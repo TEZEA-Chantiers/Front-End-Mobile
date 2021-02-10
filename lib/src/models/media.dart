@@ -1,8 +1,10 @@
-import 'enums/mediaType.dart';
+import 'package:flutter/cupertino.dart';
+
+import 'enums/media_type.dart';
 
 class Media{
   Media({
-    this.id,
+    @required this.id,
     this.nomMedia,
     this.imagesURL,
     this.mediaType,

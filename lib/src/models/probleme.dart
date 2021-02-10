@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
+
 class Probleme{
   Probleme({
-    this.id,
+    @required this.id,
     this.description,
     this.imagesURL,
   });

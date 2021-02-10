@@ -1,10 +1,12 @@
-import 'enums/statusType.dart';
+import 'package:flutter/cupertino.dart';
+
+import 'enums/status_type.dart';
 
 class Chantier{
   Chantier({
-    this.id,
-    this.idSite,
-    this.idClient,
+    @required this.id,
+    @required this.idSite,
+    @required this.idClient,
     this.problemes,
     this.medias,
     this.adresse,
@@ -28,7 +30,7 @@ class Chantier{
       idClient: jsonData['idClient'] as int,
       problemes: jsonData['problemes'] as List<int>,
       medias: jsonData['medias'] as List<int>,
-      ouvriers: jsonData['ourvriers'] as List<String>,
+      ouvriers: jsonData['ouvriers'] as List<String>,
       adresse: jsonData['adresse'].toString(),
       materiel: jsonData['materiel'].toString(),
 
@@ -72,7 +74,7 @@ class Chantier{
       'idClient':idClient,
       'problemes':problemes,
       'medias':medias,
-      'ourvriers':ouvriers,
+      'ouvriers':ouvriers,
       'adresse':adresse,
       'materiel':materiel,
 

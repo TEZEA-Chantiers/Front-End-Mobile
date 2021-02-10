@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
+
 class DemandeDeChantier{
   DemandeDeChantier({
-    this.id,
-    this.idSite,
-    this.idClient,
+    @required this.id,
+    @required this.idSite,
+    @required this.idClient,
     this.employee,
     this.materiel,
     this.adresse,
