@@ -33,7 +33,7 @@ class Site{
     return {
       'id': id,
       'nomSite': nomSite,
-      'nomChef':nomChef
+      'nomChef':nomChef,
       'prenomChef': prenomChef,
       'adresse': adresse,
       'mail': mail,

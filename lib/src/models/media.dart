@@ -13,8 +13,7 @@ class Media{
       id: jsonData['id'] as int,
       nomMedia: jsonData['nomMedia'].toString(),
       imagesURL: jsonData['imagesURL'] as List<String>,
-
-      mediaType: jsonData['mediaType'].toString(),  //
+      mediaType: MediaType.values[jsonData['mediaType'] as int],
     );
   }
 
@@ -28,8 +27,7 @@ class Media{
       'id':id,
       'nomMedia':nomMedia,
       'imagesURL':imagesURL,
-
-      'mediaType':mediaType,    //
+      'mediaType':mediaType.index,
     };
   }
 

@@ -32,15 +32,13 @@ class Chantier{
       adresse: jsonData['adresse'].toString(),
       materiel: jsonData['materiel'].toString(),
 
-      dateDebut: jsonData['dateDebut'].toString(),            //
-      dateFin: jsonData['dateFin'].toString(),                //
-      heureDemarrage: jsonData['heureDemarrage'].toString(),  //
+      dateDebut: DateTime.parse(jsonData['dateDebut'].toString()),            // parsing à checker
+      dateFin: DateTime.parse(jsonData['dateFin'].toString()),                //
+      heureDemarrage: DateTime.parse(jsonData['heureDemarrage'].toString()),  //
 
       estimationTemps: jsonData['estimationTemps'] as int,
       telephone: jsonData['telephone'].toString(),
-
-      statutChantier: jsonData['statutChantier'].toString(),  //
-
+      statutChantier: StatusType.values[jsonData['statutChantier'] as int],
       nomChantier: jsonData['nomChantier'].toString(),
       informationsInternes: jsonData['informationsInternes'].toString(),
       description: jsonData['description'].toString(),
@@ -55,9 +53,11 @@ class Chantier{
   final List<String> ouvriers;
   final String adresse;
   final String materiel;
-  final String dateDebut;
-  final String dateFin;
-  final String heureDemarrage;
+
+  final DateTime dateDebut;       // doute pour le type des 3
+  final DateTime dateFin;         //
+  final DateTime heureDemarrage;  //
+
   final int estimationTemps;
   final String telephone;
   final StatusType statutChantier;
@@ -76,15 +76,13 @@ class Chantier{
       'adresse':adresse,
       'materiel':materiel,
 
-      'dateDebut':dateDebut,    //
-      'dateFin':dateFin,        //
-      'heureDemarrage':heureDemarrage,  //
+      'dateDebut':dateDebut.toString(),             //
+      'dateFin':dateFin.toString(),                 //
+      'heureDemarrage':heureDemarrage.toString(),   //
 
       'estimationTemps':estimationTemps,
       'telephone':telephone,
-
-      'statutChantier':statutChantier, //
-
+      'statutChantier':statutChantier.index,
       'nomChantier':nomChantier,
       'informationsInternes':informationsInternes,
       'description':description,
