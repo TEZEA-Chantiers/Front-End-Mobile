@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+//import 'package:tezea_chantiers/src/pages/problem_page/chantier_list_page.dart';
 import '../../pages/home_page/home_page.dart';
 
 class AuthWrapper extends StatelessWidget {
@@ -19,5 +21,6 @@ class AuthWrapper extends StatelessWidget {
 
     //return const LoginPage();
     return const HomePage();
+    //return const ProblemPage();
   }
 }

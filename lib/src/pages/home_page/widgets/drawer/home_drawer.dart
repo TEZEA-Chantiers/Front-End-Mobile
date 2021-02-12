@@ -3,8 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/pages/chantier_list_page/chantier_list_page.dart';
+import 'package:tezea_chantiers/src/pages/problem_list_page/problem_list_page.dart';
 
 import '../../../../services/firebase_services/auth_service.dart';
+import '../../../problem_page/problem_page.dart';
 import 'home_drawer_menu.dart';
 
 class HomeDrawer extends StatelessWidget {
@@ -80,7 +83,40 @@ class HomeDrawer extends StatelessWidget {
                   )
                 ],
               ),
-              const HomeDrawerMenu()
+              const HomeDrawerMenu(),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                      builder: (context) => const ProblemPage(),
+                    ),
+                  );
+                },
+                child: const Text('Test ProblemPage'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ProblemListPage(),
+                    ),
+                  );
+                },
+                child: const Text('Test ProblemListPage'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ChantierListPage(),
+                    ),
+                  );
+                },
+                child: const Text('Test ChantierListPage'),
+              ),
             ],
           ),
         ),
