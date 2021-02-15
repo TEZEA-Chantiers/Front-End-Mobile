@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:tezea_chantiers/src/models/enums/jour_semaine_type.dart';
 
 class DemandeDeChantier {
   DemandeDeChantier({
     @required this.id,
     @required this.idSite,
     @required this.idClient,
-    this.employee,
+    this.nombreEmployes,
     this.materiel,
     this.adresse,
     this.regularite,
@@ -13,6 +14,9 @@ class DemandeDeChantier {
     this.particularite,
     this.description,
     this.infoInterne,
+    this.dateDebutRegularite,
+    this.dateFinRegularite,
+    this.joursRegularite,
   });
 
   factory DemandeDeChantier.fromJson(Map<String, dynamic> jsonData) {
@@ -20,7 +24,7 @@ class DemandeDeChantier {
       id: jsonData['id'] as int,
       idSite: jsonData['idSite'] as int,
       idClient: jsonData['idClient'] as int,
-      employee: jsonData['employee'] as List<String>,
+      nombreEmployes: jsonData['nombreEmployes'] as int,
       materiel: jsonData['materiel'].toString(),
       adresse: jsonData['adresse'].toString(),
       regularite: jsonData['regularite'].toString(),
@@ -28,13 +32,16 @@ class DemandeDeChantier {
       particularite: jsonData['particularite'].toString(),
       description: jsonData['description'].toString(),
       infoInterne: jsonData['infoInterne'].toString(),
+      dateDebutRegularite: DateTime.parse(jsonData['dateDebutRegularite'].toString()),
+      dateFinRegularite: DateTime.parse(jsonData['dateFinRegularite'].toString()),
+      joursRegularite: jsonData['joursRegularite'] as List<JourSemaineType>,
     );
   }
 
   final int id; // pas de type long dans Dart, int equivalent
   final int idSite;
   final int idClient;
-  final List<String> employee;
+  final int nombreEmployes;
   final String materiel;
   final String adresse;
   final String regularite;
@@ -42,13 +49,16 @@ class DemandeDeChantier {
   final String particularite;
   final String description;
   final String infoInterne;
+  final DateTime dateDebutRegularite;
+  final DateTime dateFinRegularite;
+  final List<JourSemaineType> joursRegularite;
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'idSite': idSite,
       'idClient': idClient,
-      'employee': employee,
+      'nombreEmployes': nombreEmployes,
       'materiel': materiel,
       'adresse': adresse,
       'regularite': regularite,
@@ -56,6 +66,9 @@ class DemandeDeChantier {
       'particularite': particularite,
       'description': description,
       'infoInterne': infoInterne,
+      'dateDebutRegularite': dateDebutRegularite.toString(),
+      'dateFinRegularite': dateFinRegularite.toString(),
+      'joursRegularite': joursRegularite,
     };
   }
 }

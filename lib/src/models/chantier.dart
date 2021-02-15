@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:tezea_chantiers/src/models/rapport_chantier_regulier.dart';
 
+import 'enums/jour_semaine_type.dart';
 import 'enums/status_type.dart';
 
 class Chantier {
@@ -12,15 +14,21 @@ class Chantier {
     this.adresse,
     this.ouvriers,
     this.materiel,
-    this.dateDebut,
-    this.dateFin,
-    this.heureDemarrage,
+    this.dateDebutTheorique,
+    this.dateFinTheorique,
     this.estimationTemps,
     this.telephone,
     this.statutChantier,
     this.nomChantier,
     this.informationsInternes,
     this.description,
+    this.joursRegularite,
+    this.dateDebutRegularite,
+    this.dateFinRegularite,
+    this.regularite,
+    this.dateDebutEffectif,
+    this.dateFinEffectif,
+    this.rapportsRegulier,
   });
 
   factory Chantier.fromJson(Map<String, dynamic> jsonData) {
@@ -34,12 +42,8 @@ class Chantier {
       adresse: jsonData['adresse'].toString(),
       materiel: jsonData['materiel'].toString(),
 
-      dateDebut: DateTime.parse(jsonData['dateDebut'].toString()),
-      // parsing à checker
-      dateFin: DateTime.parse(jsonData['dateFin'].toString()),
-      //
-      heureDemarrage: DateTime.parse(jsonData['heureDemarrage'].toString()),
-      //
+      dateDebutTheorique: DateTime.parse(jsonData['dateDebut'].toString()),
+      dateFinTheorique: DateTime.parse(jsonData['dateFin'].toString()),
 
       estimationTemps: jsonData['estimationTemps'] as int,
       telephone: jsonData['telephone'].toString(),
@@ -47,6 +51,14 @@ class Chantier {
       nomChantier: jsonData['nomChantier'].toString(),
       informationsInternes: jsonData['informationsInternes'].toString(),
       description: jsonData['description'].toString(),
+
+      joursRegularite: jsonData['joursRegularite'] as Set<JourSemaineType>,
+      dateDebutRegularite: DateTime.parse(jsonData['dateDebutRegularite'].toString()),
+      dateFinRegularite: DateTime.parse(jsonData['dateFinRegularite'].toString()),
+      regularite: jsonData['regularite'] as bool,
+      dateDebutEffectif: DateTime.parse(jsonData['dateDebutEffectif'].toString()),
+      dateFinEffectif: DateTime.parse(jsonData['dateFinEffectif'].toString()),
+      rapportsRegulier: jsonData['rapportsRegulier'] as List<RapportChantierRegulier>,
     );
   }
 
@@ -59,9 +71,8 @@ class Chantier {
   final String adresse;
   final String materiel;
 
-  final DateTime dateDebut; // doute pour le type des 3
-  final DateTime dateFin; //
-  final DateTime heureDemarrage; //
+  final DateTime dateDebutTheorique;
+  final DateTime dateFinTheorique;
 
   final int estimationTemps;
   final String telephone;
@@ -69,6 +80,14 @@ class Chantier {
   final String nomChantier;
   final String informationsInternes;
   final String description;
+
+  final Set<JourSemaineType> joursRegularite;
+  final DateTime dateDebutRegularite;
+  final DateTime dateFinRegularite;
+  final bool regularite;
+  final DateTime dateDebutEffectif;
+  final DateTime dateFinEffectif;
+  final List<RapportChantierRegulier> rapportsRegulier;
 
   Map<String, dynamic> toJson() {
     return {
@@ -81,9 +100,8 @@ class Chantier {
       'adresse': adresse,
       'materiel': materiel,
 
-      'dateDebut': dateDebut.toString(), //
-      'dateFin': dateFin.toString(), //
-      'heureDemarrage': heureDemarrage.toString(), //
+      'dateDebutTheorique': dateDebutTheorique.toString(),
+      'dateFinTheorique': dateFinTheorique.toString(),
 
       'estimationTemps': estimationTemps,
       'telephone': telephone,
@@ -91,6 +109,14 @@ class Chantier {
       'nomChantier': nomChantier,
       'informationsInternes': informationsInternes,
       'description': description,
+
+      'joursRegularite': joursRegularite,
+      'dateDebutRegularite': dateDebutRegularite.toString(),
+      'dateFinRegularite': dateFinRegularite.toString(),
+      'regularite': regularite,
+      'dateDebutEffectif': dateDebutEffectif.toString(),
+      'dateFinEffectif': dateFinEffectif.toString(),
+      'rapportsRegulier': rapportsRegulier,
     };
   }
 }
