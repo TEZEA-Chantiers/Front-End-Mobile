@@ -3,10 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tezea_chantiers/src/pages/chantier_list_page/chantier_list_page.dart';
-import 'package:tezea_chantiers/src/pages/problem_list_page/problem_list_page.dart';
 
 import '../../../../services/firebase_services/auth_service.dart';
+import '../../../chantier_list_page/chantier_list_page.dart';
+import '../../../problem_list_page/problem_list_page.dart';
 import '../../../problem_page/problem_page.dart';
 import 'home_drawer_menu.dart';
 

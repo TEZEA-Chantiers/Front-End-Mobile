@@ -1,12 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:tezea_chantiers/src/pages/problem_page/problem_page.dart';
 
 import '../../../services/firebase_services/database_service.dart';
+import '../../problem_page/problem_page.dart';
 
 class ProblemListBody extends StatelessWidget {
   const ProblemListBody({
@@ -42,7 +39,6 @@ class ProblemListBody extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20),
               height: 460,
               child: ListView(
-                  scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   children: [
                     // structure à utiliser si trop d'elements, mais peu probable (pas 500pb par chantier j'imagine)
@@ -82,7 +78,7 @@ class ProblemListBody extends StatelessWidget {
                     Container(
                       height: 80,
                       color: Colors.lime,
-                      child: Text('EXEMPLE'),
+                      child: const Text('EXEMPLE'),
                     ),
                     Container(
                       height: 80,

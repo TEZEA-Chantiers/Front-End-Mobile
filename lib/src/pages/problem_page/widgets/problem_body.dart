@@ -1,9 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../../services/firebase_services/database_service.dart';
 
@@ -59,11 +56,11 @@ class ProblemBody extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     children: <Widget>[
                       Container(
-                        width: 200.0,
+                        width: 200,
                         color: Colors.lime,
                       ),
                       Container(
-                        width: 200.0,
+                        width: 200,
                         color: Colors.brown,
                       ),
                     ],

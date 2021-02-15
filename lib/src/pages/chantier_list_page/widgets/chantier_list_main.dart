@@ -12,7 +12,7 @@ class ChantierListMain extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ChantierListBody(),
+        const ChantierListBody(),
       ],
     );
   }
