@@ -29,7 +29,8 @@ class HomePage extends StatelessWidget {
           title: const Text('Accueil'),
         ),
         drawer: const HomeDrawer(),
-        body: ChangeNotifierProvider.value(value: textEditingControllerSearchBar, child: const HomeMain()),
+        body: ChangeNotifierProvider.value(
+            value: textEditingControllerSearchBar, child: const HomeMain()),
       ),
     );
   }

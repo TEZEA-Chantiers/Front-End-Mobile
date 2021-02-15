@@ -1,4 +1,4 @@
-enum MediaType{
+enum MediaType {
   signature,
   devis,
   facture,

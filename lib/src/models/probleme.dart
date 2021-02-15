@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class Probleme{
+class Probleme {
   Probleme({
     @required this.id,
     this.description,
@@ -15,16 +15,15 @@ class Probleme{
     );
   }
 
-  final int id;   // pas de type long dans Dart, int equivalent
+  final int id; // pas de type long dans Dart, int equivalent
   final String description;
   final List<String> imagesURL;
 
   Map<String, dynamic> toJson() {
     return {
-      'id':id,
-      'description':description,
-      'imagesURL':imagesURL,
+      'id': id,
+      'description': description,
+      'imagesURL': imagesURL,
     };
   }
-
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class Client{
+class Client {
   Client({
     @required this.id,
     this.nom,
@@ -21,7 +21,7 @@ class Client{
     );
   }
 
-  final int id;   // pas de type long dans Dart, int equivalent
+  final int id; // pas de type long dans Dart, int equivalent
   final String nom;
   final String prenom;
   final String adresse;
@@ -38,5 +38,4 @@ class Client{
       'infoComplementaire': infoComplementaire,
     };
   }
-
 }

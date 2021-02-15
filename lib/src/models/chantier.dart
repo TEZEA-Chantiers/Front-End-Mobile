@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'enums/status_type.dart';
 
-class Chantier{
+class Chantier {
   Chantier({
     @required this.id,
     @required this.idSite,
@@ -34,9 +34,12 @@ class Chantier{
       adresse: jsonData['adresse'].toString(),
       materiel: jsonData['materiel'].toString(),
 
-      dateDebut: DateTime.parse(jsonData['dateDebut'].toString()),            // parsing à checker
-      dateFin: DateTime.parse(jsonData['dateFin'].toString()),                //
-      heureDemarrage: DateTime.parse(jsonData['heureDemarrage'].toString()),  //
+      dateDebut: DateTime.parse(jsonData['dateDebut'].toString()),
+      // parsing à checker
+      dateFin: DateTime.parse(jsonData['dateFin'].toString()),
+      //
+      heureDemarrage: DateTime.parse(jsonData['heureDemarrage'].toString()),
+      //
 
       estimationTemps: jsonData['estimationTemps'] as int,
       telephone: jsonData['telephone'].toString(),
@@ -47,7 +50,7 @@ class Chantier{
     );
   }
 
-  final int id;   // pas de type long dans Dart, int equivalent
+  final int id; // pas de type long dans Dart, int equivalent
   final int idSite;
   final int idClient;
   final List<int> problemes;
@@ -56,9 +59,9 @@ class Chantier{
   final String adresse;
   final String materiel;
 
-  final DateTime dateDebut;       // doute pour le type des 3
-  final DateTime dateFin;         //
-  final DateTime heureDemarrage;  //
+  final DateTime dateDebut; // doute pour le type des 3
+  final DateTime dateFin; //
+  final DateTime heureDemarrage; //
 
   final int estimationTemps;
   final String telephone;
@@ -69,26 +72,25 @@ class Chantier{
 
   Map<String, dynamic> toJson() {
     return {
-      'id':id,
-      'idSite':idSite,
-      'idClient':idClient,
-      'problemes':problemes,
-      'medias':medias,
-      'ouvriers':ouvriers,
-      'adresse':adresse,
-      'materiel':materiel,
+      'id': id,
+      'idSite': idSite,
+      'idClient': idClient,
+      'problemes': problemes,
+      'medias': medias,
+      'ouvriers': ouvriers,
+      'adresse': adresse,
+      'materiel': materiel,
 
-      'dateDebut':dateDebut.toString(),             //
-      'dateFin':dateFin.toString(),                 //
-      'heureDemarrage':heureDemarrage.toString(),   //
+      'dateDebut': dateDebut.toString(), //
+      'dateFin': dateFin.toString(), //
+      'heureDemarrage': heureDemarrage.toString(), //
 
-      'estimationTemps':estimationTemps,
-      'telephone':telephone,
-      'statutChantier':statutChantier.index,
-      'nomChantier':nomChantier,
-      'informationsInternes':informationsInternes,
-      'description':description,
+      'estimationTemps': estimationTemps,
+      'telephone': telephone,
+      'statutChantier': statutChantier.index,
+      'nomChantier': nomChantier,
+      'informationsInternes': informationsInternes,
+      'description': description,
     };
   }
-
 }

@@ -11,11 +11,9 @@ class ChantierListBody extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _ChantierListBodyState();
-
 }
 
 class _ChantierListBodyState extends State<ChantierListBody> {
-
   TextEditingController editingController = TextEditingController();
   String searchValue = '';
   bool showSearch = false;
@@ -25,8 +23,8 @@ class _ChantierListBodyState extends State<ChantierListBody> {
     final _databaseService = DatabaseService();
 
     return Container(
-        padding: const EdgeInsets.all(20),
-      child:Column(
+      padding: const EdgeInsets.all(20),
+      child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -50,22 +48,21 @@ class _ChantierListBodyState extends State<ChantierListBody> {
                       hintText: 'Recherche',
                       suffixIcon: Icon(Icons.search),
                       border: OutlineInputBorder(
-                          borderRadius:
-                          BorderRadius.all(Radius.circular(25)))),
+                          borderRadius: BorderRadius.all(Radius.circular(25)))),
                 ),
               ),
             ],
           ),
           Container(
             padding: const EdgeInsets.only(top: 20),
-              height: 460,
-              child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    // structure à utiliser si trop d'elements
-                    // classe ChantierList à implémenter si besoin
-                    // de même pour la méthode loadChantiers
-                    /*Container(
+            height: 460,
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                // structure à utiliser si trop d'elements
+                // classe ChantierList à implémenter si besoin
+                // de même pour la méthode loadChantiers
+                /*Container(
                       child: FutureBuilder<ProblemList>(
                         future: loadChantiers(),
                         builder: (context, snapshot) {
@@ -96,38 +93,38 @@ class _ChantierListBodyState extends State<ChantierListBody> {
                         },
                       ),
                     ),*/
-                    Container(
-                      height: 80,
-                      color: Colors.lime,
-                      child: const Text('EXEMPLE'),
-                    ),
-                    Container(
-                      height: 80,
-                      color: Colors.brown,
-                    ),
-                    Container(
-                      height: 80,
-                      color: Colors.yellow,
-                    ),
-                    Container(
-                      height: 80,
-                      color: Colors.red,
-                    ),
-                    Container(
-                      height: 80,
-                      color: Colors.purple,
-                    ),
-                    Container(
-                      height: 80,
-                      color: Colors.deepOrangeAccent,
-                    ),
-                    Container(
-                      height: 80,
-                      color: Colors.white38,
-                    ),
-                  ],
-              ),
+                Container(
+                  height: 80,
+                  color: Colors.lime,
+                  child: const Text('EXEMPLE'),
+                ),
+                Container(
+                  height: 80,
+                  color: Colors.brown,
+                ),
+                Container(
+                  height: 80,
+                  color: Colors.yellow,
+                ),
+                Container(
+                  height: 80,
+                  color: Colors.red,
+                ),
+                Container(
+                  height: 80,
+                  color: Colors.purple,
+                ),
+                Container(
+                  height: 80,
+                  color: Colors.deepOrangeAccent,
+                ),
+                Container(
+                  height: 80,
+                  color: Colors.white38,
+                ),
+              ],
             ),
+          ),
         ],
       ),
     );
@@ -148,7 +145,8 @@ class _ChantierListBodyState extends State<ChantierListBody> {
 Card buildCard(BuildContext context) {
   return Card(
     child: ListTile(
-      title: /*chantier.nomChantier != null     // id ? pas de champ nom/date dans la base (diagramme)
+      title:
+          /*chantier.nomChantier != null     // id ? pas de champ nom/date dans la base (diagramme)
           ? Row(children: [
         Flexible(
             child: RichText(
@@ -158,8 +156,10 @@ Card buildCard(BuildContext context) {
                   style: TextStyle(color: Colors.black), text: chantier.nomChantier),
             ))
       ])
-          : */const Text('CHANTIER X'),
-      subtitle: /*chantier.adresse != null
+          : */
+          const Text('CHANTIER X'),
+      subtitle:
+          /*chantier.adresse != null
           ? Column(children: [
         Flexible(
           child: RichText(
@@ -189,7 +189,8 @@ Card buildCard(BuildContext context) {
           ),
         ),
       ])
-          : */const Text('INFOS CHANTIER'),
+          : */
+          const Text('INFOS CHANTIER'),
       onTap: () {
         /*Navigator.push(
           context,

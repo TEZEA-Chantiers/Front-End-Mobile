@@ -31,7 +31,9 @@ class ChantierListPage extends StatelessWidget {
             onPressed: () => Navigator.of(context).pop(),
           ),
         ),
-        body: ChangeNotifierProvider.value(value: textEditingControllerSearchBar, child: const ChantierListMain()),
+        body: ChangeNotifierProvider.value(
+            value: textEditingControllerSearchBar,
+            child: const ChantierListMain()),
       ),
     );
   }

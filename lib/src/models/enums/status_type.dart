@@ -1,4 +1,4 @@
-enum StatusType{
+enum StatusType {
   demarre,
   enAttente,
   enCours,

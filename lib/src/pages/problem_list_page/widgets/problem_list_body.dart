@@ -15,8 +15,8 @@ class ProblemListBody extends StatelessWidget {
     final _databaseService = DatabaseService();
 
     return Container(
-        padding: const EdgeInsets.all(20),
-      child:Column(
+      padding: const EdgeInsets.all(20),
+      child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -37,14 +37,14 @@ class ProblemListBody extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.only(top: 20),
-              height: 460,
-              child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    // structure à utiliser si trop d'elements, mais peu probable (pas 500pb par chantier j'imagine)
-                    // classe ProblemList à implémenter si besoin (avec un id en param pour recuperer les pb du chantier i)
-                    // de même pour la méthode loadProblems
-                    /*Container(
+            height: 460,
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                // structure à utiliser si trop d'elements, mais peu probable (pas 500pb par chantier j'imagine)
+                // classe ProblemList à implémenter si besoin (avec un id en param pour recuperer les pb du chantier i)
+                // de même pour la méthode loadProblems
+                /*Container(
                       child: FutureBuilder<ProblemList>(
                         future: loadProblems(),
                         builder: (context, snapshot) {
@@ -75,38 +75,38 @@ class ProblemListBody extends StatelessWidget {
                         },
                       ),
                     ),*/
-                    Container(
-                      height: 80,
-                      color: Colors.lime,
-                      child: const Text('EXEMPLE'),
-                    ),
-                    Container(
-                      height: 80,
-                      color: Colors.brown,
-                    ),
-                    Container(
-                      height: 80,
-                      color: Colors.yellow,
-                    ),
-                    Container(
-                      height: 80,
-                      color: Colors.red,
-                    ),
-                    Container(
-                      height: 80,
-                      color: Colors.purple,
-                    ),
-                    Container(
-                      height: 80,
-                      color: Colors.deepOrangeAccent,
-                    ),
-                    Container(
-                      height: 80,
-                      color: Colors.white38,
-                    ),
-                  ],
-              ),
+                Container(
+                  height: 80,
+                  color: Colors.lime,
+                  child: const Text('EXEMPLE'),
+                ),
+                Container(
+                  height: 80,
+                  color: Colors.brown,
+                ),
+                Container(
+                  height: 80,
+                  color: Colors.yellow,
+                ),
+                Container(
+                  height: 80,
+                  color: Colors.red,
+                ),
+                Container(
+                  height: 80,
+                  color: Colors.purple,
+                ),
+                Container(
+                  height: 80,
+                  color: Colors.deepOrangeAccent,
+                ),
+                Container(
+                  height: 80,
+                  color: Colors.white38,
+                ),
+              ],
             ),
+          ),
         ],
       ),
     );
@@ -128,10 +128,10 @@ Card buildCard(BuildContext context) {
             problem.imagesURL[0] != "null")
             ? Image.network(problem.imagesURL[0], fit: BoxFit.cover)
             : Text(""),*/
-        child: Image.asset(
-            'assets/images/profile/avatar-anonym.png'),
+        child: Image.asset('assets/images/profile/avatar-anonym.png'),
       ),
-      title: /*problem.id != null     // id ? pas de champ nom/date dans la base (diagramme)
+      title:
+          /*problem.id != null     // id ? pas de champ nom/date dans la base (diagramme)
           ? Row(children: [
         Flexible(
             child: RichText(
@@ -141,8 +141,10 @@ Card buildCard(BuildContext context) {
                   style: TextStyle(color: Colors.black), text: problem.id),
             ))
       ])
-          : */const Text('PROBLEME X'),
-      subtitle: /*problem.description != null
+          : */
+          const Text('PROBLEME X'),
+      subtitle:
+          /*problem.description != null
           ? Row(children: [
         Flexible(
           child: RichText(
@@ -154,7 +156,8 @@ Card buildCard(BuildContext context) {
           ),
         )
       ])
-          : */const Text('DESCRIPTION DU PROBLEME'),
+          : */
+          const Text('DESCRIPTION DU PROBLEME'),
       onTap: () {
         Navigator.push(
           context,

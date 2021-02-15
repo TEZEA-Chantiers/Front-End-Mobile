@@ -87,8 +87,8 @@ class HomeDrawer extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
+                    context,
+                    MaterialPageRoute(
                       builder: (context) => const ProblemPage(),
                     ),
                   );

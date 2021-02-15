@@ -17,47 +17,53 @@ class ChantierBody extends StatelessWidget {
     final _firebaseFirestore = DatabaseService();
 
     return StreamBuilder(
-          stream: _firebaseFirestore.getDocument('chantier', 'V1YtkHvEVmCwOV8YSxBi').asStream(),
-          builder: (context,snapshot){
-            if(!snapshot.hasData){
-              return const Text('Pas de Donnee');
-            }
+        stream: _firebaseFirestore
+            .getDocument('chantier', 'V1YtkHvEVmCwOV8YSxBi')
+            .asStream(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Text('Pas de Donnee');
+          }
 
-            final dateDebut = (snapshot.data['dateDebut'] as Timestamp).millisecondsSinceEpoch;
+          final dateDebut =
+              (snapshot.data['dateDebut'] as Timestamp).millisecondsSinceEpoch;
 
-            return Column(
-                children: [
-                  Text(snapshot.data['adresse'].toString()),
-                  const Padding(padding: EdgeInsets.all(2),),
-
-                  Text(
-                      '${DateFormat.yMMMMd().format(DateTime.fromMillisecondsSinceEpoch(dateDebut))} ${DateFormat.Hms().format(DateTime.fromMillisecondsSinceEpoch(dateDebut))}'
-                  ),
-                  Text(snapshot.data['dateFin'].toString()),
-                  Text(snapshot.data['heureDemarrage'].toString()),
-                  Text(snapshot.data['description'].toString()),
-                  Text(snapshot.data['ouvriers'].toString()),
-                  Text(snapshot.data['materiel'].toString()),
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePage()));
-                    },
-                    child: const Text('Démarrer ce chantier'),
-                  ),
-                  RaisedButton(
-                    onPressed: () {  },
-                    child: const Text('Remonter un problème'),),
-                  RaisedButton(
-                    onPressed: () {  },
-                    child: const Text('Liste des problèmes'),),
-                  RaisedButton(
-                    onPressed: () {  },
-                    child: const Text('Photographier un document'),),
-                  RaisedButton(
-                    onPressed: () {  },
-                    child: const Text('Récupérer une signature'),),
-                ]
-            );
-          });
+          return Column(children: [
+            Text(snapshot.data['adresse'].toString()),
+            const Padding(
+              padding: EdgeInsets.all(2),
+            ),
+            Text(
+                '${DateFormat.yMMMMd().format(DateTime.fromMillisecondsSinceEpoch(dateDebut))} ${DateFormat.Hms().format(DateTime.fromMillisecondsSinceEpoch(dateDebut))}'),
+            Text(snapshot.data['dateFin'].toString()),
+            Text(snapshot.data['heureDemarrage'].toString()),
+            Text(snapshot.data['description'].toString()),
+            Text(snapshot.data['ouvriers'].toString()),
+            Text(snapshot.data['materiel'].toString()),
+            RaisedButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const HomePage()));
+              },
+              child: const Text('Démarrer ce chantier'),
+            ),
+            RaisedButton(
+              onPressed: () {},
+              child: const Text('Remonter un problème'),
+            ),
+            RaisedButton(
+              onPressed: () {},
+              child: const Text('Liste des problèmes'),
+            ),
+            RaisedButton(
+              onPressed: () {},
+              child: const Text('Photographier un document'),
+            ),
+            RaisedButton(
+              onPressed: () {},
+              child: const Text('Récupérer une signature'),
+            ),
+          ]);
+        });
   }
 }

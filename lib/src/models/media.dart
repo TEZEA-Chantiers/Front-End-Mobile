@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'enums/media_type.dart';
 
-class Media{
+class Media {
   Media({
     @required this.id,
     this.nomMedia,
@@ -19,18 +19,17 @@ class Media{
     );
   }
 
-  final int id;   // pas de type long dans Dart, int equivalent
+  final int id; // pas de type long dans Dart, int equivalent
   final String nomMedia;
   final MediaType mediaType;
   final List<String> imagesURL;
 
   Map<String, dynamic> toJson() {
     return {
-      'id':id,
-      'nomMedia':nomMedia,
-      'imagesURL':imagesURL,
-      'mediaType':mediaType.index,
+      'id': id,
+      'nomMedia': nomMedia,
+      'imagesURL': imagesURL,
+      'mediaType': mediaType.index,
     };
   }
-
 }

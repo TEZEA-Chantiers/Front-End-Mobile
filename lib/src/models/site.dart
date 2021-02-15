@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class Site{
+class Site {
   Site({
     @required this.id,
     this.nomSite,
@@ -23,7 +23,7 @@ class Site{
     );
   }
 
-  final int id;   // pas de type long dans Dart, int equivalent
+  final int id; // pas de type long dans Dart, int equivalent
   final String nomSite;
   final String nomChef;
   final String prenomChef;
@@ -35,12 +35,11 @@ class Site{
     return {
       'id': id,
       'nomSite': nomSite,
-      'nomChef':nomChef,
+      'nomChef': nomChef,
       'prenomChef': prenomChef,
       'adresse': adresse,
       'mail': mail,
       'telephone': telephone,
     };
   }
-
 }

@@ -31,7 +31,9 @@ class ProblemListPage extends StatelessWidget {
             onPressed: () => Navigator.of(context).pop(),
           ),
         ),
-        body: ChangeNotifierProvider.value(value: textEditingControllerSearchBar, child: const ProblemListMain()),
+        body: ChangeNotifierProvider.value(
+            value: textEditingControllerSearchBar,
+            child: const ProblemListMain()),
       ),
     );
   }

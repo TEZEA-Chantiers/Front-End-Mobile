@@ -14,8 +14,8 @@ class ProblemBody extends StatelessWidget {
     final _databaseService = DatabaseService();
 
     return Container(
-        padding: const EdgeInsets.all(20),
-      child:Column(
+      padding: const EdgeInsets.all(20),
+      child: Column(
         children: [
           Row(
             children: const [
@@ -38,7 +38,7 @@ class ProblemBody extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {  },
+                    onPressed: () {},
                     child: const Text('Enregistrer'),
                   ),
                 ],
@@ -47,7 +47,7 @@ class ProblemBody extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.only(top: 20),
-            child:Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Container(
@@ -67,7 +67,7 @@ class ProblemBody extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {  },
+                  onPressed: () {},
                   child: const Text('Ajouter une photo'),
                 ),
               ],

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class DemandeDeChantier{
+class DemandeDeChantier {
   DemandeDeChantier({
     @required this.id,
     @required this.idSite,
@@ -31,7 +31,7 @@ class DemandeDeChantier{
     );
   }
 
-  final int id;   // pas de type long dans Dart, int equivalent
+  final int id; // pas de type long dans Dart, int equivalent
   final int idSite;
   final int idClient;
   final List<String> employee;
@@ -45,18 +45,17 @@ class DemandeDeChantier{
 
   Map<String, dynamic> toJson() {
     return {
-      'id':id,
-      'idSite':idSite,
-      'idClient':idClient,
-      'employee':employee,
-      'materiel':materiel,
-      'adresse':adresse,
-      'regularite':regularite,
-      'estimationTemps':estimationTemps,
-      'particularite':particularite,
-      'description':description,
-      'infoInterne':infoInterne,
+      'id': id,
+      'idSite': idSite,
+      'idClient': idClient,
+      'employee': employee,
+      'materiel': materiel,
+      'adresse': adresse,
+      'regularite': regularite,
+      'estimationTemps': estimationTemps,
+      'particularite': particularite,
+      'description': description,
+      'infoInterne': infoInterne,
     };
   }
-
 }
