@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:tezea_chantiers/src/pages/chantier/widgets/chantier_main.dart';
+import '../../services/firebase_services/database_service.dart';
 
-import 'package:tezea_chantiers/src/services/firebase_services/database_service.dart';
+import 'widgets/chantier_main.dart';
 
 class Chantier extends StatelessWidget {
   const Chantier({
@@ -25,12 +24,12 @@ class Chantier extends StatelessWidget {
       child: Scaffold(
         backgroundColor: const Color(0xff2E4053),
         appBar : AppBar(title: StreamBuilder(
-            stream: _firebaseFirestore.getDocument("chantier", "V1YtkHvEVmCwOV8YSxBi").asStream(),
+            stream: _firebaseFirestore.getDocument('chantier', 'V1YtkHvEVmCwOV8YSxBi').asStream(),
             builder: (context,snapshot){
               if(!snapshot.hasData){
-                return Text('Pas de Donnee');
+                return const Text('Pas de Donnee');
               }
-              return Text(snapshot.data["nomChantier"].toString());
+              return Text(snapshot.data['nomChantier'].toString());
             }),
         ),
         body: const ChantierMain(),
