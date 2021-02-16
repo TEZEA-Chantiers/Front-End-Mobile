@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 
 import '../../../services/firebase_services/database_service.dart';
 import '../../home_page/home_page.dart';
+import '../../problem_list_page/problem_list_page.dart';
 
 class ChantierBody extends StatelessWidget {
   const ChantierBody({
@@ -52,7 +53,14 @@ class ChantierBody extends StatelessWidget {
               child: const Text('Remonter un problème'),
             ),
             RaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProblemListPage(),
+                  ),
+                );
+              },
               child: const Text('Liste des problèmes'),
             ),
             RaisedButton(

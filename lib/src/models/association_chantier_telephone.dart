@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 
-import 'enums/media_type.dart';
 
 class AssociationChantierTelephone {
   AssociationChantierTelephone({

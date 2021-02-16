@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:tezea_chantiers/src/models/rapport_chantier_regulier.dart';
 
 import 'enums/jour_semaine_type.dart';
 import 'enums/status_type.dart';
+import 'rapport_chantier_regulier.dart';
 
 class Chantier {
   Chantier({

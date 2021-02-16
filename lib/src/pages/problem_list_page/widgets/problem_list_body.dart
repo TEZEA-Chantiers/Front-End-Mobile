@@ -14,102 +14,109 @@ class ProblemListBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final _databaseService = DatabaseService();
 
-    return Container(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text('[NOM DU CHANTIER]',
-                  style: TextStyle(fontSize: 20, color: Colors.white)),
-            ],
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text('[ADRESSE DU CHANTIER]',
-                    style: TextStyle(fontSize: 16, color: Colors.white)),
-              ],
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: 20),
-            height: 460,
-            child: ListView(
-              shrinkWrap: true,
+    return StreamBuilder(
+        stream: _databaseService.getDocument('chantier', 'V1YtkHvEVmCwOV8YSxBi').asStream(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Text('Pas de Données');
+          }
+          return Container(
+            padding: const EdgeInsets.all(20),
+            child: Column(
               children: [
-                // structure à utiliser si trop d'elements, mais peu probable (pas 500pb par chantier j'imagine)
-                // classe ProblemList à implémenter si besoin (avec un id en param pour recuperer les pb du chantier i)
-                // de même pour la méthode loadProblems
-                /*Container(
-                      child: FutureBuilder<ProblemList>(
-                        future: loadProblems(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasError)
-                            Center(child: CircularProgressIndicator());
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(snapshot.data['nomChantier'].toString(),
+                        style: const TextStyle(fontSize: 20, color: Colors.white)),
+                  ],
+                ),
+                Container(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(snapshot.data['adresse'].toString(),
+                          style: const TextStyle(fontSize: 16, color: Colors.white)),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(top: 20),
+                  height: 460,
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: [
+                      // structure à utiliser si trop d'elements, mais peu probable (pas 500pb par chantier j'imagine)
+                      // classe ProblemList à implémenter si besoin (avec un id en param pour recuperer les pb du chantier i)
+                      // de même pour la méthode loadProblems
+                      /*Container(
+                        child: FutureBuilder<ProblemList>(
+                          future: loadProblems(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError)
+                              Center(child: CircularProgressIndicator());
 
-                          if (snapshot.hasData) {
-                            if (snapshot.data == null) {
+                            if (snapshot.hasData) {
+                              if (snapshot.data == null) {
+                                return Center(child: CircularProgressIndicator());
+                              }
+                              var list = snapshot.data.events
+                                  .where((element) => test(element))
+                                  .toList();
+                              return ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: list.length,
+                                  padding: const EdgeInsets.all(8),
+                                  itemBuilder: (BuildContext context, int index) {
+                                    return Container(
+                                      height: 80,
+                                      child: buildProblemItem(
+                                          context, list.elementAt(index)),
+                                    );
+                                  });
+                            } else {
                               return Center(child: CircularProgressIndicator());
                             }
-                            var list = snapshot.data.events
-                                .where((element) => test(element))
-                                .toList();
-                            return ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: list.length,
-                                padding: const EdgeInsets.all(8),
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Container(
-                                    height: 80,
-                                    child: buildProblemItem(
-                                        context, list.elementAt(index)),
-                                  );
-                                });
-                          } else {
-                            return Center(child: CircularProgressIndicator());
-                          }
-                        },
+                          },
+                        ),
+                      ),*/
+                      Container(
+                        height: 80,
+                        color: Colors.lime,
+                        child: const Text('EXEMPLE'),
                       ),
-                    ),*/
-                Container(
-                  height: 80,
-                  color: Colors.lime,
-                  child: const Text('EXEMPLE'),
-                ),
-                Container(
-                  height: 80,
-                  color: Colors.brown,
-                ),
-                Container(
-                  height: 80,
-                  color: Colors.yellow,
-                ),
-                Container(
-                  height: 80,
-                  color: Colors.red,
-                ),
-                Container(
-                  height: 80,
-                  color: Colors.purple,
-                ),
-                Container(
-                  height: 80,
-                  color: Colors.deepOrangeAccent,
-                ),
-                Container(
-                  height: 80,
-                  color: Colors.white38,
+                      Container(
+                        height: 80,
+                        color: Colors.brown,
+                      ),
+                      Container(
+                        height: 80,
+                        color: Colors.yellow,
+                      ),
+                      Container(
+                        height: 80,
+                        color: Colors.red,
+                      ),
+                      Container(
+                        height: 80,
+                        color: Colors.purple,
+                      ),
+                      Container(
+                        height: 80,
+                        color: Colors.deepOrangeAccent,
+                      ),
+                      Container(
+                        height: 80,
+                        color: Colors.white38,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
-          ),
-        ],
-      ),
-    );
+          );
+        });
   }
 }
 

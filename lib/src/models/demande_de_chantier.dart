@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:tezea_chantiers/src/models/enums/jour_semaine_type.dart';
+import 'enums/jour_semaine_type.dart';
 
 class DemandeDeChantier {
   DemandeDeChantier({

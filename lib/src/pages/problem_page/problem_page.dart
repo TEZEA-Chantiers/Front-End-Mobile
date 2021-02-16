@@ -12,6 +12,7 @@ class ProblemPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textEditingControllerSearchBar = TextEditingController();
+
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
