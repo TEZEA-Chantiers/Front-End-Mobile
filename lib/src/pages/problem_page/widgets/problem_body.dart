@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../services/firebase_services/database_service.dart';
+import '../../../utilities/camera_widget.dart';
 
 class ProblemBody extends StatelessWidget {
   const ProblemBody({
@@ -67,7 +68,14 @@ class ProblemBody extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const CameraWidget()
+                        )
+                    );
+                  },
                   child: const Text('Ajouter une photo'),
                 ),
               ],
