@@ -31,6 +31,7 @@ dependencies:
   intl: ^0.16.1
   url_launcher: ^5.7.10
   cached_network_image: ^2.5.0
+  syncfusion_flutter_signaturepad: ^18.4.42-beta
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
