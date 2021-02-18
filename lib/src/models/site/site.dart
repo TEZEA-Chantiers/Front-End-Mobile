@@ -23,7 +23,7 @@ class Site {
     );
   }
 
-  final int id; // pas de type long dans Dart, int equivalent
+  final int id;
   final String nomSite;
   final String nomChef;
   final String prenomChef;

@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
-import 'package:tezea_chantiers/src/models/enums/jour_semaine_type.dart';
+
+import '../client/client.dart';
+import '../site/site.dart';
+import 'jour_semaine_type.dart';
 
 class DemandeDeChantier {
   DemandeDeChantier({
     @required this.id,
-    @required this.idSite,
-    @required this.idClient,
+    @required this.site,
+    @required this.client,
     this.nombreEmployes,
     this.materiel,
     this.adresse,
@@ -22,8 +25,8 @@ class DemandeDeChantier {
   factory DemandeDeChantier.fromJson(Map<String, dynamic> jsonData) {
     return DemandeDeChantier(
       id: jsonData['id'] as int,
-      idSite: jsonData['idSite'] as int,
-      idClient: jsonData['idClient'] as int,
+      site: jsonData['site'] as Site,
+      client: jsonData['client'] as Client,
       nombreEmployes: jsonData['nombreEmployes'] as int,
       materiel: jsonData['materiel'].toString(),
       adresse: jsonData['adresse'].toString(),
@@ -32,15 +35,17 @@ class DemandeDeChantier {
       particularite: jsonData['particularite'].toString(),
       description: jsonData['description'].toString(),
       infoInterne: jsonData['infoInterne'].toString(),
-      dateDebutRegularite: DateTime.parse(jsonData['dateDebutRegularite'].toString()),
-      dateFinRegularite: DateTime.parse(jsonData['dateFinRegularite'].toString()),
+      dateDebutRegularite:
+          DateTime.parse(jsonData['dateDebutRegularite'].toString()),
+      dateFinRegularite:
+          DateTime.parse(jsonData['dateFinRegularite'].toString()),
       joursRegularite: jsonData['joursRegularite'] as List<JourSemaineType>,
     );
   }
 
-  final int id; // pas de type long dans Dart, int equivalent
-  final int idSite;
-  final int idClient;
+  final int id;
+  final Site site;
+  final Client client;
   final int nombreEmployes;
   final String materiel;
   final String adresse;
@@ -56,8 +61,8 @@ class DemandeDeChantier {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'idSite': idSite,
-      'idClient': idClient,
+      'site': site,
+      'client': client,
       'nombreEmployes': nombreEmployes,
       'materiel': materiel,
       'adresse': adresse,

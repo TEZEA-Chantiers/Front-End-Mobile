@@ -21,7 +21,7 @@ class Client {
     );
   }
 
-  final int id; // pas de type long dans Dart, int equivalent
+  final int id;
   final String nom;
   final String prenom;
   final String adresse;

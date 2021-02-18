@@ -1,5 +1,7 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
-import 'enums/status_type.dart';
+
+import 'status_type.dart';
 
 class RapportChantierRegulier {
   RapportChantierRegulier({
@@ -8,17 +10,20 @@ class RapportChantierRegulier {
     this.dateFinTheorique,
     this.dateDebutEffectif,
     this.dateFinEffectif,
-    this.statut,
+    this.status,
   });
 
   factory RapportChantierRegulier.fromJson(Map<String, dynamic> jsonData) {
     return RapportChantierRegulier(
       id: jsonData['id'] as int,
-      dateDebutTheorique: DateTime.parse(jsonData['dateDebutTheorique'].toString()),
+      dateDebutTheorique:
+          DateTime.parse(jsonData['dateDebutTheorique'].toString()),
       dateFinTheorique: DateTime.parse(jsonData['dateFinTheorique'].toString()),
-      dateDebutEffectif: DateTime.parse(jsonData['dateDebutEffectif'].toString()),
+      dateDebutEffectif:
+          DateTime.parse(jsonData['dateDebutEffectif'].toString()),
       dateFinEffectif: DateTime.parse(jsonData['dateFinEffectif'].toString()),
-      statut: StatusType.values[jsonData['statut'] as int],
+      status: EnumToString.fromString(
+          StatusType.values, jsonData['status'].toString()),
     );
   }
 
@@ -27,7 +32,7 @@ class RapportChantierRegulier {
   final DateTime dateFinTheorique;
   final DateTime dateDebutEffectif;
   final DateTime dateFinEffectif;
-  final StatusType statut;
+  final StatusType status;
 
   Map<String, dynamic> toJson() {
     return {
@@ -36,7 +41,7 @@ class RapportChantierRegulier {
       'dateFinTheorique': dateFinTheorique.toString(),
       'dateDebutEffectif': dateDebutEffectif.toString(),
       'dateFinEffectif': dateFinEffectif.toString(),
-      'statut': statut.index,
+      'status': status,
     };
   }
 }

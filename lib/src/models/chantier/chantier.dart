@@ -1,14 +1,18 @@
 import 'package:flutter/cupertino.dart';
-import 'package:tezea_chantiers/src/models/rapport_chantier_regulier.dart';
 
-import 'enums/jour_semaine_type.dart';
-import 'enums/status_type.dart';
+import '../client/client.dart';
+import '../site/site.dart';
+import 'jour_semaine_type.dart';
+import 'media.dart';
+import 'probleme.dart';
+import 'rapport_chantier_regulier.dart';
+import 'status_type.dart';
 
 class Chantier {
   Chantier({
     @required this.id,
-    @required this.idSite,
-    @required this.idClient,
+    @required this.site,
+    @required this.client,
     this.problemes,
     this.medias,
     this.adresse,
@@ -20,7 +24,7 @@ class Chantier {
     this.telephone,
     this.statutChantier,
     this.nomChantier,
-    this.informationsInternes,
+    this.informationsInterne,
     this.description,
     this.joursRegularite,
     this.dateDebutRegularite,
@@ -34,41 +38,42 @@ class Chantier {
   factory Chantier.fromJson(Map<String, dynamic> jsonData) {
     return Chantier(
       id: jsonData['id'] as int,
-      idSite: jsonData['idSite'] as int,
-      idClient: jsonData['idClient'] as int,
-      problemes: jsonData['problemes'] as List<int>,
-      medias: jsonData['medias'] as List<int>,
-      ouvriers: jsonData['ouvriers'] as List<String>,
+      site: jsonData['site'] as Site,
+      client: jsonData['client'] as Client,
+      problemes: jsonData['problemes'] as Set<Probleme>,
+      medias: jsonData['medias'] as Set<Media>,
       adresse: jsonData['adresse'].toString(),
+      ouvriers: jsonData['ouvriers'] as Set<String>,
       materiel: jsonData['materiel'].toString(),
-
       dateDebutTheorique: DateTime.parse(jsonData['dateDebut'].toString()),
       dateFinTheorique: DateTime.parse(jsonData['dateFin'].toString()),
-
       estimationTemps: jsonData['estimationTemps'] as int,
       telephone: jsonData['telephone'].toString(),
       statutChantier: StatusType.values[jsonData['statutChantier'] as int],
       nomChantier: jsonData['nomChantier'].toString(),
-      informationsInternes: jsonData['informationsInternes'].toString(),
+      informationsInterne: jsonData['informationsInterne'].toString(),
       description: jsonData['description'].toString(),
-
       joursRegularite: jsonData['joursRegularite'] as Set<JourSemaineType>,
-      dateDebutRegularite: DateTime.parse(jsonData['dateDebutRegularite'].toString()),
-      dateFinRegularite: DateTime.parse(jsonData['dateFinRegularite'].toString()),
+      dateDebutRegularite:
+          DateTime.parse(jsonData['dateDebutRegularite'].toString()),
+      dateFinRegularite:
+          DateTime.parse(jsonData['dateFinRegularite'].toString()),
       regularite: jsonData['regularite'] as bool,
-      dateDebutEffectif: DateTime.parse(jsonData['dateDebutEffectif'].toString()),
+      dateDebutEffectif:
+          DateTime.parse(jsonData['dateDebutEffectif'].toString()),
       dateFinEffectif: DateTime.parse(jsonData['dateFinEffectif'].toString()),
-      rapportsRegulier: jsonData['rapportsRegulier'] as List<RapportChantierRegulier>,
+      rapportsRegulier:
+          jsonData['rapportsRegulier'] as Set<RapportChantierRegulier>,
     );
   }
 
-  final int id; // pas de type long dans Dart, int equivalent
-  final int idSite;
-  final int idClient;
-  final List<int> problemes;
-  final List<int> medias;
-  final List<String> ouvriers;
+  final int id;
+  final Site site;
+  final Client client;
+  final Set<Probleme> problemes;
+  final Set<Media> medias;
   final String adresse;
+  final Set<String> ouvriers;
   final String materiel;
 
   final DateTime dateDebutTheorique;
@@ -78,7 +83,7 @@ class Chantier {
   final String telephone;
   final StatusType statutChantier;
   final String nomChantier;
-  final String informationsInternes;
+  final String informationsInterne;
   final String description;
 
   final Set<JourSemaineType> joursRegularite;
@@ -87,29 +92,26 @@ class Chantier {
   final bool regularite;
   final DateTime dateDebutEffectif;
   final DateTime dateFinEffectif;
-  final List<RapportChantierRegulier> rapportsRegulier;
+  final Set<RapportChantierRegulier> rapportsRegulier;
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'idSite': idSite,
-      'idClient': idClient,
+      'site': site,
+      'client': client,
       'problemes': problemes,
       'medias': medias,
       'ouvriers': ouvriers,
       'adresse': adresse,
       'materiel': materiel,
-
       'dateDebutTheorique': dateDebutTheorique.toString(),
       'dateFinTheorique': dateFinTheorique.toString(),
-
       'estimationTemps': estimationTemps,
       'telephone': telephone,
       'statutChantier': statutChantier.index,
       'nomChantier': nomChantier,
-      'informationsInternes': informationsInternes,
+      'informationsInterne': informationsInterne,
       'description': description,
-
       'joursRegularite': joursRegularite,
       'dateDebutRegularite': dateDebutRegularite.toString(),
       'dateFinRegularite': dateFinRegularite.toString(),

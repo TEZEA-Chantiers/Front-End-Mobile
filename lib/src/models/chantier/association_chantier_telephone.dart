@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 
-import 'enums/media_type.dart';
-
 class AssociationChantierTelephone {
   AssociationChantierTelephone({
     @required this.id,
@@ -17,7 +15,7 @@ class AssociationChantierTelephone {
     );
   }
 
-  final int id; // pas de type long dans Dart, int equivalent
+  final int id;
   final int telephone;
   final int chantier;
 
