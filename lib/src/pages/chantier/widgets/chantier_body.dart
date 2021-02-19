@@ -18,60 +18,78 @@ class ChantierBody extends StatelessWidget {
     final _firebaseFirestore = DatabaseService();
 
     return StreamBuilder(
-        stream: _firebaseFirestore
-            .getDocument('chantier', 'V1YtkHvEVmCwOV8YSxBi')
-            .asStream(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Text('Pas de Donnee');
-          }
+          stream: _firebaseFirestore
+              .getDocument('chantier', 'V1YtkHvEVmCwOV8YSxBi')
+              .asStream(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return const Text('Pas de Donnee');
+            }
 
-          final dateDebut =
-              (snapshot.data['dateDebut'] as Timestamp).millisecondsSinceEpoch;
+            final dateDebut =
+                (snapshot.data['dateDebut'] as Timestamp).millisecondsSinceEpoch;
+            final dateFin =
+                (snapshot.data['dateFin'] as Timestamp).millisecondsSinceEpoch;
+            final heureDemarrage =
+                (snapshot.data['heureDemarrage'] as Timestamp).millisecondsSinceEpoch;
 
-          return Column(children: [
-            Text(snapshot.data['adresse'].toString()),
-            const Padding(
-              padding: EdgeInsets.all(2),
-            ),
-            Text(
-                '${DateFormat.yMMMMd().format(DateTime.fromMillisecondsSinceEpoch(dateDebut))} ${DateFormat.Hms().format(DateTime.fromMillisecondsSinceEpoch(dateDebut))}'),
-            Text(snapshot.data['dateFin'].toString()),
-            Text(snapshot.data['heureDemarrage'].toString()),
-            Text(snapshot.data['description'].toString()),
-            Text(snapshot.data['ouvriers'].toString()),
-            Text(snapshot.data['materiel'].toString()),
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const HomePage()));
-              },
-              child: const Text('Démarrer ce chantier'),
-            ),
-            RaisedButton(
-              onPressed: () {},
-              child: const Text('Remonter un problème'),
-            ),
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ProblemListPage(),
+            return Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(top: 10,bottom : 30),
+                    child : Text(snapshot.data['adresse'].toString(),textScaleFactor: 1.3,),
                   ),
-                );
-              },
-              child: const Text('Liste des problèmes'),
-            ),
-            RaisedButton(
-              onPressed: () {},
-              child: const Text('Photographier un document'),
-            ),
-            RaisedButton(
-              onPressed: () {},
-              child: const Text('Récupérer une signature'),
-            ),
-          ]);
-        });
+                  Container(
+                    padding: const EdgeInsets.only(bottom : 20),
+                    child: const Text('Horaire : ', textScaleFactor: 1.2,),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(bottom : 10),
+                    child : Text(
+                        'Debut : ${DateFormat.yMMMMd().format(DateTime.fromMillisecondsSinceEpoch(dateDebut))} ${DateFormat.Hms().format(DateTime.fromMillisecondsSinceEpoch(dateDebut))}'
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(bottom : 10),
+                    child : Text(
+                        'Fin : ${DateFormat.yMMMMd().format(DateTime.fromMillisecondsSinceEpoch(dateFin))} ${DateFormat.Hms().format(DateTime.fromMillisecondsSinceEpoch(dateFin))}'
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(bottom : 20),
+                    child : Text(
+                        'Débuté à ${DateFormat.yMMMMd().format(DateTime.fromMillisecondsSinceEpoch(heureDemarrage))} ${DateFormat.Hms().format(DateTime.fromMillisecondsSinceEpoch(heureDemarrage))}'
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(bottom : 10),
+                    child :
+                      const Text('Description : ', textScaleFactor: 1.2,)
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(bottom : 20),
+                    child :
+                      Text(snapshot.data['description'].toString()),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(bottom : 10),
+                    child :
+                      const Text('Employés Affectés : ',textScaleFactor: 1.2,)
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(bottom : 20),
+                    child :
+                    Text(snapshot.data['ouvriers'].toString()),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(bottom : 30),
+                    child :
+                    Text('Materiel : ${snapshot.data['materiel']}',textScaleFactor: 1.1,),
+                  ),
+            ]
+            );
+          });
+
+
   }
 }

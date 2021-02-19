@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'chantier_body.dart';
+import 'chantier_button.dart';
 
 class ChantierMain extends StatelessWidget {
   const ChantierMain({
@@ -10,9 +11,10 @@ class ChantierMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: const [
         ChantierBody(),
+        ChantierButton(),
       ],
     );
   }
