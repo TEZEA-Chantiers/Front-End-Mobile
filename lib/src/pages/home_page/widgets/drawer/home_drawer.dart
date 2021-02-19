@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../services/firebase_services/auth_service.dart';
+import '../../../../utilities/camera_widget.dart';
+import '../../../chantier/chantier.dart';
 import '../../../chantier_list_page/chantier_list_page.dart';
 import '../../../problem_list_page/problem_list_page.dart';
 import '../../../problem_page/problem_page.dart';
@@ -116,6 +118,28 @@ class HomeDrawer extends StatelessWidget {
                   );
                 },
                 child: const Text('Test ChantierListPage'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Chantier(),
+                    ),
+                  );
+                },
+                child: const Text('Test ChantierPage'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CameraWidget(),
+                    ),
+                  );
+                },
+                child: const Text('Test CameraWidget'),
               ),
             ],
           ),

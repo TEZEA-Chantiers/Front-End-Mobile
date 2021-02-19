@@ -1,8 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/provider_image_list.dart';
 import '../../../services/firebase_services/database_service.dart';
+import '../../../utilities/camera_widget.dart';
+import '../screens/check_image_screen.dart';
 
 class ProblemBody extends StatelessWidget {
   const ProblemBody({
@@ -12,6 +19,8 @@ class ProblemBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _databaseService = DatabaseService();
+
+    final providerImgList = Provider.of<ProviderImageList>(context);
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -52,22 +61,44 @@ class ProblemBody extends StatelessWidget {
               children: [
                 Container(
                   height: 200,
-                  child: ListView(
+                  child: ListView.builder(
+                    shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    children: <Widget>[
-                      Container(
-                        width: 200,
-                        color: Colors.lime,
-                      ),
-                      Container(
-                        width: 200,
-                        color: Colors.brown,
-                      ),
-                    ],
+                    itemCount: providerImgList.imageList.length,
+                    itemBuilder: (context, index) {
+                      if(providerImgList.imageList.isNotEmpty) {
+                        print('not empty');
+                        return Container(
+                          padding: const EdgeInsets.only(right: 5),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CheckImageScreen(imagePath: providerImgList
+                                        .imageList[index])
+                                ),
+                              );
+                            },
+                            child: Image.file(File(providerImgList
+                                .imageList[index])),
+                          ),
+                        );
+                      } else{
+                        print('empty!');
+                        return Container(width: 200, color: Colors.lime);
+                      }
+                    },
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => const CameraWidget(),
+                        )
+                    );
+                  },
                   child: const Text('Ajouter une photo'),
                 ),
               ],
