@@ -32,9 +32,9 @@ class ProblemPage extends StatelessWidget {
             onPressed: () => Navigator.of(context).pop(),
           ),
         ),
-        body: ChangeNotifierProvider.value(
-            value: textEditingControllerSearchBar, child: const ProblemMain()),
-      ),
+        body: /*ChangeNotifierProvider<ProviderImageList>.value(
+            value: ProviderImageList(), child:*/ const ProblemMain()),
+      //),
     );
   }
 }

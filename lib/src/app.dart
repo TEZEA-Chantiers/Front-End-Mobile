@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/providers/provider_image_list.dart';
 
 import 'services/firebase_services/auth_service.dart';
 import 'wrappers/auth_wrapper/auth_wrapper.dart';
@@ -19,6 +20,9 @@ class App extends StatelessWidget {
         ),
         StreamProvider(
           create: (context) => context.read<AuthService>().idTokenChanges,
+        ),
+        ChangeNotifierProvider<ProviderImageList>(
+          create: (context) => ProviderImageList(),
         )
       ],
       child: MaterialApp(
