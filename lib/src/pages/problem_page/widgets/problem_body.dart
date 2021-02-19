@@ -65,7 +65,7 @@ class ProblemBody extends StatelessWidget {
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemCount: providerImgList.imageList.length,
-                    itemBuilder: (BuildContext context, int index) {
+                    itemBuilder: (context, index) {
                       if(providerImgList.imageList.isNotEmpty) {
                         print('not empty');
                         return Container(

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'widgets/problem_main.dart';
 
@@ -32,8 +31,7 @@ class ProblemPage extends StatelessWidget {
             onPressed: () => Navigator.of(context).pop(),
           ),
         ),
-        body: /*ChangeNotifierProvider<ProviderImageList>.value(
-            value: ProviderImageList(), child:*/ const ProblemMain()),
+        body: const ProblemMain()),
       //),
     );
   }

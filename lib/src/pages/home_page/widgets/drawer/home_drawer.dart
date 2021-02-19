@@ -3,10 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../chantier/chantier.dart';
-import '../../../../utilities/camera_widget.dart';
 
 import '../../../../services/firebase_services/auth_service.dart';
+import '../../../../utilities/camera_widget.dart';
+import '../../../chantier/chantier.dart';
 import '../../../chantier_list_page/chantier_list_page.dart';
 import '../../../problem_list_page/problem_list_page.dart';
 import '../../../problem_page/problem_page.dart';
@@ -135,7 +135,7 @@ class HomeDrawer extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CameraWidget(),
+                      builder: (context) => const CameraWidget(),
                     ),
                   );
                 },

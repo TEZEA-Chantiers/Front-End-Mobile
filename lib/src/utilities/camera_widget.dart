@@ -47,9 +47,9 @@ class _CameraWidget extends State<CameraWidget> {
 
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      _controller != null
-          ? _initializeControllerFuture = _controller.initialize()
-          : null; //on pause camera is disposed, so we need to call again "issue is only for android"
+      if(_controller != null){
+        _initializeControllerFuture = _controller.initialize();
+      }
     }
   }
 
@@ -134,7 +134,7 @@ class _CameraWidget extends State<CameraWidget> {
 }
 
 class ValidatePictureScreen extends StatelessWidget {
-  ValidatePictureScreen({Key key, this.imagePath}) : super(key: key);
+  const ValidatePictureScreen({Key key, this.imagePath}) : super(key: key);
 
   final String imagePath;
 
