@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../models/client/client.dart';
 
-import '../../../services/firebase_services/database_service.dart';
+import '../../../services/crud/chantier/client_service.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({
@@ -11,8 +13,10 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _databaseService = DatabaseService();
+    final _client = context.watch<Set<Client>>();
 
-    return Container();
+    return Container(
+        child: Text(_client == null ? 'Chargement' : 'oui'),
+    );
   }
 }
