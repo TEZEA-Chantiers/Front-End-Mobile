@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PhotoDocBody extends StatelessWidget {
   const PhotoDocBody({
@@ -12,38 +13,40 @@ class PhotoDocBody extends StatelessWidget {
 
     var dropdownValue = 'Signature';
 
-    return ListView(
-      shrinkWrap: true,
-      padding: const EdgeInsets.all(20),
+    return Column(
       children:<Widget> [
         TextFormField(
           decoration: const InputDecoration(
             labelText: 'Titre du Document',
+            labelStyle: TextStyle(fontSize: 20),
           ),
           onSaved: (value){
 
           },
         ),
 
-        const Padding(padding: EdgeInsets.all(10)),
+        const Padding(padding: EdgeInsets.only(top:10, bottom:15)),
 
         Row(
           children: [
-            const Text('Type du Document'),
+            const Text('Type du Document :',textScaleFactor: 1.3,),
             const Padding(padding: EdgeInsets.all(10)),
-            DropdownButton<String>(
+            Provider.value(
               value: dropdownValue,
-              icon: const Icon(Icons.arrow_downward),
-              onChanged: (newValue) {
-                dropdownValue = newValue;
-              },
-              items: <String>['Signature', 'Devis', 'Etat des Lieux', 'Livraison','Autre']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
+              child: DropdownButton<String>(
+                value: dropdownValue,
+                icon: const Icon(Icons.arrow_downward),
+                onChanged: (newValue) {
+                  dropdownValue = newValue;
+                },
+                items: ['Signature', 'Devis', 'Etat des Lieux', 'Livraison','Autre']
+                    .map<DropdownMenuItem<String>>((value) {
+                  return DropdownMenuItem(
+                    value: value,
+                    child: Text(value, textScaleFactor: 1.2,),
+                  );
+                }).toList(),
+              ),
             ),
           ],
         ),
@@ -70,6 +73,7 @@ class PhotoDocBody extends StatelessWidget {
         Container(
             padding: const EdgeInsets.all(40),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 RaisedButton(
                   onPressed: () {},

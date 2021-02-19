@@ -10,7 +10,9 @@ class PhotoDocMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
+      padding: const EdgeInsets.all(15),
+      shrinkWrap: true,
       children: const [
         PhotoDocBody(),
       ],

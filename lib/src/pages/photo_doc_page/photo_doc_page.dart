@@ -25,7 +25,7 @@ class PhotoDocPage extends StatelessWidget {
         backgroundColor: const Color(0xff2E4053),
         appBar: AppBar(
           backgroundColor: const Color(0xff2E4060),
-          title: const Text('Récuperer une signature'),
+          title: const Text('Photographier un Document'),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () => Navigator.of(context).pop(),
