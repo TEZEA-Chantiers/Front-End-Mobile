@@ -16,16 +16,23 @@ class SignatureBody extends StatelessWidget {
       shrinkWrap: true,
       padding: const EdgeInsets.all(20),
       children:<Widget> [
-        const Text('Signature :'),
+        Container(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: const Text('Signature :', textScaleFactor: 1.4,),
+        ),
         SfSignaturePad(
           key: _signaturePadKey,
           backgroundColor: Colors.grey[200],
         ),
-        RaisedButton(
-            onPressed: () async {
-              _signaturePadKey.currentState.clear();
-            },
-            child: const Text('Effacer')
+        Container(
+          padding: const EdgeInsets.only(bottom: 10),
+          alignment: Alignment.centerRight,
+          child: RaisedButton(
+              onPressed: () async {
+                _signaturePadKey.currentState.clear();
+              },
+              child: const Text('Effacer')
+          ),
         ),
         TextFormField(
           decoration: const InputDecoration(
@@ -35,11 +42,15 @@ class SignatureBody extends StatelessWidget {
 
           },
         ),
-        RaisedButton(
-            onPressed: () async {
-              _signaturePadKey.currentState.clear();
-            },
-            child: const Text('Envoyer')
+        Container(
+          padding: const EdgeInsets.only(top: 30),
+          alignment: Alignment.centerRight,
+          child: RaisedButton(
+              onPressed: () async {
+                _signaturePadKey.currentState.clear();
+              },
+              child: const Text('Envoyer')
+          ),
         ),
       ],
     );
