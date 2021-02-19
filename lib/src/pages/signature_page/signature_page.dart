@@ -32,7 +32,8 @@ class SignaturePage extends StatelessWidget {
           ),
         ),
         body: ChangeNotifierProvider.value(
-            value: textEditingControllerSearchBar, child: const SignatureMain()),
+            value: textEditingControllerSearchBar,
+            child: const SignatureMain()),
       ),
     );
   }

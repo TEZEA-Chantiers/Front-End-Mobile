@@ -10,26 +10,24 @@ class PhotoDocBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     var dropdownValue = 'Signature';
 
     return Column(
-      children:<Widget> [
+      children: <Widget>[
         TextFormField(
           decoration: const InputDecoration(
             labelText: 'Titre du Document',
             labelStyle: TextStyle(fontSize: 20),
           ),
-          onSaved: (value){
-
-          },
+          onSaved: (value) {},
         ),
-
-        const Padding(padding: EdgeInsets.only(top:10, bottom:15)),
-
+        const Padding(padding: EdgeInsets.only(top: 10, bottom: 15)),
         Row(
           children: [
-            const Text('Type du Document :',textScaleFactor: 1.3,),
+            const Text(
+              'Type du Document :',
+              textScaleFactor: 1.3,
+            ),
             const Padding(padding: EdgeInsets.all(10)),
             Provider.value(
               value: dropdownValue,
@@ -39,20 +37,26 @@ class PhotoDocBody extends StatelessWidget {
                 onChanged: (newValue) {
                   dropdownValue = newValue;
                 },
-                items: ['Signature', 'Devis', 'Etat des Lieux', 'Livraison','Autre']
-                    .map<DropdownMenuItem<String>>((value) {
+                items: [
+                  'Signature',
+                  'Devis',
+                  'Etat des Lieux',
+                  'Livraison',
+                  'Autre'
+                ].map<DropdownMenuItem<String>>((value) {
                   return DropdownMenuItem(
                     value: value,
-                    child: Text(value, textScaleFactor: 1.2,),
+                    child: Text(
+                      value,
+                      textScaleFactor: 1.2,
+                    ),
                   );
                 }).toList(),
               ),
             ),
           ],
         ),
-
         const Padding(padding: EdgeInsets.all(10)),
-
         Container(
           height: 200,
           child: ListView(
@@ -69,7 +73,6 @@ class PhotoDocBody extends StatelessWidget {
             ],
           ),
         ),
-
         Container(
             padding: const EdgeInsets.all(40),
             child: Row(
@@ -78,22 +81,17 @@ class PhotoDocBody extends StatelessWidget {
                 RaisedButton(
                   onPressed: () {},
                   child: const IconButton(
-                      icon: Icon(Icons.folder),
-                      onPressed: null),
+                      icon: Icon(Icons.folder), onPressed: null),
                 ),
                 const Spacer(),
                 RaisedButton(
                   onPressed: () {},
                   child: const IconButton(
-                      icon: Icon(Icons.add_a_photo),
-                      onPressed: null),
+                      icon: Icon(Icons.add_a_photo), onPressed: null),
                 ),
               ],
-            )
-        )
+            ))
       ],
     );
   }
-
-
 }

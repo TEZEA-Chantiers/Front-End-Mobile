@@ -12,47 +12,47 @@ class SignatureBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final _signaturePadKey = GlobalKey<SfSignaturePadState>();
 
-    return ListView(
-      shrinkWrap: true,
+    return Padding(
       padding: const EdgeInsets.all(20),
-      children:<Widget> [
-        Container(
-          padding: const EdgeInsets.only(bottom: 20),
-          child: const Text('Signature :', textScaleFactor: 1.4,),
-        ),
-        SfSignaturePad(
-          key: _signaturePadKey,
-          backgroundColor: Colors.grey[200],
-        ),
-        Container(
-          padding: const EdgeInsets.only(bottom: 10),
-          alignment: Alignment.centerRight,
-          child: RaisedButton(
-              onPressed: () async {
-                _signaturePadKey.currentState.clear();
-              },
-              child: const Text('Effacer')
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: const Text(
+              'Signature :',
+              textScaleFactor: 1.4,
+            ),
           ),
-        ),
-        TextFormField(
-          decoration: const InputDecoration(
-            labelText: 'Signataire',
+          SfSignaturePad(
+            key: _signaturePadKey,
+            backgroundColor: Colors.grey[200],
           ),
-          onSaved: (value){
-
-          },
-        ),
-        Container(
-          padding: const EdgeInsets.only(top: 30),
-          alignment: Alignment.centerRight,
-          child: RaisedButton(
-              onPressed: () async {
-                _signaturePadKey.currentState.clear();
-              },
-              child: const Text('Envoyer')
+          Container(
+            padding: const EdgeInsets.only(bottom: 10),
+            alignment: Alignment.centerRight,
+            child: RaisedButton(
+                onPressed: () async {
+                  _signaturePadKey.currentState.clear();
+                },
+                child: const Text('Effacer')),
           ),
-        ),
-      ],
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Signataire',
+            ),
+            onSaved: (value) {},
+          ),
+          Container(
+            padding: const EdgeInsets.only(top: 30),
+            alignment: Alignment.centerRight,
+            child: RaisedButton(
+                onPressed: () async {
+                  _signaturePadKey.currentState.clear();
+                },
+                child: const Text('Envoyer')),
+          ),
+        ],
+      ),
     );
   }
 }

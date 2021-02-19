@@ -22,16 +22,16 @@ class ProblemPage extends StatelessWidget {
         }
       },
       child: Scaffold(
-        backgroundColor: const Color(0xff2E4053),
-        appBar: AppBar(
-          backgroundColor: const Color(0xff2E4060),
-          title: const Text('Problème du [DATE]'),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => Navigator.of(context).pop(),
+          backgroundColor: const Color(0xff2E4053),
+          appBar: AppBar(
+            backgroundColor: const Color(0xff2E4060),
+            title: const Text('Problème du [DATE]'),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
           ),
-        ),
-        body: const ProblemMain()),
+          body: const ProblemMain()),
       //),
     );
   }

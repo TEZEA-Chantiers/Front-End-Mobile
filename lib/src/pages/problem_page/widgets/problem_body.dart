@@ -20,7 +20,7 @@ class ProblemBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final _databaseService = DatabaseService();
 
-    final providerImgList = Provider.of<ProviderImageList>(context);
+    final providerImgList = context.watch<ProviderImageList>();
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -61,30 +61,31 @@ class ProblemBody extends StatelessWidget {
               children: [
                 Container(
                   height: 200,
+                  color: Colors.amber,
                   child: ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemCount: providerImgList.imageList.length,
                     itemBuilder: (context, index) {
-                      if(providerImgList.imageList.isNotEmpty) {
+                      if (providerImgList.imageList.isNotEmpty) {
                         print('not empty');
                         return Container(
                           padding: const EdgeInsets.only(right: 5),
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => CheckImageScreen(imagePath: providerImgList
-                                        .imageList[index])
-                                ),
+                                    builder: (context) => CheckImageScreen(
+                                        imagePath:
+                                            providerImgList.imageList[index])),
                               );
                             },
-                            child: Image.file(File(providerImgList
-                                .imageList[index])),
+                            child: Image.file(
+                                File(providerImgList.imageList[index])),
                           ),
                         );
-                      } else{
+                      } else {
                         print('empty!');
                         return Container(width: 200, color: Colors.lime);
                       }
@@ -93,11 +94,9 @@ class ProblemBody extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => const CameraWidget(),
-                        )
-                    );
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const CameraWidget(),
+                    ));
                   },
                   child: const Text('Ajouter une photo'),
                 ),

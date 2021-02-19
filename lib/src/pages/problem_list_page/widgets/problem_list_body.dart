@@ -16,7 +16,9 @@ class ProblemListBody extends StatelessWidget {
     final _databaseService = DatabaseService();
 
     return StreamBuilder(
-        stream: _databaseService.getDocument('chantier', 'V1YtkHvEVmCwOV8YSxBi').asStream(),
+        stream: _databaseService
+            .getDocument('chantier', 'V1YtkHvEVmCwOV8YSxBi')
+            .asStream(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Text('Pas de Données');
@@ -29,7 +31,8 @@ class ProblemListBody extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(snapshot.data['nomChantier'].toString(),
-                        style: const TextStyle(fontSize: 20, color: Colors.white)),
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.white)),
                   ],
                 ),
                 Container(
@@ -38,7 +41,8 @@ class ProblemListBody extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(snapshot.data['adresse'].toString(),
-                          style: const TextStyle(fontSize: 16, color: Colors.white)),
+                          style: const TextStyle(
+                              fontSize: 16, color: Colors.white)),
                     ],
                   ),
                 ),
@@ -83,28 +87,28 @@ class ProblemListBody extends StatelessWidget {
               ],
             ),
           );
-        }
-     );
+        });
   }
 
-  Container buildListItem(BuildContext context){
+  Container buildListItem(BuildContext context) {
     return Container(
       height: 80,
       padding: const EdgeInsets.only(bottom: 5),
       child: GestureDetector(
-        onTap: (){
+        onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => const ProblemPage(),  // argument manquant: id pb
+              builder: (context) =>
+                  const ProblemPage(), // argument manquant: id pb
             ),
           );
         },
         child: Row(
           children: [
             const CircleAvatar(
-              backgroundImage: AssetImage(
-                  'assets/images/profile/avatar-anonym.png'),
+              backgroundImage:
+                  AssetImage('assets/images/profile/avatar-anonym.png'),
             ),
             Column(
               children: const [

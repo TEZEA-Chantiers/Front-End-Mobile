@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../providers/provider_image_list.dart';
 
+import '../../../providers/provider_image_list.dart';
 import '../problem_page.dart';
 
 class CheckImageScreen extends StatelessWidget {
@@ -42,30 +42,35 @@ class CheckImageScreen extends StatelessWidget {
                           onPressed: () {
                             showDialog(
                                 context: context,
-                                builder: (context){
+                                builder: (context) {
                                   return AlertDialog(
                                     title: const Text('Confirmer'),
-                                    content: const Text('Voulez vous vraiment supprimer cette photo ?'),
+                                    content: const Text(
+                                        'Voulez vous vraiment supprimer cette photo ?'),
                                     actions: [
                                       FlatButton(
-                                        onPressed:  () {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) => const ProblemPage(),
-                                              )
-                                          );
-                                          Provider.of<ProviderImageList>(context, listen: false).delImage(imagePath);
+                                        onPressed: () {
+                                          Navigator.of(context)
+                                              .push(MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ProblemPage(),
+                                          ));
+                                          Provider.of<ProviderImageList>(
+                                                  context,
+                                                  listen: false)
+                                              .delImage(imagePath);
                                         },
                                         child: const Text('Oui'),
                                       ),
                                       FlatButton(
-                                        onPressed:  () { Navigator.of(context).pop(); },
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
                                         child: const Text('Non'),
                                       ),
                                     ],
                                   );
-                                }
-                            );
+                                });
                           },
                           child: const Text('Supprimer la photo'),
                         ),
