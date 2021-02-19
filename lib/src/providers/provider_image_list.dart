@@ -5,7 +5,6 @@ class ProviderImageList extends ChangeNotifier{
 
   void addImage(String i){
     imageList.add(i);
-    print('added '+i);
     notifyListeners();
   }
   void delImage(String i){

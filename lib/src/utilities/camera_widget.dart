@@ -25,7 +25,6 @@ class _CameraWidget extends State<CameraWidget> {
   Future<void> _initializeControllerFuture;
   bool isCameraReady = false;
   List<CameraDescription> cameras;
-  List<String> imgPath = <String>[];
 
   @override
   void initState() {
@@ -124,7 +123,7 @@ class _CameraWidget extends State<CameraWidget> {
       await Navigator.push(
         this.context,
         MaterialPageRoute(
-            builder: (context) => DisplayPictureScreen(imagePath: path,img: imgPath)
+            builder: (context) => ValidatePictureScreen(imagePath: path)
         ),
       );
 
@@ -134,11 +133,10 @@ class _CameraWidget extends State<CameraWidget> {
   }
 }
 
-class DisplayPictureScreen extends StatelessWidget {
-  DisplayPictureScreen({Key key, this.imagePath, this.img}) : super(key: key);
+class ValidatePictureScreen extends StatelessWidget {
+  ValidatePictureScreen({Key key, this.imagePath}) : super(key: key);
 
   final String imagePath;
-  List<String> img;
 
   @override
   Widget build(BuildContext context) {

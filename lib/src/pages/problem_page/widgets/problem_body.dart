@@ -5,10 +5,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import '../../../providers/provider_image_list.dart';
 
+import '../../../providers/provider_image_list.dart';
 import '../../../services/firebase_services/database_service.dart';
 import '../../../utilities/camera_widget.dart';
+import '../screens/check_image_screen.dart';
 
 class ProblemBody extends StatelessWidget {
   const ProblemBody({
@@ -69,8 +70,19 @@ class ProblemBody extends StatelessWidget {
                         print('not empty');
                         return Container(
                           padding: const EdgeInsets.only(right: 5),
-                          child: Image.file(File(providerImgList
-                                    .imageList[index])),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CheckImageScreen(imagePath: providerImgList
+                                        .imageList[index])
+                                ),
+                              );
+                            },
+                            child: Image.file(File(providerImgList
+                                .imageList[index])),
+                          ),
                         );
                       } else{
                         print('empty!');
