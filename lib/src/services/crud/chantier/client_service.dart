@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:http/http.dart' as http;
 
@@ -45,21 +44,49 @@ class ClientService {
     }
   }
 
-  // Get All
-  Future<Void> addClient(Client client) async {
+  // Add
+  Future<bool> addClient(Client client) async {
     final _hearders = <String, String>{'content-type': 'application/json'};
-    final _body = client.toJson();
+    final _body = jsonEncode(client.toJson());
 
     final response = await http.post(
-        '${DatabaseService.URL}${'$SERVICE_NAME${'/get'}'}',
-        headers: _hearders, body: _body);
+        '${DatabaseService.URL}${'$SERVICE_NAME${'/add'}'}',
+        headers: _hearders,
+        body: _body);
 
     if (response.statusCode == 201) {
-
-
-      return null;
+      return true;
     } else {
-      throw Exception('Chargement du client échoué.');
+      throw Exception('Création du client échoué.');
+    }
+  }
+
+  // Update
+  Future<Client> updateClient(int id, Client client) async {
+    final _hearders = <String, String>{'content-type': 'application/json'};
+    final _body = jsonEncode(client.toJson());
+
+    final response = await http.put(
+        '${DatabaseService.URL}${'$SERVICE_NAME${'/update/$id'}'}',
+        headers: _hearders,
+        body: _body);
+
+    if (response.statusCode == 200) {
+      return Client.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+    } else {
+      throw Exception('Mise à jour du client échoué.');
+    }
+  }
+
+  // Delete
+  Future<bool> deleteClient(int id) async {
+    final response = await http
+        .delete('${DatabaseService.URL}${'$SERVICE_NAME${'/delete/$id'}'}');
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception('Suppression du client échoué.');
     }
   }
 }
