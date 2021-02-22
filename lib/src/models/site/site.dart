@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
-
 class Site {
   Site({
-    @required this.id,
+    this.id,
     this.nomSite,
     this.nomChef,
     this.prenomChef,

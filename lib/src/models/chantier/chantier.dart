@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 
 import '../client/client.dart';
 import '../site/site.dart';
@@ -10,9 +9,9 @@ import 'status_type.dart';
 
 class Chantier {
   Chantier({
-    @required this.id,
-    @required this.site,
-    @required this.client,
+    this.id,
+    this.site,
+    this.client,
     this.problemes,
     this.medias,
     this.adresse,
@@ -36,12 +35,32 @@ class Chantier {
   });
 
   factory Chantier.fromJson(Map<String, dynamic> jsonData) {
+    Set<Probleme> _problemes;
+
+    for (final probleme in jsonData['problemes'] as List<dynamic>) {
+      _problemes.add(Probleme.fromJson(probleme as Map<String, dynamic>));
+    }
+
+    Set<Media> _medias;
+
+    for (final media in jsonData['medias'] as List<dynamic>) {
+      _medias.add(Media.fromJson(media as Map<String, dynamic>));
+    }
+
+    Set<RapportChantierRegulier> _rapportsRegulier;
+
+    for (final rapportsRegulier
+        in jsonData['rapportsRegulier'] as List<dynamic>) {
+      _rapportsRegulier.add(RapportChantierRegulier.fromJson(
+          rapportsRegulier as Map<String, dynamic>));
+    }
+
     return Chantier(
       id: jsonData['id'] as int,
-      site: jsonData['site'] as Site,
-      client: jsonData['client'] as Client,
-      problemes: jsonData['problemes'] as Set<Probleme>,
-      medias: jsonData['medias'] as Set<Media>,
+      site: Site.fromJson(jsonData['site'] as Map<String, dynamic>),
+      client: Client.fromJson(jsonData['client'] as Map<String, dynamic>),
+      problemes: _problemes,
+      medias: _medias,
       adresse: jsonData['adresse'].toString(),
       ouvriers: jsonData['ouvriers'] as Set<String>,
       materiel: jsonData['materiel'].toString(),
@@ -62,8 +81,7 @@ class Chantier {
       dateDebutEffectif:
           DateTime.parse(jsonData['dateDebutEffectif'].toString()),
       dateFinEffectif: DateTime.parse(jsonData['dateFinEffectif'].toString()),
-      rapportsRegulier:
-          jsonData['rapportsRegulier'] as Set<RapportChantierRegulier>,
+      rapportsRegulier: _rapportsRegulier,
     );
   }
 
@@ -97,8 +115,8 @@ class Chantier {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'site': site,
-      'client': client,
+      'site': site.toJson(),
+      'client': client.toJson(),
       'problemes': problemes,
       'medias': medias,
       'ouvriers': ouvriers,

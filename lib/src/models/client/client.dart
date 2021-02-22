@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
-
 class Client {
   Client({
-    @required this.id,
+    this.id,
     this.nom,
     this.prenom,
     this.adresse,

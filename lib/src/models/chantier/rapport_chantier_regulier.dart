@@ -1,11 +1,10 @@
 import 'package:enum_to_string/enum_to_string.dart';
-import 'package:flutter/cupertino.dart';
 
 import 'status_type.dart';
 
 class RapportChantierRegulier {
   RapportChantierRegulier({
-    @required this.id,
+    this.id,
     this.dateDebutTheorique,
     this.dateFinTheorique,
     this.dateDebutEffectif,

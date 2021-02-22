@@ -1,11 +1,10 @@
 import 'package:enum_to_string/enum_to_string.dart';
-import 'package:flutter/cupertino.dart';
 
 import 'media_type.dart';
 
 class Media {
   Media({
-    @required this.id,
+    this.id,
     this.nomMedia,
     this.imagesURL,
     this.mediaType,

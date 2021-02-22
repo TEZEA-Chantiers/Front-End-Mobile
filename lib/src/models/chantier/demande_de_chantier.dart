@@ -1,14 +1,12 @@
-import 'package:flutter/cupertino.dart';
-
 import '../client/client.dart';
 import '../site/site.dart';
 import 'jour_semaine_type.dart';
 
 class DemandeDeChantier {
   DemandeDeChantier({
-    @required this.id,
-    @required this.site,
-    @required this.client,
+    this.id,
+    this.site,
+    this.client,
     this.nombreEmployes,
     this.materiel,
     this.adresse,
