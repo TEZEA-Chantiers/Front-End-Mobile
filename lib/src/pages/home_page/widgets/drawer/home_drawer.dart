@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../services/firebase_services/auth_service.dart';
-import '../../../../utilities/camera_widget.dart';
+import '../../../camera_page/camera_page.dart';
 import '../../../chantier_list_page/chantier_list_page.dart';
 import '../../../chantier_page/chantier_page.dart';
 import '../../../problem_list_page/problem_list_page.dart';
@@ -135,7 +135,7 @@ class HomeDrawer extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const CameraWidget(),
+                      builder: (context) => const CameraPage(),
                     ),
                   );
                 },

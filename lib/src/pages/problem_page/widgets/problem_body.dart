@@ -8,8 +8,8 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/provider_image_list.dart';
 import '../../../services/firebase_services/database_service.dart';
-import '../../../utilities/camera_widget.dart';
-import '../screens/check_image_screen.dart';
+import '../../camera_page/camera_page.dart';
+import '../../check_picture_page/check_picture_page.dart';
 
 class ProblemBody extends StatelessWidget {
   const ProblemBody({
@@ -61,7 +61,6 @@ class ProblemBody extends StatelessWidget {
               children: [
                 Container(
                   height: 200,
-                  color: Colors.amber,
                   child: ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
@@ -76,9 +75,9 @@ class ProblemBody extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => CheckImageScreen(
+                                    builder: (context) => CheckPicturePage(
                                         imagePath:
-                                            providerImgList.imageList[index])),
+                                            providerImgList.imageList[index], controller: 'check',)),
                               );
                             },
                             child: Image.file(
@@ -92,17 +91,22 @@ class ProblemBody extends StatelessWidget {
                     },
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const CameraWidget(),
-                    ));
-                  },
-                  child: const Text('Ajouter une photo'),
-                ),
               ],
             ),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const CameraPage(),
+                  ));
+                },
+                child: const Text('Ajouter une photo'),
+              ),
+            ],
+          )
         ],
       ),
     );

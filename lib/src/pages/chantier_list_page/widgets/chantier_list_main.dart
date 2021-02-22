@@ -11,7 +11,7 @@ class ChantierListMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: const [
+      children: [
         ChantierListBody(),
       ],
     );
