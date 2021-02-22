@@ -25,7 +25,6 @@ class ChantierPage extends StatelessWidget {
         }
       },
       child: Scaffold(
-        backgroundColor: const Color(0xff2E4053),
         appBar: AppBar(
           title: StreamBuilder(
               stream: _firebaseFirestore
