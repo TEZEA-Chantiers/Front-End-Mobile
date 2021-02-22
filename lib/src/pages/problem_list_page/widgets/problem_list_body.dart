@@ -52,35 +52,15 @@ class ProblemListBody extends StatelessWidget {
                   child: ListView(
                     shrinkWrap: true,
                     children: [
-                      Container(
-                        height: 80,
-                        color: Colors.lime,
-                        child: const Text('EXEMPLE'),
-                      ),
-                      Container(
-                        height: 80,
-                        color: Colors.brown,
-                      ),
-                      Container(
-                        height: 80,
-                        color: Colors.yellow,
-                      ),
-                      Container(
-                        height: 80,
-                        color: Colors.red,
-                      ),
-                      Container(
-                        height: 80,
-                        color: Colors.purple,
-                      ),
-                      Container(
-                        height: 80,
-                        color: Colors.deepOrangeAccent,
-                      ),
-                      Container(
-                        height: 80,
-                        color: Colors.white38,
-                      ),
+                      buildListItem(context),
+                      buildListItem(context),
+                      buildListItem(context),
+                      buildListItem(context),
+                      buildListItem(context),
+                      buildListItem(context),
+                      buildListItem(context),
+                      buildListItem(context),
+                      buildListItem(context),
                     ],
                   ),
                 ),
@@ -92,31 +72,42 @@ class ProblemListBody extends StatelessWidget {
 
   Container buildListItem(BuildContext context) {
     return Container(
-      height: 80,
-      padding: const EdgeInsets.only(bottom: 5),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  const ProblemPage(), // argument manquant: id pb
-            ),
-          );
-        },
-        child: Row(
-          children: [
-            const CircleAvatar(
-              backgroundImage:
-                  AssetImage('assets/images/profile/avatar-anonym.png'),
-            ),
-            Column(
-              children: const [
-                Text('Nom probleme'),
-                Text('Description wrappee du probleme'),
-              ],
-            ),
-          ],
+      padding: const EdgeInsets.only(bottom: 2),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white38,
+            border: Border.all(),
+        ),
+        height: 80,
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    const ProblemPage(), // argument manquant: id pb
+              ),
+            );
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              const CircleAvatar(
+                radius: 25,
+                backgroundImage:
+                    AssetImage('assets/images/profile/avatar-anonym.png'),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text('Nom probleme',
+                    style: TextStyle(fontSize: 18)),
+                  Text('Description wrappee du probleme'),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
