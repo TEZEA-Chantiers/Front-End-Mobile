@@ -8,6 +8,7 @@ import '../../../services/firebase_services/auth_service.dart';
 import '../models/login_input_controller_model.dart';
 
 class LoginBottom extends StatelessWidget {
+
   const LoginBottom({
     Key key,
   }) : super(key: key);
@@ -29,10 +30,20 @@ class LoginBottom extends StatelessWidget {
                         context.read<LoginInputControllerModel>().emailController.text.trim(),
                         context.read<LoginInputControllerModel>().passwordController.text.trim(),
                       )
-                      .then((value) {
-                        print(value.jwt);
-                        Utilisateur_Service.getUtilisateur(value.jwt)
-                            .then((utilisateur) => print(utilisateur.role));
+                      .then((value){
+                        FocusScope.of(context).unfocus();
+                        if(value == null){
+                          String auth_error = "La connexion au compte a échoué.";
+                          //Good lord, it seems to be deprecated.
+                          Scaffold.of(context).showSnackBar(SnackBar(
+                            content: Text(auth_error),
+                          ));
+                        }
+                        else {
+                          //print("Retrieved JWT : " + value.jwt);
+                          Utilisateur_Service.getUtilisateur(value.jwt)
+                              .then((utilisateur) => AuthentificationService.currentUser = utilisateur);
+                        }
                   });
                 }
               },
@@ -45,6 +56,7 @@ class LoginBottom extends StatelessWidget {
                   text: 'En cas d\'oubli, contactez l\'administration. ',
                   style: TextStyle(color: Colors.white70),
             )),
+
           ],
         ),
       ),

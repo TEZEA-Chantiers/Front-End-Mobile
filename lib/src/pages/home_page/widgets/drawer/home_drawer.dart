@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/pages/login_page/login_page.dart';
 
 import '../../../../services/firebase_services/auth_service.dart';
 import '../../../camera_page/camera_page.dart';
@@ -140,6 +141,17 @@ class HomeDrawer extends StatelessWidget {
                   );
                 },
                 child: const Text('Test CameraWidget'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(),
+                    ),
+                  );
+                },
+                child: const Text('Test Login page'),
               ),
             ],
           ),

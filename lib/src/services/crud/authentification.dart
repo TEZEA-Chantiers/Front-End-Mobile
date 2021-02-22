@@ -10,6 +10,7 @@ import 'package:tezea_chantiers/src/models/utilisateur/utilisateur.dart';
 class AuthentificationService {
   static const API_URL = 'http://10.0.2.2:8080/api/v1';
   static const SERVICE_NAME = '/authentification';
+  static Utilisateur currentUser;
 
   // Get the current user from the database.
   //Used to obtain roles.
@@ -26,7 +27,8 @@ class AuthentificationService {
       return Jwt.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
     }
     else {
-      throw Exception('L\'authentification a échoué. Response : ' + response.statusCode.toString());
+      //throw Exception('L\'authentification a échoué. Response : ' + response.statusCode.toString());
+      return null;
     }
   }
 
