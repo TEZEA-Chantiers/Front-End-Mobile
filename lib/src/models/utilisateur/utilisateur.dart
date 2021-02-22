@@ -1,14 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
 class Utilisateur {
-  Utilisateur({
-    @required this.id,
-    this.username,
-    this.password,
-    this.role,
-    this.jwt
-  });
-
+  Utilisateur(
+      {@required this.id, this.username, this.password, this.role, this.jwt});
 
   factory Utilisateur.fromJson(Map<String, dynamic> jsonData) {
     return Utilisateur(
@@ -36,4 +30,3 @@ class Utilisateur {
     };
   }
 }
-

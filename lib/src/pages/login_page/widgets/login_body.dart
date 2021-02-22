@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/widgets_generic/text_form_field_custom.dart';
-import 'package:validators/validators.dart' as validators;
 
 import '../models/login_input_controller_model.dart';
 

@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
+
 
 class Jwt {
-  Jwt({
-    this.jwt
-  });
-
+  Jwt({this.jwt});
 
   factory Jwt.fromJson(Map<String, dynamic> jsonData) {
     return Jwt(
@@ -20,4 +17,3 @@ class Jwt {
     };
   }
 }
-
