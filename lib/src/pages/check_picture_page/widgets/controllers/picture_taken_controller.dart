@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../providers/provider_image_list.dart';
 
 class PictureTakenController extends StatelessWidget {
   const PictureTakenController({
-    Key key, this.imagePath,
+    Key key,
+    this.imagePath,
   }) : super(key: key);
 
   final String imagePath;

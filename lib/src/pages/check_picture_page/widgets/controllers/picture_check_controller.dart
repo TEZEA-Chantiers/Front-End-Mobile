@@ -7,7 +7,8 @@ import '../../../problem_page/problem_page.dart';
 
 class PictureCheckController extends StatelessWidget {
   const PictureCheckController({
-    Key key, this.imagePath,
+    Key key,
+    this.imagePath,
   }) : super(key: key);
 
   final String imagePath;
@@ -50,12 +51,10 @@ class PictureCheckController extends StatelessWidget {
                                   onPressed: () {
                                     Navigator.of(context)
                                         .push(MaterialPageRoute(
-                                      builder: (context) =>
-                                      const ProblemPage(),
+                                      builder: (context) => const ProblemPage(),
                                     ));
-                                    Provider.of<ProviderImageList>(
-                                        context,
-                                        listen: false)
+                                    Provider.of<ProviderImageList>(context,
+                                            listen: false)
                                         .delImage(imagePath);
                                   },
                                   child: const Text('Oui'),

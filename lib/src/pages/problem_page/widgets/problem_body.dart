@@ -76,8 +76,10 @@ class ProblemBody extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => CheckPicturePage(
-                                        imagePath:
-                                            providerImgList.imageList[index], controller: 'check',)),
+                                          imagePath:
+                                              providerImgList.imageList[index],
+                                          controller: 'check',
+                                        )),
                               );
                             },
                             child: Image.file(

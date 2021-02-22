@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'widgets/camera_main.dart';
 
 class CameraPage extends StatelessWidget {
@@ -9,7 +10,6 @@ class CameraPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
@@ -20,8 +20,7 @@ class CameraPage extends StatelessWidget {
         }
       },
       child: const Scaffold(
-          backgroundColor: Color(0xff2E4053),
-          body: CameraMain()),
+          backgroundColor: Color(0xff2E4053), body: CameraMain()),
       //),
     );
   }

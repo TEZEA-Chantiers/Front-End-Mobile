@@ -102,4 +102,3 @@ class ChantierListBody extends StatelessWidget {
     return false;
   }
 }
-

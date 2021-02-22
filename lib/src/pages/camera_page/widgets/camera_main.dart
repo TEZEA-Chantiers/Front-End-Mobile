@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'camera_body.dart';
 
-
 class CameraMain extends StatelessWidget {
   const CameraMain({
     Key key,

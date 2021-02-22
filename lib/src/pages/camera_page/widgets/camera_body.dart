@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+
 import '../../check_picture_page/check_picture_page.dart';
 
 class CameraBody extends StatefulWidget {
@@ -98,7 +99,7 @@ class _CameraBody extends State<CameraBody> {
         } else {
           return const Center(
               child:
-              CircularProgressIndicator()); // Otherwise, display a loading indicator.
+                  CircularProgressIndicator()); // Otherwise, display a loading indicator.
         }
       },
     );
@@ -116,10 +117,11 @@ class _CameraBody extends State<CameraBody> {
       print('picture taken!');
 
       await Navigator.push(
-        this.context,
-        MaterialPageRoute(
-            builder: (context) => CheckPicturePage(imagePath: path, controller: 'taken'),
-      ));
+          this.context,
+          MaterialPageRoute(
+            builder: (context) =>
+                CheckPicturePage(imagePath: path, controller: 'taken'),
+          ));
     } catch (e) {
       log(e.toString());
     }
