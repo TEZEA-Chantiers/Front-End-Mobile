@@ -1,27 +1,24 @@
 import 'dart:developer';
 import 'dart:ffi';
-import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:provider/provider.dart';
 
-import '../pages/problem_page/problem_page.dart';
-import '../providers/provider_image_list.dart';
+import '../../check_picture_page/check_picture_page.dart';
 
-class CameraWidget extends StatefulWidget {
-  const CameraWidget({
+class CameraBody extends StatefulWidget {
+  const CameraBody({
     Key key,
   }) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _CameraWidget();
+  State<StatefulWidget> createState() => _CameraBody();
 }
 
-class _CameraWidget extends State<CameraWidget> {
+class _CameraBody extends State<CameraBody> {
   CameraController _controller;
   Future<void> _initializeControllerFuture;
   bool isCameraReady = false;
@@ -58,7 +55,6 @@ class _CameraWidget extends State<CameraWidget> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final deviceRatio = size.width / size.height;
-    //var providerImgList = Provider.of<ProviderImageList>(context);
 
     return FutureBuilder<void>(
       future: _initializeControllerFuture,
@@ -121,68 +117,15 @@ class _CameraWidget extends State<CameraWidget> {
       print('picture taken!');
 
       await Navigator.push(
-        this.context,
-        MaterialPageRoute(
-            builder: (context) => ValidatePictureScreen(imagePath: path)),
-      );
+          this.context,
+          MaterialPageRoute(
+            builder: (context) =>
+                CheckPicturePage(imagePath: path, controller: 'taken'),
+          ));
     } catch (e) {
       log(e.toString());
     }
 
     return null;
-  }
-}
-
-class ValidatePictureScreen extends StatelessWidget {
-  const ValidatePictureScreen({Key key, this.imagePath}) : super(key: key);
-
-  final String imagePath;
-
-  @override
-  Widget build(BuildContext context) {
-    final providerImgList = Provider.of<ProviderImageList>(context);
-
-    return Scaffold(
-      body: Stack(
-        children: [
-          Image.file(File(imagePath)),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              width: double.infinity,
-              height: 80,
-              padding: const EdgeInsets.all(5),
-              color: const Color.fromRGBO(00, 00, 00, 0.7),
-              child: Stack(
-                children: <Widget>[
-                  Align(
-                    //alignment: Alignment.center,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            providerImgList.addImage(imagePath);
-                            Navigator.of(context).pop();
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('OK'),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('Reprendre la photo'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }

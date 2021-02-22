@@ -4,16 +4,11 @@ import 'package:flutter/material.dart';
 
 import '../../../services/firebase_services/database_service.dart';
 
-class ChantierListBody extends StatefulWidget {
-  const ChantierListBody({
+class ChantierListBody extends StatelessWidget {
+  ChantierListBody({
     Key key,
   }) : super(key: key);
 
-  @override
-  State<StatefulWidget> createState() => _ChantierListBodyState();
-}
-
-class _ChantierListBodyState extends State<ChantierListBody> {
   TextEditingController editingController = TextEditingController();
   String searchValue = '';
   bool showSearch = false;
@@ -33,6 +28,7 @@ class _ChantierListBodyState extends State<ChantierListBody> {
                 width: 300,
                 height: 50,
                 child: TextField(
+                  textAlignVertical: TextAlignVertical.bottom,
                   /*onSubmitted: (String value) {
                   showSearch = true;
 
@@ -59,40 +55,6 @@ class _ChantierListBodyState extends State<ChantierListBody> {
             child: ListView(
               shrinkWrap: true,
               children: [
-                // structure à utiliser si trop d'elements
-                // classe ChantierList à implémenter si besoin
-                // de même pour la méthode loadChantiers
-                /*Container(
-                      child: FutureBuilder<ProblemList>(
-                        future: loadChantiers(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasError)
-                            Center(child: CircularProgressIndicator());
-
-                          if (snapshot.hasData) {
-                            if (snapshot.data == null) {
-                              return Center(child: CircularProgressIndicator());
-                            }
-                            var list = snapshot.data.events
-                                .where((element) => test(element))
-                                .toList();
-                            return ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: list.length,
-                                padding: const EdgeInsets.all(8),
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Container(
-                                    height: 80,
-                                    child: buildChantierItem(
-                                        context, list.elementAt(index)),
-                                  );
-                                });
-                          } else {
-                            return Center(child: CircularProgressIndicator());
-                          }
-                        },
-                      ),
-                    ),*/
                 Container(
                   height: 80,
                   color: Colors.lime,
@@ -139,66 +101,4 @@ class _ChantierListBodyState extends State<ChantierListBody> {
     //return res;
     return false;
   }
-}
-
-// passer le chantier en parametre pour l'image et les infos
-Card buildCard(BuildContext context) {
-  return Card(
-    child: ListTile(
-      title:
-          /*chantier.nomChantier != null     // id ? pas de champ nom/date dans la base (diagramme)
-          ? Row(children: [
-        Flexible(
-            child: RichText(
-              overflow: TextOverflow.ellipsis,
-              strutStyle: StrutStyle(fontSize: 12.0),
-              text: TextSpan(
-                  style: TextStyle(color: Colors.black), text: chantier.nomChantier),
-            ))
-      ])
-          : */
-          const Text('CHANTIER X'),
-      subtitle:
-          /*chantier.adresse != null
-          ? Column(children: [
-        Flexible(
-          child: RichText(
-            overflow: TextOverflow.ellipsis,
-            strutStyle: StrutStyle(fontSize: 12.0),
-            text: TextSpan(
-                style: TextStyle(color: Colors.black),
-                text: chantier.adresse),
-          ),
-        ),
-        Flexible(
-          child: RichText(
-            overflow: TextOverflow.ellipsis,
-            strutStyle: StrutStyle(fontSize: 12.0),
-            text: TextSpan(
-                style: TextStyle(color: Colors.black),
-                text: 'Démarré le : '+chantier.dateDebut),
-          ),
-        ),
-        Flexible(
-          child: RichText(
-            overflow: TextOverflow.ellipsis,
-            strutStyle: StrutStyle(fontSize: 12.0),
-            text: TextSpan(
-                style: TextStyle(color: Colors.black),
-                text: 'Site : '+chantier.idSite),
-          ),
-        ),
-      ])
-          : */
-          const Text('INFOS CHANTIER'),
-      onTap: () {
-        /*Navigator.push(
-          context,
-          MaterialPageRoute(
-            //builder: (context) => const ChantierPage(),
-          ),
-        );*/
-      },
-    ),
-  );
 }
