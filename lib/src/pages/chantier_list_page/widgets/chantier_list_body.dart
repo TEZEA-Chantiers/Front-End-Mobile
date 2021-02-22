@@ -16,6 +16,7 @@ class ChantierListBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _databaseService = DatabaseService();
+    final size = MediaQuery.of(context).size;
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -51,7 +52,7 @@ class ChantierListBody extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.only(top: 20),
-            height: 460,
+            height: size.height-180,
             child: ListView(
               shrinkWrap: true,
               children: [

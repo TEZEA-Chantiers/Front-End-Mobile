@@ -14,6 +14,7 @@ class ProblemListBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _databaseService = DatabaseService();
+    final size = MediaQuery.of(context).size;
 
     return StreamBuilder(
         stream: _databaseService
@@ -48,7 +49,7 @@ class ProblemListBody extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.only(top: 20),
-                  height: 460,
+                  height: size.height-180,
                   child: ListView(
                     shrinkWrap: true,
                     children: [
