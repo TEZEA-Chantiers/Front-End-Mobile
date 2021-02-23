@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'chantier_list_body.dart';
+import 'chantier_list_search_bar.dart';
 
 class ChantierListMain extends StatelessWidget {
   const ChantierListMain({
@@ -10,8 +11,9 @@ class ChantierListMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Column(
       children: [
+        ChantierListSearchBar(),
         ChantierListBody(),
       ],
     );
