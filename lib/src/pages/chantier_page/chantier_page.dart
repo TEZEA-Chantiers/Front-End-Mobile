@@ -1,12 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../models/chantier/chantier.dart';
 
 import '../../services/firebase_services/database_service.dart';
 import 'widgets/chantier_main.dart';
 
 class ChantierPage extends StatelessWidget {
-  const ChantierPage({
+
+  Chantier chantier;
+
+  ChantierPage({
     Key key,
+    this.chantier
   }) : super(key: key);
 
   @override

@@ -12,9 +12,9 @@ class ChantierBody extends StatelessWidget {
   }) : super(key: key);
 
   String listToString(List<String> list) {
-    String res = '';
-    for (String str in list) {
-      res += '${str} ';
+    var res = '';
+    for (var str in list) {
+      res += '  - ${str} \n';
     }
     return res;
   }
