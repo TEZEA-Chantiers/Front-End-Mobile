@@ -19,39 +19,63 @@ class ChantierButton extends StatelessWidget {
 
     return Column(
       children: [
-        RaisedButton(
-          onPressed: () {},
-          child: const Text('Démarrer ce chantier'),
+        Container(
+          width: MediaQuery.of(context).size.width * 0.7,
+          child: RaisedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const ProblemPage()));
+            },
+            child: const Text.rich(TextSpan(
+              text: 'Remonter un problème',
+              style:
+              TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            )),
+          ),
         ),
-        RaisedButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ProblemPage()));
-          },
-          child: const Text('Remonter un problème'),
+        Container(
+          width: MediaQuery.of(context).size.width * 0.7,
+          child: RaisedButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ProblemListPage()));
+            },
+            child: const Text.rich(TextSpan(
+              text: 'Liste des Problèmes',
+              style:
+              TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            )),
+          ),
         ),
-        RaisedButton(
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const ProblemListPage()));
-          },
-          child: const Text('Liste des problèmes'),
+        Container(
+          width: MediaQuery.of(context).size.width * 0.7,
+          child: RaisedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const PhotoDocPage()));
+            },
+            child: const Text.rich(TextSpan(
+              text: 'Photographier un Document',
+              style:
+              TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            )),
+          ),
         ),
-        RaisedButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const PhotoDocPage()));
-          },
-          child: const Text('Photographier un document'),
-        ),
-        RaisedButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const SignaturePage()));
-          },
-          child: const Text('Récupérer une signature'),
+        Container(
+          width: MediaQuery.of(context).size.width * 0.7,
+          child: RaisedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const SignaturePage()));
+            },
+            child: const Text.rich(TextSpan(
+              text: 'Récupérer une Signature',
+              style:
+              TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            )),
+          ),
         ),
       ],
     );
