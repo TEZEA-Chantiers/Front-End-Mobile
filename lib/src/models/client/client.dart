@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
-
 class Client {
   Client({
-    @required this.id,
+    this.id,
     this.nom,
     this.prenom,
     this.adresse,
@@ -13,11 +11,11 @@ class Client {
   factory Client.fromJson(Map<String, dynamic> jsonData) {
     return Client(
       id: jsonData['id'] as int,
-      nom: jsonData['nom'].toString(),
-      prenom: jsonData['prenom'].toString(),
-      adresse: jsonData['adresse'].toString(),
-      mail: jsonData['mail'].toString(),
-      infoComplementaire: jsonData['infoComplementaire'].toString(),
+      nom: jsonData['nom']?.toString(),
+      prenom: jsonData['prenom']?.toString(),
+      adresse: jsonData['adresse']?.toString(),
+      mail: jsonData['mail']?.toString(),
+      infoComplementaire: jsonData['infoComplementaire']?.toString(),
     );
   }
 
