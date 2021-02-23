@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../providers/provider_image_list.dart';
+import '../../../photo_doc_page/photo_doc_page.dart';
 import '../../../problem_page/problem_page.dart';
 
 class PictureCheckController extends StatelessWidget {
-  const PictureCheckController({
-    Key key,
-    this.imagePath,
-  }) : super(key: key);
+  const PictureCheckController({Key key, this.imagePath, this.type})
+      : super(key: key);
 
-  final String imagePath;
+  final String imagePath, type;
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +48,25 @@ class PictureCheckController extends StatelessWidget {
                               actions: [
                                 FlatButton(
                                   onPressed: () {
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                      builder: (context) => const ProblemPage(),
-                                    ));
-                                    Provider.of<ProviderImageList>(context,
-                                            listen: false)
-                                        .delImage(imagePath);
+                                    if (type == "pb") {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ProblemPage(),
+                                      ));
+                                      Provider.of<ProviderImageList>(context,
+                                              listen: false)
+                                          .delImage(imagePath);
+                                    } else {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) =>
+                                            const PhotoDocPage(),
+                                      ));
+                                      Provider.of<ProviderImageList>(context,
+                                              listen: false)
+                                          .delDoc(imagePath);
+                                    }
                                   },
                                   child: const Text('Oui'),
                                 ),

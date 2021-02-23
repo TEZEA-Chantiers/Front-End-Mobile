@@ -10,9 +10,12 @@ import 'package:path_provider/path_provider.dart';
 import '../../check_picture_page/check_picture_page.dart';
 
 class CameraBody extends StatefulWidget {
-  const CameraBody({
+  CameraBody({
     Key key,
+    this.type,
   }) : super(key: key);
+
+  String type;
 
   @override
   State<StatefulWidget> createState() => _CameraBody();
@@ -119,8 +122,8 @@ class _CameraBody extends State<CameraBody> {
       await Navigator.push(
           this.context,
           MaterialPageRoute(
-            builder: (context) =>
-                CheckPicturePage(imagePath: path, controller: 'taken'),
+            builder: (context) => CheckPicturePage(
+                imagePath: path, controller: 'taken', type: widget.type),
           ));
     } catch (e) {
       log(e.toString());

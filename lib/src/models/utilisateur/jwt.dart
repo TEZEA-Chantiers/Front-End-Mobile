@@ -1,5 +1,3 @@
-
-
 class Jwt {
   Jwt({this.jwt});
 
