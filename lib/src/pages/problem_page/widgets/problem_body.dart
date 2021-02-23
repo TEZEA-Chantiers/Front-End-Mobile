@@ -19,8 +19,8 @@ class ProblemBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _databaseService = DatabaseService();
-
     final providerImgList = context.watch<ProviderImageList>();
+    final size = MediaQuery.of(context).size;
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -60,7 +60,7 @@ class ProblemBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Container(
-                  height: 200,
+                  height: size.height-430,
                   child: ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,

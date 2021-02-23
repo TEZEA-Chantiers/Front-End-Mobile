@@ -14,6 +14,7 @@ class ProblemListBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _databaseService = DatabaseService();
+    final size = MediaQuery.of(context).size;
 
     return StreamBuilder(
         stream: _databaseService
@@ -46,39 +47,17 @@ class ProblemListBody extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.only(top: 20),
-                  height: 450,
+                  height: size.height-180,
                   child: ListView(
                     shrinkWrap: true,
                     children: [
-                      Container(
-                        height: 80,
-                        color: Colors.lime,
-                        child: const Text('EXEMPLE'),
-                      ),
-                      Container(
-                        height: 80,
-                        color: Colors.brown,
-                      ),
-                      Container(
-                        height: 80,
-                        color: Colors.yellow,
-                      ),
-                      Container(
-                        height: 80,
-                        color: Colors.red,
-                      ),
-                      Container(
-                        height: 80,
-                        color: Colors.purple,
-                      ),
-                      Container(
-                        height: 80,
-                        color: Colors.deepOrangeAccent,
-                      ),
-                      Container(
-                        height: 80,
-                        color: Colors.white38,
-                      ),
+                      buildListCard(context),
+                      buildListCard(context),
+                      buildListCard(context),
+                      buildListCard(context),
+                      buildListCard(context),
+                      buildListCard(context),
+                      buildListCard(context),
                     ],
                   ),
                 ),
@@ -88,34 +67,34 @@ class ProblemListBody extends StatelessWidget {
         });
   }
 
-  Container buildListItem(BuildContext context) {
-    return Container(
-      height: 80,
-      padding: const EdgeInsets.only(bottom: 5),
-      child: GestureDetector(
-        onTap: () {
+  Card buildListCard(BuildContext context){
+    return Card(
+      child: ListTile(
+        leading: ConstrainedBox(
+          constraints: const BoxConstraints(
+            minWidth: 40,
+            minHeight: 40,
+            maxWidth: 40,
+            maxHeight: 40,
+          ),
+          child: Image.asset('assets/images/profile/avatar-anonym.png'),
+        ),
+        title: Row(
+          children: const [
+            Text('Nom probleme',
+                style: TextStyle(fontSize: 18)),
+          ],
+        ),
+        subtitle: const Text('Description wrappee du probleme'),
+        onTap: (){
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) =>
-                  const ProblemPage(), // argument manquant: id pb
+              const ProblemPage(), // argument manquant: id pb
             ),
           );
-        },
-        child: Row(
-          children: [
-            const CircleAvatar(
-              backgroundImage:
-                  AssetImage('assets/images/profile/avatar-anonym.png'),
-            ),
-            Column(
-              children: const [
-                Text('Nom probleme'),
-                Text('Description wrappee du probleme'),
-              ],
-            ),
-          ],
-        ),
+        }
       ),
     );
   }
