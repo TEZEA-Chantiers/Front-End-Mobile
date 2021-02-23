@@ -131,7 +131,14 @@ class PhotoDocBody extends StatelessWidget {
                       icon: Icon(Icons.add_a_photo), onPressed: null),
                 ),
               ],
-            ))
+            ),
+        ),
+        Container(
+          alignment: Alignment.centerRight,
+          child: RaisedButton(
+              onPressed: (){ },
+              child: const Text('Envoyer')),
+        ),
       ],
     );
   }

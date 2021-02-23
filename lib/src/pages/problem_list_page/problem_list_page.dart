@@ -22,7 +22,7 @@ class ProblemListPage extends StatelessWidget {
         }
       },
       child: Scaffold(
-        backgroundColor: const Color(0xff2E4053),
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: const Color(0xff2E4060),
           title: const Text('Liste des problèmes'),
