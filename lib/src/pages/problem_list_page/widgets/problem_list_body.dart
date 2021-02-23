@@ -53,15 +53,13 @@ class ProblemListBody extends StatelessWidget {
                   child: ListView(
                     shrinkWrap: true,
                     children: [
-                      buildListItem(context),
-                      buildListItem(context),
-                      buildListItem(context),
-                      buildListItem(context),
-                      buildListItem(context),
-                      buildListItem(context),
-                      buildListItem(context),
-                      buildListItem(context),
-                      buildListItem(context),
+                      buildListCard(context),
+                      buildListCard(context),
+                      buildListCard(context),
+                      buildListCard(context),
+                      buildListCard(context),
+                      buildListCard(context),
+                      buildListCard(context),
                     ],
                   ),
                 ),
@@ -71,45 +69,34 @@ class ProblemListBody extends StatelessWidget {
         });
   }
 
-  Container buildListItem(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(bottom: 2),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white38,
-            border: Border.all(),
-        ),
-        height: 80,
-        child: GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    const ProblemPage(), // argument manquant: id pb
-              ),
-            );
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              const CircleAvatar(
-                radius: 25,
-                backgroundImage:
-                    AssetImage('assets/images/profile/avatar-anonym.png'),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text('Nom probleme',
-                    style: TextStyle(fontSize: 18)),
-                  Text('Description wrappee du probleme'),
-                ],
-              ),
-            ],
+  Card buildListCard(BuildContext context){
+    return Card(
+      child: ListTile(
+        leading: ConstrainedBox(
+          constraints: const BoxConstraints(
+            minWidth: 40,
+            minHeight: 40,
+            maxWidth: 40,
+            maxHeight: 40,
           ),
+          child: Image.asset('assets/images/profile/avatar-anonym.png'),
         ),
+        title: Row(
+          children: const [
+            Text('Nom probleme',
+                style: TextStyle(fontSize: 18)),
+          ],
+        ),
+        subtitle: const Text('Description wrappee du probleme'),
+        onTap: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+              const ProblemPage(), // argument manquant: id pb
+            ),
+          );
+        }
       ),
     );
   }
