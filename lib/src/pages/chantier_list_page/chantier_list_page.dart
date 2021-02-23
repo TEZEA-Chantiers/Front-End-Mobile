@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
 
 import 'widgets/chantier_list_main.dart';
 
@@ -22,9 +23,9 @@ class ChantierListPage extends StatelessWidget {
         }
       },
       child: Scaffold(
-        backgroundColor: const Color(0xff2E4053),
+        backgroundColor: ColorBank.BACKGROUND_COLOR,
         appBar: AppBar(
-          backgroundColor: const Color(0xff2E4060),
+          backgroundColor: const Color.fromRGBO(50, 147, 207, 1.0),
           title: const Text('Liste des chantiers'),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),

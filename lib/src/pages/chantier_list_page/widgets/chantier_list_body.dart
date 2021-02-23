@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
+import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
+import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
 import '../../../services/firebase_services/database_service.dart';
 
 class ChantierListBody extends StatelessWidget {
@@ -9,86 +12,96 @@ class ChantierListBody extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
-  TextEditingController editingController = TextEditingController();
   String searchValue = '';
   bool showSearch = false;
+  final dateFormat = new DateFormat('dd-MM-yyyy HH:mm');
+  var chantiers = <Chantier>{};
+  var filteredChantiers = <Chantier>{};
 
   @override
   Widget build(BuildContext context) {
     final _databaseService = DatabaseService();
+    return Expanded(
+      child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          padding: const EdgeInsets.all(5),
+          itemCount: 10,
+          itemBuilder: (BuildContext context, int index) {
+            return Card(
+              color : ColorBank.CARD_COLOR,
+              child: ListTile(
+                onTap: () {},
+                leading: false
+                    ? Container()
+                    : Icon(
+                        Icons.construction,
+                        color: ColorBank.TEZEA_VERT,
+                        size: 40,
+                      ),
 
-    return Container(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 300,
-                height: 50,
-                child: TextField(
-                  textAlignVertical: TextAlignVertical.bottom,
-                  /*onSubmitted: (String value) {
-                  showSearch = true;
-
-                  searchValue = editingController.text;
-                  editingController.clear();
-                  setState(() {});
-                },*/
-                  //onChanged: (value) {},
-                  controller: editingController,
-                  decoration: const InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      hintText: 'Recherche',
-                      suffixIcon: Icon(Icons.search),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(25)))),
-                ),
+                title: Text("Juan Pedrinos",
+                    style:
+                    TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
+                contentPadding:
+                    const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 5),
+                subtitle: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (true)
+                              Text.rich(TextSpan(
+                                text: "15 rue des biscuits sales, 35014 Pipriac",
+                                style:
+                                    const TextStyle(fontWeight: FontWeight.bold),
+                              )),
+                            const Padding(padding: EdgeInsets.only(top: 5)),
+                            if (true)
+                              Text.rich(TextSpan(
+                                text: 'Démarré le ${dateFormat.format(DateTime.now())}',
+                                style:
+                                const TextStyle(fontWeight: FontWeight.bold),
+                              )),
+                            const Padding(padding: EdgeInsets.only(top: 10)),
+                            //Row avec les petites icônes sympa
+                            Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                   Icon(
+                                    Icons.supervisor_account,
+                                    color: ColorBank.TEZEA_VERT,
+                                    size: 30,
+                                  ),
+                                  Text.rich(TextSpan(
+                                    text: '45',
+                                    style:
+                                    const TextStyle(color : Colors.black,fontWeight: FontWeight.bold),
+                                  )),
+                                  const Padding(padding: EdgeInsets.only(left: 15)),
+                                   Icon(
+                                    Icons.car_rental,
+                                    color: false? ColorBank.TEZEA_VERT : Colors.red,
+                                    size: 30,
+                                  )
+                                  ]
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[]),
+                      )
+                    ]),
               ),
-            ],
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: 20),
-            height: 460,
-            child: ListView(
-              shrinkWrap: true,
-              children: [
-                Container(
-                  height: 80,
-                  color: Colors.lime,
-                  child: const Text('EXEMPLE'),
-                ),
-                Container(
-                  height: 80,
-                  color: Colors.brown,
-                ),
-                Container(
-                  height: 80,
-                  color: Colors.yellow,
-                ),
-                Container(
-                  height: 80,
-                  color: Colors.red,
-                ),
-                Container(
-                  height: 80,
-                  color: Colors.purple,
-                ),
-                Container(
-                  height: 80,
-                  color: Colors.deepOrangeAccent,
-                ),
-                Container(
-                  height: 80,
-                  color: Colors.white38,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+            );
+          }),
     );
   }
 
@@ -100,5 +113,32 @@ class ChantierListBody extends StatelessWidget {
 
     //return res;
     return false;
+  }
+
+  void updateChantiers(BuildContext context){
+    String request = context.watch<TextEditingController>().text.trim().toLowerCase();
+    if(request == ""){
+      return;
+    }
+    this.filteredChantiers = new Set<Chantier>();
+    for(final chantier in this.chantiers){
+      if(chantier.client.nom.contains(request)){
+        this.filteredChantiers.add(chantier);
+      }
+      else if (chantier.client.prenom.contains(request)){
+        this.filteredChantiers.add(chantier);
+      }
+      else if (chantier.nomChantier.contains(request)){
+        this.filteredChantiers.add(chantier);
+      }
+      else {
+        for(final ouvrier in chantier.ouvriers) {
+          if (ouvrier.contains(request)) {
+            this.filteredChantiers.add(chantier);
+            break;
+          }
+        }
+      }
+    }
   }
 }
