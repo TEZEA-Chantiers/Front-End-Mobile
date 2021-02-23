@@ -1,7 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+
+import '../../../providers/provider_image_list.dart';
+import '../../camera_page/camera_page.dart';
+import '../../check_picture_page/check_picture_page.dart';
+import '../photo_doc_page.dart';
 
 class PhotoDocBody extends StatelessWidget {
   const PhotoDocBody({
@@ -11,6 +19,7 @@ class PhotoDocBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var dropdownValue = 'Signature';
+    final providerImgList = context.watch<ProviderImageList>();
 
     return Column(
       children: <Widget>[
@@ -59,38 +68,75 @@ class PhotoDocBody extends StatelessWidget {
         const Padding(padding: EdgeInsets.all(10)),
         Container(
           height: 200,
-          child: ListView(
+          child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            children: <Widget>[
-              Container(
-                width: 200,
-                color: Colors.lime,
+            itemCount: providerImgList.docList.length,
+            itemBuilder: (context, index) {
+              if (providerImgList.docList.isNotEmpty) {
+                print('not empty');
+                return Container(
+                  padding: const EdgeInsets.only(right: 5),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CheckPicturePage(
+                                  imagePath: providerImgList.docList[index],
+                                  controller: 'check',
+                                  type: 'doc',
+                                )),
+                      );
+                    },
+                    child: Image.file(File(providerImgList.docList[index])),
+                  ),
+                );
+              } else {
+                print('empty!');
+                return Container(width: 200, color: Colors.lime);
+              }
+            },
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.all(40),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              RaisedButton(
+                onPressed: () async {
+                  File _image;
+                  _image = await ImagePicker.pickImage(
+                      source: ImageSource.gallery, imageQuality: 50);
+                  providerImgList.docList.add(_image.path);
+                  // sale, voir autre moyen pour rebuild si possible (sinon stateful)
+                  Navigator.of(context).pop();
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PhotoDocPage()),
+                  );
+                },
+                child:
+                    const IconButton(icon: Icon(Icons.folder), onPressed: null),
               ),
-              Container(
-                width: 200,
-                color: Colors.brown,
+              const Spacer(),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => CameraPage(type: 'doc'),
+                  ));
+                },
+                child: const IconButton(
+                    icon: Icon(Icons.add_a_photo), onPressed: null),
               ),
             ],
           ),
         ),
         Container(
-            padding: const EdgeInsets.all(40),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                RaisedButton(
-                  onPressed: () {},
-                  child: const IconButton(
-                      icon: Icon(Icons.folder), onPressed: null),
-                ),
-                const Spacer(),
-                RaisedButton(
-                  onPressed: () {},
-                  child: const IconButton(
-                      icon: Icon(Icons.add_a_photo), onPressed: null),
-                ),
-              ],
-            ))
+          alignment: Alignment.centerRight,
+          child: RaisedButton(onPressed: () {}, child: const Text('Envoyer')),
+        ),
       ],
     );
   }

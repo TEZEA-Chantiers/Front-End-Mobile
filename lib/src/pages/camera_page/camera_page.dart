@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'widgets/camera_main.dart';
 
 class CameraPage extends StatelessWidget {
-  const CameraPage({
+  CameraPage({
     Key key,
+    this.type,
   }) : super(key: key);
+
+  String type;
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +22,9 @@ class CameraPage extends StatelessWidget {
           currentFocus.unfocus();
         }
       },
-      child: const Scaffold(
-          backgroundColor: Color(0xff2E4053), body: CameraMain()),
+      child: Scaffold(
+          backgroundColor: const Color(0xff2E4053),
+          body: CameraMain(type: type)),
       //),
     );
   }

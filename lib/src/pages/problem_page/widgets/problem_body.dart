@@ -79,6 +79,7 @@ class ProblemBody extends StatelessWidget {
                                           imagePath:
                                               providerImgList.imageList[index],
                                           controller: 'check',
+                                          type: 'pb',
                                         )),
                               );
                             },
@@ -102,7 +103,7 @@ class ProblemBody extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const CameraPage(),
+                    builder: (context) => CameraPage(type: 'pb'),
                   ));
                 },
                 child: const Text('Ajouter une photo'),

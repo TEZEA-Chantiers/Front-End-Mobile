@@ -31,8 +31,7 @@ class ProblemListBody extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(snapshot.data['nomChantier'].toString(),
-                        style:
-                            const TextStyle(fontSize: 20, color: Colors.white)),
+                        style: const TextStyle(fontSize: 20)),
                   ],
                 ),
                 Container(
@@ -41,14 +40,13 @@ class ProblemListBody extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(snapshot.data['adresse'].toString(),
-                          style: const TextStyle(
-                              fontSize: 16, color: Colors.white)),
+                          style: const TextStyle(fontSize: 16)),
                     ],
                   ),
                 ),
                 Container(
                   padding: const EdgeInsets.only(top: 20),
-                  height: 460,
+                  height: 450,
                   child: ListView(
                     shrinkWrap: true,
                     children: [

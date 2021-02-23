@@ -8,10 +8,13 @@ import 'widgets/controllers/picture_taken_controller.dart';
 
 class CheckPicturePage extends StatelessWidget {
   const CheckPicturePage(
-      {Key key, @required this.imagePath, @required this.controller})
+      {Key key,
+      @required this.imagePath,
+      @required this.controller,
+      @required this.type})
       : super(key: key);
 
-  final String imagePath, controller;
+  final String imagePath, controller, type;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +32,9 @@ class CheckPicturePage extends StatelessWidget {
 
   Widget selectController() {
     if (controller == 'taken') {
-      return PictureTakenController(imagePath: imagePath);
+      return PictureTakenController(imagePath: imagePath, type: type);
     } else {
-      return PictureCheckController(imagePath: imagePath);
+      return PictureCheckController(imagePath: imagePath, type: type);
     }
   }
 }

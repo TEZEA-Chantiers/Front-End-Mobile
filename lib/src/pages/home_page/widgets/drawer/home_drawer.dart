@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/pages/login_page/login_page.dart';
 
 import '../../../../services/firebase_services/auth_service.dart';
-import '../../../camera_page/camera_page.dart';
 import '../../../chantier_list_page/chantier_list_page.dart';
 import '../../../chantier_page/chantier_page.dart';
 import '../../../problem_list_page/problem_list_page.dart';
@@ -130,17 +129,6 @@ class HomeDrawer extends StatelessWidget {
                   );
                 },
                 child: const Text('Test ChantierPage'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const CameraPage(),
-                    ),
-                  );
-                },
-                child: const Text('Test CameraWidget'),
               ),
               ElevatedButton(
                 onPressed: () {

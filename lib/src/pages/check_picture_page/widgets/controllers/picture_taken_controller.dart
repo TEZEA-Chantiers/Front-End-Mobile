@@ -5,12 +5,10 @@ import 'package:provider/provider.dart';
 import '../../../../providers/provider_image_list.dart';
 
 class PictureTakenController extends StatelessWidget {
-  const PictureTakenController({
-    Key key,
-    this.imagePath,
-  }) : super(key: key);
+  const PictureTakenController({Key key, this.imagePath, this.type})
+      : super(key: key);
 
-  final String imagePath;
+  final String imagePath, type;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +30,11 @@ class PictureTakenController extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      providerImgList.addImage(imagePath);
+                      if (type == 'pb') {
+                        providerImgList.addImage(imagePath);
+                      } else {
+                        providerImgList.addDoc(imagePath);
+                      }
                       Navigator.of(context).pop();
                       Navigator.of(context).pop();
                     },
