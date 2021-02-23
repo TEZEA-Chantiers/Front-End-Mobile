@@ -15,7 +15,7 @@ class HomeBody extends StatelessWidget {
     final _client = context.watch<Chantier>();
 
     return Container(
-      child: Text(_client == null ? 'Chargement' : 'oui'),
+      child: Text(_client == null ? 'Chargement' : _client.toJson().toString()),
     );
   }
 }

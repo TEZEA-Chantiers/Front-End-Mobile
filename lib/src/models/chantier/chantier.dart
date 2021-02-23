@@ -1,3 +1,4 @@
+import 'package:enum_to_string/enum_to_string.dart';
 
 import '../client/client.dart';
 import '../site/site.dart';
@@ -31,56 +32,79 @@ class Chantier {
     this.regularite,
     this.dateDebutEffectif,
     this.dateFinEffectif,
+    this.conducteurPresent,
     this.rapportsRegulier,
   });
 
   factory Chantier.fromJson(Map<String, dynamic> jsonData) {
-    Set<Probleme> _problemes;
+    final _problemes = <Probleme>{};
 
-    for (final probleme in jsonData['problemes'] as List<dynamic>) {
-      _problemes.add(Probleme.fromJson(probleme as Map<String, dynamic>));
+    if (jsonData['problemes'] != null) {
+      for (final probleme in jsonData['problemes'] as List<dynamic>) {
+        _problemes.add(Probleme.fromJson(probleme as Map<String, dynamic>));
+      }
     }
 
-    Set<Media> _medias;
+    final _medias = <Media>{};
 
-    for (final media in jsonData['medias'] as List<dynamic>) {
-      _medias.add(Media.fromJson(media as Map<String, dynamic>));
+    if (jsonData['medias'] != null) {
+      for (final media in jsonData['medias'] as List<dynamic>) {
+        _medias.add(Media.fromJson(media as Map<String, dynamic>));
+      }
     }
 
-    Set<RapportChantierRegulier> _rapportsRegulier;
+    final _rapportsRegulier = <RapportChantierRegulier>{};
 
-    for (final rapportsRegulier
-        in jsonData['rapportsRegulier'] as List<dynamic>) {
-      _rapportsRegulier.add(RapportChantierRegulier.fromJson(
-          rapportsRegulier as Map<String, dynamic>));
+    if (jsonData['rapportsRegulier'] != null) {
+      for (final rapportsRegulier
+          in jsonData['rapportsRegulier'] as List<dynamic>) {
+        _rapportsRegulier.add(RapportChantierRegulier.fromJson(
+            rapportsRegulier as Map<String, dynamic>));
+      }
     }
 
     return Chantier(
       id: jsonData['id'] as int,
-      site: Site.fromJson(jsonData['site'] as Map<String, dynamic>),
-      client: Client.fromJson(jsonData['client'] as Map<String, dynamic>),
+      site: jsonData['site'] != null
+          ? Site.fromJson(jsonData['site'] as Map<String, dynamic>)
+          : null,
+      client: jsonData['client'] != null
+          ? Client.fromJson(jsonData['client'] as Map<String, dynamic>)
+          : null,
       problemes: _problemes,
       medias: _medias,
-      adresse: jsonData['adresse'].toString(),
-      ouvriers: jsonData['ouvriers'] as Set<String>,
-      materiel: jsonData['materiel'].toString(),
-      dateDebutTheorique: DateTime.parse(jsonData['dateDebut'].toString()),
-      dateFinTheorique: DateTime.parse(jsonData['dateFin'].toString()),
+      adresse: jsonData['adresse']?.toString(),
+      ouvriers: jsonData['ouvriers']?.cast<String>()?.toSet(),
+      materiel: jsonData['materiel']?.toString(),
+      dateDebutTheorique: jsonData['dateDebut'] != null
+          ? DateTime.parse(jsonData['dateDebut'].toString())
+          : null,
+      dateFinTheorique: jsonData['dateFin'] != null
+          ? DateTime.parse(jsonData['dateFin'].toString())
+          : null,
       estimationTemps: jsonData['estimationTemps'] as int,
-      telephone: jsonData['telephone'].toString(),
-      statutChantier: StatusType.values[jsonData['statutChantier'] as int],
-      nomChantier: jsonData['nomChantier'].toString(),
-      informationsInterne: jsonData['informationsInterne'].toString(),
-      description: jsonData['description'].toString(),
-      joursRegularite: jsonData['joursRegularite'] as Set<JourSemaineType>,
-      dateDebutRegularite:
-          DateTime.parse(jsonData['dateDebutRegularite'].toString()),
-      dateFinRegularite:
-          DateTime.parse(jsonData['dateFinRegularite'].toString()),
+      telephone: jsonData['telephone']?.toString(),
+      statutChantier: EnumToString.fromString(
+          StatusType.values, jsonData['statutChantier']?.toString()),
+      nomChantier: jsonData['nomChantier']?.toString(),
+      informationsInterne: jsonData['informationsInterne']?.toString(),
+      description: jsonData['description']?.toString(),
+      joursRegularite:
+          jsonData['joursRegularite']?.cast<JourSemaineType>()?.toSet(),
+      dateDebutRegularite: jsonData['dateDebutRegularite'] != null
+          ? DateTime.parse(jsonData['dateDebutRegularite'].toString())
+          : null,
+      dateFinRegularite: jsonData['dateFinRegularite'] != null
+          ? DateTime.parse(jsonData['dateFinRegularite'].toString())
+          : null,
       regularite: jsonData['regularite'] as bool,
-      dateDebutEffectif:
-          DateTime.parse(jsonData['dateDebutEffectif'].toString()),
-      dateFinEffectif: DateTime.parse(jsonData['dateFinEffectif'].toString()),
+      dateDebutEffectif: jsonData['dateDebutEffectif'] != null
+          ? DateTime.parse(jsonData['dateDebutEffectif'].toString())
+          : null,
+      dateFinEffectif: jsonData['dateFinEffectif'] != null
+          ? DateTime.parse(jsonData['dateFinEffectif'].toString())
+          : null,
+      conducteurPresent: jsonData['conducteurPresent'] as bool,
       rapportsRegulier: _rapportsRegulier,
     );
   }
@@ -110,32 +134,34 @@ class Chantier {
   final bool regularite;
   final DateTime dateDebutEffectif;
   final DateTime dateFinEffectif;
+  final bool conducteurPresent;
   final Set<RapportChantierRegulier> rapportsRegulier;
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'site': site.toJson(),
-      'client': client.toJson(),
+      'site': site?.toJson(),
+      'client': client?.toJson(),
       'problemes': problemes,
       'medias': medias,
       'ouvriers': ouvriers,
       'adresse': adresse,
       'materiel': materiel,
-      'dateDebutTheorique': dateDebutTheorique.toString(),
-      'dateFinTheorique': dateFinTheorique.toString(),
+      'dateDebutTheorique': dateDebutTheorique?.toString(),
+      'dateFinTheorique': dateFinTheorique?.toString(),
       'estimationTemps': estimationTemps,
       'telephone': telephone,
-      'statutChantier': statutChantier.index,
+      'statutChantier': statutChantier,
       'nomChantier': nomChantier,
       'informationsInterne': informationsInterne,
       'description': description,
       'joursRegularite': joursRegularite,
-      'dateDebutRegularite': dateDebutRegularite.toString(),
-      'dateFinRegularite': dateFinRegularite.toString(),
+      'dateDebutRegularite': dateDebutRegularite?.toString(),
+      'dateFinRegularite': dateFinRegularite?.toString(),
       'regularite': regularite,
-      'dateDebutEffectif': dateDebutEffectif.toString(),
-      'dateFinEffectif': dateFinEffectif.toString(),
+      'dateDebutEffectif': dateDebutEffectif?.toString(),
+      'dateFinEffectif': dateFinEffectif?.toString(),
+      'conducteurPresent': conducteurPresent,
       'rapportsRegulier': rapportsRegulier,
     };
   }

@@ -12,12 +12,12 @@ class Site {
   factory Site.fromJson(Map<String, dynamic> jsonData) {
     return Site(
       id: jsonData['id'] as int,
-      nomSite: jsonData['nomSite'].toString(),
-      nomChef: jsonData['nomChef'].toString(),
-      prenomChef: jsonData['prenomChef'].toString(),
-      adresse: jsonData['adresse'].toString(),
-      mail: jsonData['mail'].toString(),
-      telephone: jsonData['telephone'].toString(),
+      nomSite: jsonData['nomSite']?.toString(),
+      nomChef: jsonData['nomChef']?.toString(),
+      prenomChef: jsonData['prenomChef']?.toString(),
+      adresse: jsonData['adresse']?.toString(),
+      mail: jsonData['mail']?.toString(),
+      telephone: jsonData['telephone']?.toString(),
     );
   }
 

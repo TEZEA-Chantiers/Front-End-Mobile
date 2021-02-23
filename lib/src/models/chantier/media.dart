@@ -13,17 +13,17 @@ class Media {
   factory Media.fromJson(Map<String, dynamic> jsonData) {
     return Media(
       id: jsonData['id'] as int,
-      nomMedia: jsonData['nomMedia'].toString(),
-      imagesURL: jsonData['imagesURL'] as List<String>,
+      nomMedia: jsonData['nomMedia']?.toString(),
+      imagesURL: jsonData['imagesURL']?.cast<String>()?.toSet(),
       mediaType: EnumToString.fromString(
-          MediaType.values, jsonData['mediaType'].toString()),
+          MediaType.values, jsonData['mediaType']?.toString()),
     );
   }
 
   final int id;
   final String nomMedia;
   final MediaType mediaType;
-  final List<String> imagesURL;
+  Set<String> imagesURL;
 
   Map<String, dynamic> toJson() {
     return {

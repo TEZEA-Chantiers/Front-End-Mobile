@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/services/crud/chantier/media_service.dart';
+import 'package:tezea_chantiers/src/services/crud/chantier/probleme_service.dart';
 
 import '../../models/chantier/chantier.dart';
 import '../../models/client/client.dart';
@@ -20,6 +22,8 @@ class HomePage extends StatelessWidget {
     final client = Client(id: 0, adresse: 'flutter15');
     final _clientService = ClientService();
     final _chantierService = ChantierService();
+    final _MediaService = MediaService();
+    final _ProblemeService = ProblemeService();
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
@@ -37,7 +41,7 @@ class HomePage extends StatelessWidget {
         ),
         drawer: const HomeDrawer(),
         body: FutureProvider<Chantier>(
-          create: (_) async => _chantierService.getChantier(3),
+          create: (_) async => _chantierService.getChantier(1),
           child: const HomeMain(),
         ),
       ),
