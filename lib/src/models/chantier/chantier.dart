@@ -41,6 +41,10 @@ class Chantier {
 
     if (jsonData['problemes'] != null) {
       for (final probleme in jsonData['problemes'] as List<dynamic>) {
+        if (probleme == null)
+        {
+          continue;
+        }
         _problemes.add(Probleme.fromJson(probleme as Map<String, dynamic>));
       }
     }
@@ -49,6 +53,10 @@ class Chantier {
 
     if (jsonData['medias'] != null) {
       for (final media in jsonData['medias'] as List<dynamic>) {
+        if (media == null)
+        {
+          continue;
+        }
         _medias.add(Media.fromJson(media as Map<String, dynamic>));
       }
     }
@@ -58,8 +66,26 @@ class Chantier {
     if (jsonData['rapportsRegulier'] != null) {
       for (final rapportsRegulier
           in jsonData['rapportsRegulier'] as List<dynamic>) {
+        if (rapportsRegulier == null)
+        {
+          continue;
+        }
         _rapportsRegulier.add(RapportChantierRegulier.fromJson(
             rapportsRegulier as Map<String, dynamic>));
+      }
+    }
+
+    final _joursRegularite = <JourSemaineType>{};
+
+    if (jsonData['joursRegularite'] != null) {
+      for (final jourSemaineType
+          in jsonData['joursRegularite'] as List<dynamic>) {
+        if (jourSemaineType == null)
+          {
+            continue;
+          }
+        _joursRegularite.add(EnumToString.fromString(
+            JourSemaineType.values, jourSemaineType?.toString()));
       }
     }
 
@@ -89,8 +115,7 @@ class Chantier {
       nomChantier: jsonData['nomChantier']?.toString(),
       informationsInterne: jsonData['informationsInterne']?.toString(),
       description: jsonData['description']?.toString(),
-      joursRegularite:
-          jsonData['joursRegularite']?.cast<JourSemaineType>()?.toSet(),
+      joursRegularite: _joursRegularite,
       dateDebutRegularite: jsonData['dateDebutRegularite'] != null
           ? DateTime.parse(jsonData['dateDebutRegularite'].toString())
           : null,
