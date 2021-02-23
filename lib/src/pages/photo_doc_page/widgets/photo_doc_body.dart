@@ -99,45 +99,43 @@ class PhotoDocBody extends StatelessWidget {
           ),
         ),
         Container(
-            padding: const EdgeInsets.all(40),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                RaisedButton(
-                  onPressed: () async {
-                    File _image;
-                    _image = await ImagePicker.pickImage(
-                        source: ImageSource.gallery, imageQuality: 50);
-                    providerImgList.docList.add(_image.path);
-                    // sale, voir autre moyen pour rebuild si possible (sinon stateful)
-                    Navigator.of(context).pop();
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const PhotoDocPage()),
-                    );
-                  },
-                  child: const IconButton(
-                      icon: Icon(Icons.folder), onPressed: null),
-                ),
-                const Spacer(),
-                RaisedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => CameraPage(type: 'doc'),
-                    ));
-                  },
-                  child: const IconButton(
-                      icon: Icon(Icons.add_a_photo), onPressed: null),
-                ),
-              ],
-            ),
+          padding: const EdgeInsets.all(40),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              RaisedButton(
+                onPressed: () async {
+                  File _image;
+                  _image = await ImagePicker.pickImage(
+                      source: ImageSource.gallery, imageQuality: 50);
+                  providerImgList.docList.add(_image.path);
+                  // sale, voir autre moyen pour rebuild si possible (sinon stateful)
+                  Navigator.of(context).pop();
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PhotoDocPage()),
+                  );
+                },
+                child:
+                    const IconButton(icon: Icon(Icons.folder), onPressed: null),
+              ),
+              const Spacer(),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => CameraPage(type: 'doc'),
+                  ));
+                },
+                child: const IconButton(
+                    icon: Icon(Icons.add_a_photo), onPressed: null),
+              ),
+            ],
+          ),
         ),
         Container(
           alignment: Alignment.centerRight,
-          child: RaisedButton(
-              onPressed: (){ },
-              child: const Text('Envoyer')),
+          child: RaisedButton(onPressed: () {}, child: const Text('Envoyer')),
         ),
       ],
     );

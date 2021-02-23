@@ -31,8 +31,7 @@ class ProblemListBody extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(snapshot.data['nomChantier'].toString(),
-                        style:
-                            const TextStyle(fontSize: 20)),
+                        style: const TextStyle(fontSize: 20)),
                   ],
                 ),
                 Container(
@@ -41,8 +40,7 @@ class ProblemListBody extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(snapshot.data['adresse'].toString(),
-                          style: const TextStyle(
-                              fontSize: 16)),
+                          style: const TextStyle(fontSize: 16)),
                     ],
                   ),
                 ),
