@@ -28,8 +28,7 @@ class ChantierButton extends StatelessWidget {
             },
             child: const Text.rich(TextSpan(
               text: 'Remonter un problème',
-              style:
-              TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             )),
           ),
         ),
@@ -44,8 +43,7 @@ class ChantierButton extends StatelessWidget {
             },
             child: const Text.rich(TextSpan(
               text: 'Liste des Problèmes',
-              style:
-              TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             )),
           ),
         ),
@@ -53,13 +51,14 @@ class ChantierButton extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.7,
           child: RaisedButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const PhotoDocPage()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const PhotoDocPage()));
             },
             child: const Text.rich(TextSpan(
               text: 'Photographier un Document',
-              style:
-              TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             )),
           ),
         ),
@@ -67,13 +66,14 @@ class ChantierButton extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.7,
           child: RaisedButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const SignaturePage()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SignaturePage()));
             },
             child: const Text.rich(TextSpan(
               text: 'Récupérer une Signature',
-              style:
-              TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             )),
           ),
         ),

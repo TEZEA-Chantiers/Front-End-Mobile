@@ -47,7 +47,7 @@ class ProblemListBody extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.only(top: 20),
-                  height: size.height-180,
+                  height: size.height - 180,
                   child: ListView(
                     shrinkWrap: true,
                     children: [
@@ -67,35 +67,33 @@ class ProblemListBody extends StatelessWidget {
         });
   }
 
-  Card buildListCard(BuildContext context){
+  Card buildListCard(BuildContext context) {
     return Card(
       child: ListTile(
-        leading: ConstrainedBox(
-          constraints: const BoxConstraints(
-            minWidth: 40,
-            minHeight: 40,
-            maxWidth: 40,
-            maxHeight: 40,
-          ),
-          child: Image.asset('assets/images/profile/avatar-anonym.png'),
-        ),
-        title: Row(
-          children: const [
-            Text('Nom probleme',
-                style: TextStyle(fontSize: 18)),
-          ],
-        ),
-        subtitle: const Text('Description wrappee du probleme'),
-        onTap: (){
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-              const ProblemPage(), // argument manquant: id pb
+          leading: ConstrainedBox(
+            constraints: const BoxConstraints(
+              minWidth: 40,
+              minHeight: 40,
+              maxWidth: 40,
+              maxHeight: 40,
             ),
-          );
-        }
-      ),
+            child: Image.asset('assets/images/profile/avatar-anonym.png'),
+          ),
+          title: Row(
+            children: const [
+              Text('Nom probleme', style: TextStyle(fontSize: 18)),
+            ],
+          ),
+          subtitle: const Text('Description wrappee du probleme'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    const ProblemPage(), // argument manquant: id pb
+              ),
+            );
+          }),
     );
   }
 }

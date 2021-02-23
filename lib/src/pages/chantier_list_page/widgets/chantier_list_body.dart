@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
 import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
+
 import '../../../services/firebase_services/database_service.dart';
 
 class ChantierListBody extends StatelessWidget {
@@ -29,7 +30,7 @@ class ChantierListBody extends StatelessWidget {
           itemCount: 10,
           itemBuilder: (BuildContext context, int index) {
             return Card(
-              color : ColorBank.CARD_COLOR,
+              color: ColorBank.CARD_COLOR,
               child: ListTile(
                 onTap: () {},
                 leading: false
@@ -39,10 +40,9 @@ class ChantierListBody extends StatelessWidget {
                         color: ColorBank.TEZEA_VERT,
                         size: 40,
                       ),
-
                 title: Text("Juan Pedrinos",
                     style:
-                    TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
                 contentPadding:
                     const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 5),
                 subtitle: Row(
@@ -56,40 +56,45 @@ class ChantierListBody extends StatelessWidget {
                           children: [
                             if (true)
                               Text.rich(TextSpan(
-                                text: "15 rue des biscuits sales, 35014 Pipriac",
-                                style:
-                                    const TextStyle(fontWeight: FontWeight.bold),
+                                text:
+                                    "15 rue des biscuits sales, 35014 Pipriac",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               )),
                             const Padding(padding: EdgeInsets.only(top: 5)),
                             if (true)
                               Text.rich(TextSpan(
-                                text: 'Démarré le ${dateFormat.format(DateTime.now())}',
-                                style:
-                                const TextStyle(fontWeight: FontWeight.bold),
+                                text:
+                                    'Démarré le ${dateFormat.format(DateTime.now())}',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               )),
                             const Padding(padding: EdgeInsets.only(top: 10)),
                             //Row avec les petites icônes sympa
                             Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                   Icon(
+                                  Icon(
                                     Icons.supervisor_account,
                                     color: ColorBank.TEZEA_VERT,
                                     size: 30,
                                   ),
                                   Text.rich(TextSpan(
                                     text: '45',
-                                    style:
-                                    const TextStyle(color : Colors.black,fontWeight: FontWeight.bold),
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
                                   )),
-                                  const Padding(padding: EdgeInsets.only(left: 15)),
-                                   Icon(
+                                  const Padding(
+                                      padding: EdgeInsets.only(left: 15)),
+                                  Icon(
                                     Icons.car_rental,
-                                    color: false? ColorBank.TEZEA_VERT : Colors.red,
+                                    color: false
+                                        ? ColorBank.TEZEA_VERT
+                                        : Colors.red,
                                     size: 30,
                                   )
-                                  ]
-                            )
+                                ])
                           ],
                         ),
                       ),
@@ -115,24 +120,22 @@ class ChantierListBody extends StatelessWidget {
     return false;
   }
 
-  void updateChantiers(BuildContext context){
-    String request = context.watch<TextEditingController>().text.trim().toLowerCase();
-    if(request == ""){
+  void updateChantiers(BuildContext context) {
+    String request =
+        context.watch<TextEditingController>().text.trim().toLowerCase();
+    if (request == "") {
       return;
     }
     this.filteredChantiers = new Set<Chantier>();
-    for(final chantier in this.chantiers){
-      if(chantier.client.nom.contains(request)){
+    for (final chantier in this.chantiers) {
+      if (chantier.client.nom.contains(request)) {
         this.filteredChantiers.add(chantier);
-      }
-      else if (chantier.client.prenom.contains(request)){
+      } else if (chantier.client.prenom.contains(request)) {
         this.filteredChantiers.add(chantier);
-      }
-      else if (chantier.nomChantier.contains(request)){
+      } else if (chantier.nomChantier.contains(request)) {
         this.filteredChantiers.add(chantier);
-      }
-      else {
-        for(final ouvrier in chantier.ouvriers) {
+      } else {
+        for (final ouvrier in chantier.ouvriers) {
           if (ouvrier.contains(request)) {
             this.filteredChantiers.add(chantier);
             break;

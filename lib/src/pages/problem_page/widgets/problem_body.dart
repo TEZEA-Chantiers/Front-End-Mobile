@@ -60,7 +60,7 @@ class ProblemBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Container(
-                  height: size.height-430,
+                  height: size.height - 430,
                   child: ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,

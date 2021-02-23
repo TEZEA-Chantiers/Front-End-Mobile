@@ -13,10 +13,6 @@ class CameraMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CameraBody(type: type),
-      ],
-    );
+    return CameraBody(type: type);
   }
 }
