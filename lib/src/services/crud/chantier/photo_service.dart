@@ -40,4 +40,16 @@ class PhotoService {
     }
   }
 
+  // Delete
+  Future<bool> deletePhoto(int id) async {
+    final response = await http
+        .delete('${DatabaseService.URL}${'$SERVICE_NAME${'/delete/$id'}'}');
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception('Suppression de la photo échouée.');
+    }
+  }
+
 }
