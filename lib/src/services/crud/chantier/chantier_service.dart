@@ -33,7 +33,7 @@ class ChantierService {
         headers: _hearders);
 
     if (response.statusCode == 200) {
-      Set<Chantier> chantiers;
+      final chantiers = <Chantier>{};
 
       (jsonDecode(response.body) as List<dynamic>).forEach((element) {
         chantiers.add(Chantier.fromJson(element as Map<String, dynamic>));
