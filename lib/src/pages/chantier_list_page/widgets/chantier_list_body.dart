@@ -57,6 +57,7 @@ class ChantierListBody extends StatelessWidget {
                         Icons.construction,
                         color: ColorBank.TEZEA_VERT,
                         size: 40,
+                        semanticLabel: "Démarré",
                       )
                           :
                       (this.filteredChantiers[index].statusChantier==StatusType.ENATTENTE?
@@ -64,6 +65,7 @@ class ChantierListBody extends StatelessWidget {
                         Icons.construction,
                         color: Colors.orange,
                         size: 40,
+                        semanticLabel: "En attente",
                       )
                           :
                       Icon(
