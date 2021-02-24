@@ -81,6 +81,9 @@ class ChantierButton extends StatelessWidget {
             )),
           ),
         ),
+        Container(
+          height: 50,
+        )
       ],
     );
   }

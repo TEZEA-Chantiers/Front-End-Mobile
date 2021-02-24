@@ -22,6 +22,7 @@ class PhotoDocBody extends StatelessWidget {
     var dropdownValue = 'Signature';
     final providerImgList = context.watch<ProviderImageList>();
 
+    double width = MediaQuery.of(context).size.width;
     final _chantier = context.read<Chantier>();
 
     return Column(
@@ -36,9 +37,9 @@ class PhotoDocBody extends StatelessWidget {
         const Padding(padding: EdgeInsets.only(top: 10, bottom: 15)),
         Row(
           children: [
-            const Text(
+            Text(
               'Type du Document :',
-              textScaleFactor: 1.3,
+              style: TextStyle(fontSize: width * 0.05),
             ),
             const Padding(padding: EdgeInsets.all(10)),
             Provider.value(
@@ -60,7 +61,7 @@ class PhotoDocBody extends StatelessWidget {
                     value: value,
                     child: Text(
                       value,
-                      textScaleFactor: 1.2,
+                      style: TextStyle(fontSize :width * 0.05),
                     ),
                   );
                 }).toList(),

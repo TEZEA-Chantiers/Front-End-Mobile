@@ -69,8 +69,8 @@ class DemandeDeChantier {
       'particularite': particularite,
       'description': description,
       'infoInterne': infoInterne,
-      'dateDebutRegularite': dateDebutRegularite.toString(),
-      'dateFinRegularite': dateFinRegularite.toString(),
+      'dateDebutRegularite': dateDebutRegularite.toIso8601String(),
+      'dateFinRegularite': dateFinRegularite.toIso8601String(),
       'joursRegularite': joursRegularite,
     };
   }

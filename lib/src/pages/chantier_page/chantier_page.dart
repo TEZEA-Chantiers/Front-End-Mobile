@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
 import '../../models/chantier/status_type.dart';
 import '../../models/chantier/chantier.dart';
 import 'package:enum_to_string/enum_to_string.dart';
@@ -23,29 +24,27 @@ class ChantierPage extends StatelessWidget {
     switch (chantier.statusChantier) {
       case StatusType.ENATTENTE:
         {
-          print('pb');
           statusColor = Colors.orange;
           break;
         }
 
-
       case StatusType.ENCOURS:
         {
           statusColor = Colors.green;
+          break;
         }
-        break;
 
       case StatusType.TERMINE:
         {
           statusColor = Colors.grey;
+          break;
         }
-        break;
 
       default:
         {
           statusColor = Colors.black;
+          break;
         }
-        break;
     }
   }
 
@@ -64,12 +63,20 @@ class ChantierPage extends StatelessWidget {
         }
       },
       child: Scaffold(
+        backgroundColor: ColorBank.BACKGROUND_COLOR,
         appBar: AppBar(
+          backgroundColor: ColorBank.APP_BAR_COLOR,
           title: Row(
             children: [
-              Text(chantier.nomChantier),
-              const Spacer(),
-              Text(EnumToString.convertToString(chantier.statusChantier)),
+              Expanded(
+                child: RichText(
+                  overflow: TextOverflow.ellipsis,
+                  text: TextSpan(
+                      text: chantier.nomChantier),
+                ),
+              ),
+
+              Text(EnumToString.convertToString(chantier.statusChantier),style: TextStyle(fontSize: 10),),
               Icon(Icons.circle, color: statusColor),
             ],
           ),

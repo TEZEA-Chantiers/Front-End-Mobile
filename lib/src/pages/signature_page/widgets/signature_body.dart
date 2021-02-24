@@ -21,6 +21,7 @@ class SignatureBody extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.only(bottom: 20),
+            alignment: Alignment.centerLeft,
             child: const Text(
               'Signature :',
               textScaleFactor: 1.4,

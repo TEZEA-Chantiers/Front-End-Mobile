@@ -27,6 +27,7 @@ class ChantierBody extends StatelessWidget {
 
     final _chantier = context.read<Chantier>();
     final ouvr = _chantier.ouvriers;
+    final dateFormat = new DateFormat('dd/MM à HH:mm');
 
     return Container(
         padding: const EdgeInsets.all(10),
@@ -64,7 +65,7 @@ class ChantierBody extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 10),
             alignment: Alignment.centerLeft,
             child: Text(
-              'Debut : ${_chantier.dateDebutTheorique}',
+              'Debut : ${dateFormat.format(_chantier.dateDebutTheorique)}',
               textScaleFactor: 1.2,
             ),
           ),
@@ -72,7 +73,7 @@ class ChantierBody extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 10),
             alignment: Alignment.centerLeft,
             child: Text(
-              'Fin : ${_chantier.dateFinTheorique}',
+              'Fin : ${dateFormat.format(_chantier.dateFinTheorique)}',
               textScaleFactor: 1.2,
             ),
           ),
@@ -80,7 +81,7 @@ class ChantierBody extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 20),
             alignment: Alignment.centerLeft,
             child: Text(
-              'Débuté à ${_chantier.dateDebutEffectif}',
+              'Débuté le ${dateFormat.format(_chantier.dateDebutEffectif)}',
               textScaleFactor: 1.2,
             ),
           ),
