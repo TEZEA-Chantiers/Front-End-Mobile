@@ -98,11 +98,11 @@ class Chantier {
       adresse: jsonData['adresse']?.toString(),
       ouvriers: jsonData['ouvriers']?.cast<String>()?.toSet(),
       materiel: jsonData['materiel']?.toString(),
-      dateDebutTheorique: jsonData['dateDebut'] != null
-          ? DateTime.parse(jsonData['dateDebut'].toString())
+      dateDebutTheorique: jsonData['dateDebutTheorique'] != null
+          ? DateTime.parse(jsonData['dateDebutTheorique'].toString())
           : null,
-      dateFinTheorique: jsonData['dateFin'] != null
-          ? DateTime.parse(jsonData['dateFin'].toString())
+      dateFinTheorique: jsonData['dateFinTheorique'] != null
+          ? DateTime.parse(jsonData['dateFinTheorique'].toString())
           : null,
       estimationTemps: jsonData['estimationTemps'] as int,
       telephone: jsonData['telephone']?.toString(),
