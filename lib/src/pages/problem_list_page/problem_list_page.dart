@@ -1,13 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
 
 import '../chantier_page/chantier_page.dart';
 import 'widgets/problem_list_main.dart';
 
 class ProblemListPage extends StatelessWidget {
-  const ProblemListPage({
+  Chantier chantier;
+  ProblemListPage({
     Key key,
+    @required this.chantier,
   }) : super(key: key);
 
   @override
@@ -38,7 +41,9 @@ class ProblemListPage extends StatelessWidget {
         ),
         body: ChangeNotifierProvider.value(
             value: textEditingControllerSearchBar,
-            child: const ProblemListMain()),
+            child: Provider.value(
+                value: chantier,
+                child: ProblemListMain())),
       ),
     );
   }

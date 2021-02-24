@@ -7,6 +7,8 @@ import '../../photo_doc_page/photo_doc_page.dart';
 import '../../problem_list_page/problem_list_page.dart';
 import '../../problem_page/problem_page.dart';
 import '../../signature_page/signature_page.dart';
+import 'package:provider/provider.dart';
+import '../../../models/chantier/chantier.dart';
 
 class ChantierButton extends StatelessWidget {
   const ChantierButton({
@@ -15,7 +17,8 @@ class ChantierButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _firebaseFirestore = DatabaseService();
+
+    final _chantier = context.read<Chantier>();
 
     return Column(
       children: [
@@ -24,7 +27,8 @@ class ChantierButton extends StatelessWidget {
           child: RaisedButton(
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const ProblemPage()));
+                  MaterialPageRoute(
+                      builder: (context) => ProblemPage(chantier: _chantier,)));
             },
             child: const Text.rich(TextSpan(
               text: 'Remonter un problème',
@@ -54,7 +58,7 @@ class ChantierButton extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const PhotoDocPage()));
+                      builder: (context) => PhotoDocPage(chantier: _chantier,)));
             },
             child: const Text.rich(TextSpan(
               text: 'Photographier un Document',
@@ -69,7 +73,7 @@ class ChantierButton extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const SignaturePage()));
+                      builder: (context) => SignaturePage(chantier: _chantier,)));
             },
             child: const Text.rich(TextSpan(
               text: 'Récupérer une Signature',

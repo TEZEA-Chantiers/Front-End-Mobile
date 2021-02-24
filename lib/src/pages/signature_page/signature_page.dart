@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
 
 import 'widgets/signature_main.dart';
 
 class SignaturePage extends StatelessWidget {
-  const SignaturePage({
+  Chantier chantier;
+  SignaturePage({
     Key key,
+    @required this.chantier
   }) : super(key: key);
 
   @override
@@ -33,7 +36,9 @@ class SignaturePage extends StatelessWidget {
         ),
         body: ChangeNotifierProvider.value(
             value: textEditingControllerSearchBar,
-            child: const SignatureMain()),
+            child: Provider.value(
+                value: chantier,
+                child: SignatureMain())),
       ),
     );
   }

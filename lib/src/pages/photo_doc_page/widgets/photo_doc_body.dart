@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
 
 import '../../../providers/provider_image_list.dart';
 import '../../camera_page/camera_page.dart';
@@ -20,6 +21,8 @@ class PhotoDocBody extends StatelessWidget {
   Widget build(BuildContext context) {
     var dropdownValue = 'Signature';
     final providerImgList = context.watch<ProviderImageList>();
+
+    final _chantier = context.read<Chantier>();
 
     return Column(
       children: <Widget>[
@@ -114,7 +117,7 @@ class PhotoDocBody extends StatelessWidget {
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const PhotoDocPage()),
+                        builder: (context) => PhotoDocPage(chantier: _chantier)),
                   );
                 },
                 child:

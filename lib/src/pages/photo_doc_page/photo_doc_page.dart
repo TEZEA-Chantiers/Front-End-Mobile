@@ -1,11 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
 
 import 'widgets/photo_doc_main.dart';
+import 'package:provider/provider.dart';
 
 class PhotoDocPage extends StatelessWidget {
-  const PhotoDocPage({
+  Chantier chantier;
+  PhotoDocPage({
+    @required this.chantier,
     Key key,
   }) : super(key: key);
 
@@ -32,7 +36,9 @@ class PhotoDocPage extends StatelessWidget {
           ),
         ),
         body: ChangeNotifierProvider.value(
-            value: textEditingControllerSearchBar, child: const PhotoDocMain()),
+            value: textEditingControllerSearchBar, child: Provider.value(
+            value: chantier,
+            child: PhotoDocMain())),
       ),
     );
   }

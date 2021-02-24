@@ -1,12 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/pages/problem_list_page/problem_list_page.dart';
+import '../../models/chantier/chantier.dart';
 
 import 'widgets/problem_main.dart';
 
 class ProblemPage extends StatelessWidget {
-  const ProblemPage({
+  Chantier chantier;
+
+  ProblemPage({
     Key key,
+    @required this.chantier,
   }) : super(key: key);
 
   @override
@@ -31,11 +36,13 @@ class ProblemPage extends StatelessWidget {
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const ProblemListPage(),
+                    builder: (context) => ProblemListPage(chantier: chantier,),
                   ));
                 }),
           ),
-          body: const ProblemMain()),
+          body: Provider.value(
+              value: chantier,
+              child: ProblemMain())),
       //),
     );
   }

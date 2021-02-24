@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
+import 'package:provider/provider.dart';
 
 import '../../../services/firebase_services/database_service.dart';
 import '../../problem_page/problem_page.dart';
@@ -15,6 +17,8 @@ class ProblemListBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final _databaseService = DatabaseService();
     final size = MediaQuery.of(context).size;
+
+    final _chantier = context.read<Chantier>();
 
     return StreamBuilder(
         stream: _databaseService
@@ -90,7 +94,7 @@ class ProblemListBody extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    const ProblemPage(), // argument manquant: id pb
+                    ProblemPage(), // argument manquant: id pb
               ),
             );
           }),

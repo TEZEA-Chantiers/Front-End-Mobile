@@ -10,6 +10,9 @@ import '../../../providers/provider_image_list.dart';
 import '../../../services/firebase_services/database_service.dart';
 import '../../camera_page/camera_page.dart';
 import '../../check_picture_page/check_picture_page.dart';
+import 'package:provider/provider.dart';
+import '../../../models/chantier/chantier.dart';
+
 
 class ProblemBody extends StatelessWidget {
   const ProblemBody({
@@ -19,6 +22,8 @@ class ProblemBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _databaseService = DatabaseService();
+    final _chantier = context.read<Chantier>();
+
     final providerImgList = context.watch<ProviderImageList>();
     final size = MediaQuery.of(context).size;
 
@@ -40,8 +45,8 @@ class ProblemBody extends StatelessWidget {
                 children: [
                   TextFormField(
                     maxLines: 8,
-                    decoration: const InputDecoration.collapsed(
-                      hintText: 'Gégé a bousillé le tractopelle',
+                    decoration: InputDecoration.collapsed(
+                      hintText: 'aaa',
                       fillColor: Colors.white,
                       filled: true,
                     ),
