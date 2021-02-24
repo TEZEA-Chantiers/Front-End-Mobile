@@ -27,7 +27,7 @@ class App extends StatelessWidget {
           primarySwatch: Colors.blueGrey,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: AuthWrapper(),
+        home: const AuthWrapper(),
       ),
     );
   }

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -29,12 +28,10 @@ class ChantierBody extends StatelessWidget {
           }
 
           final dateFormat = new DateFormat('dd/MM/yyyy HH:mm');
-          final dateDebut =
-              (snapshot.data['dateDebut'] as Timestamp).millisecondsSinceEpoch;
-          final dateFin =
-              (snapshot.data['dateFin'] as Timestamp).millisecondsSinceEpoch;
-          final heureDemarrage = (snapshot.data['heureDemarrage'] as Timestamp)
-              .millisecondsSinceEpoch;
+          final dateDebut = (snapshot.data['dateDebut']).millisecondsSinceEpoch;
+          final dateFin = (snapshot.data['dateFin']).millisecondsSinceEpoch;
+          final heureDemarrage =
+              (snapshot.data['heureDemarrage']).millisecondsSinceEpoch;
 
           return Container(
               padding: const EdgeInsets.all(10),
