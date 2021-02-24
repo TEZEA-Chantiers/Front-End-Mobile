@@ -12,20 +12,22 @@ import '../../camera_page/camera_page.dart';
 import '../../check_picture_page/check_picture_page.dart';
 import 'package:provider/provider.dart';
 import '../../../models/chantier/chantier.dart';
-
+import 'package:tezea_chantiers/src/models/chantier/probleme.dart';
 
 class ProblemBody extends StatelessWidget {
-  const ProblemBody({
+  Probleme probleme;
+
+  ProblemBody({
     Key key,
+    Probleme this.probleme
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final _databaseService = DatabaseService();
     final _chantier = context.read<Chantier>();
-
     final providerImgList = context.watch<ProviderImageList>();
     final size = MediaQuery.of(context).size;
+
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -45,10 +47,11 @@ class ProblemBody extends StatelessWidget {
                 children: [
                   TextFormField(
                     maxLines: 8,
+                    initialValue: probleme.description,
                     decoration: InputDecoration.collapsed(
-                      hintText: 'aaa',
                       fillColor: Colors.white,
                       filled: true,
+
                     ),
                   ),
                   ElevatedButton(
@@ -118,5 +121,10 @@ class ProblemBody extends StatelessWidget {
         ],
       ),
     );
+  }
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Probleme>('probleme', probleme));
   }
 }
