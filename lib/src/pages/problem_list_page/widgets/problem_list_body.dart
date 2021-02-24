@@ -68,7 +68,12 @@ class ProblemListBody extends StatelessWidget {
               maxWidth: 40,
               maxHeight: 40,
             ),
-            child: Image.asset('assets/images/profile/avatar-anonym.png'),
+            child: Icon(
+              Icons.warning_amber_outlined,
+              color: Colors.orange,
+              size: 40,
+              semanticLabel: "En attente",
+            ),
           ),
           title: Row(
             children: [
@@ -76,8 +81,8 @@ class ProblemListBody extends StatelessWidget {
             ],
           ),
           subtitle:  Text(probleme.description),
-          onTap: () {
-            Navigator.push(
+          onTap: () async {
+            await Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) =>
