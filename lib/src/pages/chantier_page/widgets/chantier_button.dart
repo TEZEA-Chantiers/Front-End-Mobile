@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../../../services/firebase_services/database_service.dart';
 import '../../photo_doc_page/photo_doc_page.dart';
 import '../../problem_list_page/problem_list_page.dart';
 import '../../problem_page/problem_page.dart';
@@ -15,8 +14,6 @@ class ChantierButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _firebaseFirestore = DatabaseService();
-
     return Column(
       children: [
         Container(

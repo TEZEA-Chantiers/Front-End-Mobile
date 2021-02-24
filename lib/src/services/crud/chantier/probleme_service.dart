@@ -1,18 +1,22 @@
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
+import 'package:http_interceptor/http_client_with_interceptor.dart';
 
 import '../../../models/chantier/probleme.dart';
 import '../../database/database_service.dart';
 
 class ProblemeService {
+  ProblemeService(this.client);
+
   static const SERVICE_NAME = '/probleme';
+
+  HttpClientWithInterceptor client;
 
   // Get
   Future<Probleme> getProbleme(int id) async {
     final _hearders = <String, String>{'Accept': 'application/json'};
 
-    final response = await http.get(
+    final response = await client.get(
         '${DatabaseService.URL}${'$SERVICE_NAME${'/get/$id'}'}',
         headers: _hearders);
 
@@ -28,7 +32,7 @@ class ProblemeService {
   Future<Set<Probleme>> getAllProblemes() async {
     final _hearders = <String, String>{'Accept': 'application/json'};
 
-    final response = await http.get(
+    final response = await client.get(
         '${DatabaseService.URL}${'$SERVICE_NAME${'/get'}'}',
         headers: _hearders);
 
@@ -50,7 +54,7 @@ class ProblemeService {
     final _hearders = <String, String>{'content-type': 'application/json'};
     final _body = jsonEncode(probleme.toJson());
 
-    final response = await http.post(
+    final response = await client.post(
         '${DatabaseService.URL}${'$SERVICE_NAME${'/add'}'}',
         headers: _hearders,
         body: _body);
@@ -67,7 +71,7 @@ class ProblemeService {
     final _hearders = <String, String>{'content-type': 'application/json'};
     final _body = jsonEncode(probleme.toJson());
 
-    final response = await http.put(
+    final response = await client.put(
         '${DatabaseService.URL}${'$SERVICE_NAME${'/update/$id'}'}',
         headers: _hearders,
         body: _body);
@@ -82,7 +86,7 @@ class ProblemeService {
 
   // Delete
   Future<bool> deleteProbleme(int id) async {
-    final response = await http
+    final response = await client
         .delete('${DatabaseService.URL}${'$SERVICE_NAME${'/delete/$id'}'}');
 
     if (response.statusCode == 200) {

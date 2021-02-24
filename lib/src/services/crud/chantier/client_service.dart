@@ -1,18 +1,22 @@
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
+import 'package:http_interceptor/http_client_with_interceptor.dart';
 
 import '../../../models/client/client.dart';
 import '../../database/database_service.dart';
 
 class ClientService {
+  ClientService(this.client);
+
   static const SERVICE_NAME = '/client';
 
+  HttpClientWithInterceptor client;
+
   // Get
-  Future<Client> getClient(int id) async {
+  Future<Client> getClient(int id, String jwt) async {
     final _hearders = <String, String>{'Accept': 'application/json'};
 
-    final response = await http.get(
+    final response = await client.get(
         '${DatabaseService.URL}${'$SERVICE_NAME${'/get/$id'}'}',
         headers: _hearders);
 
@@ -27,7 +31,7 @@ class ClientService {
   Future<Set<Client>> getAllClients() async {
     final _hearders = <String, String>{'Accept': 'application/json'};
 
-    final response = await http.get(
+    final response = await client.get(
         '${DatabaseService.URL}${'$SERVICE_NAME${'/get'}'}',
         headers: _hearders);
 
@@ -49,7 +53,7 @@ class ClientService {
     final _hearders = <String, String>{'content-type': 'application/json'};
     final _body = jsonEncode(client.toJson());
 
-    final response = await http.post(
+    final response = await this.client.post(
         '${DatabaseService.URL}${'$SERVICE_NAME${'/add'}'}',
         headers: _hearders,
         body: _body);
@@ -66,7 +70,7 @@ class ClientService {
     final _hearders = <String, String>{'content-type': 'application/json'};
     final _body = jsonEncode(client.toJson());
 
-    final response = await http.put(
+    final response = await this.client.put(
         '${DatabaseService.URL}${'$SERVICE_NAME${'/update/$id'}'}',
         headers: _hearders,
         body: _body);
@@ -80,7 +84,7 @@ class ClientService {
 
   // Delete
   Future<bool> deleteClient(int id) async {
-    final response = await http
+    final response = await client
         .delete('${DatabaseService.URL}${'$SERVICE_NAME${'/delete/$id'}'}');
 
     if (response.statusCode == 200) {

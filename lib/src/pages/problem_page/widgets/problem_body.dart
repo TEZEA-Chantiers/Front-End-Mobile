@@ -7,7 +7,6 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/provider_image_list.dart';
-import '../../../services/firebase_services/database_service.dart';
 import '../../camera_page/camera_page.dart';
 import '../../check_picture_page/check_picture_page.dart';
 
@@ -18,7 +17,6 @@ class ProblemBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _databaseService = DatabaseService();
     final providerImgList = context.watch<ProviderImageList>();
     final size = MediaQuery.of(context).size;
 

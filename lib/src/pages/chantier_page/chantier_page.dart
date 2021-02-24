@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../services/firebase_services/database_service.dart';
 import 'widgets/chantier_main.dart';
 
 class ChantierPage extends StatelessWidget {
@@ -11,8 +10,6 @@ class ChantierPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _firebaseFirestore = DatabaseService();
-
     var statusColor = Colors.black;
 
     return GestureDetector(
@@ -27,9 +24,7 @@ class ChantierPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: StreamBuilder(
-              stream: _firebaseFirestore
-                  .getDocument('chantier', 'V1YtkHvEVmCwOV8YSxBi')
-                  .asStream(),
+              stream: null,
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return const Text('Pas de Donnee');

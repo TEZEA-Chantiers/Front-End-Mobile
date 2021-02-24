@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
-import 'package:tezea_chantiers/src/services/crud/authentification.dart';
-import 'package:tezea_chantiers/src/services/crud/utilisateur_service.dart';
+import 'package:tezea_chantiers/src/wrappers/auth_wrapper/auth_wrapper.dart';
 
+import '../../../services/crud/utilisateur/utilisateur_service.dart';
+import '../../../services/database/authentification_service.dart';
 import '../models/login_input_controller_model.dart';
 
 class LoginBottom extends StatelessWidget {
@@ -13,6 +17,8 @@ class LoginBottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _utilisateurService = UtilisateurService();
+    final _authentificationService = AuthentificationService();
     return Expanded(
       flex: 2,
       child: SingleChildScrollView(
@@ -25,7 +31,8 @@ class LoginBottom extends StatelessWidget {
                     .read<GlobalKey<FormState>>()
                     .currentState
                     .validate()) {
-                  AuthentificationService.authenticate(
+                  _authentificationService
+                      .authenticate(
                     context
                         .read<LoginInputControllerModel>()
                         .emailController
@@ -36,19 +43,25 @@ class LoginBottom extends StatelessWidget {
                         .passwordController
                         .text
                         .trim(),
-                  ).then((value) {
+                  )
+                      .then((token) {
                     FocusScope.of(context).unfocus();
-                    if (value == null) {
-                      String auth_error = "La connexion au compte a échoué.";
-                      //Good lord, it seems to be deprecated.
-                      Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text(auth_error),
+                    if (token == null) {
+                      Scaffold.of(context).showSnackBar(const SnackBar(
+                        content: Text('La connexion au compte a échoué.'),
                       ));
                     } else {
-                      //print("Retrieved JWT : " + value.jwt);
-                      Utilisateur_Service.getUtilisateur(value.jwt).then(
-                          (utilisateur) => AuthentificationService.currentUser =
-                              utilisateur);
+                      _utilisateurService
+                          .getUtilisateur(token.jwt)
+                          .then((utilisateur) async {
+                        await context.read<FlutterSecureStorage>().write(
+                            key: 'utilisateur',
+                            value: jsonEncode(utilisateur.toJson()));
+                        await Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AuthWrapper()));
+                      });
                     }
                   });
                 }
@@ -59,7 +72,7 @@ class LoginBottom extends StatelessWidget {
             ),
             const Padding(padding: EdgeInsets.only(top: 5)),
             const Text.rich(TextSpan(
-              text: 'En cas d\'oubli, contactez l\'administration. ',
+              text: "En cas d'oubli, contactez l'administration.",
               style: TextStyle(color: Colors.white70),
             )),
           ],

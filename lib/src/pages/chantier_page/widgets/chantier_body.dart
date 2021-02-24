@@ -4,8 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../../services/firebase_services/database_service.dart';
-
 class ChantierBody extends StatelessWidget {
   const ChantierBody({
     Key key,
@@ -21,14 +19,10 @@ class ChantierBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _firebaseFirestore = DatabaseService();
-
     final ouvr = <String>{'Juan Polo', 'Dovid Pedros'};
 
     return StreamBuilder(
-        stream: _firebaseFirestore
-            .getDocument('chantier', 'V1YtkHvEVmCwOV8YSxBi')
-            .asStream(),
+        stream: null,
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Text('Pas de Donnee');

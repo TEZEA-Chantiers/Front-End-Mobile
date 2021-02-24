@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
+
 class Jwt {
-  Jwt({this.jwt});
+  Jwt({@required this.jwt});
 
   factory Jwt.fromJson(Map<String, dynamic> jsonData) {
     return Jwt(
-      jwt: jsonData['jwt'].toString(),
+      jwt: jsonData['jwt']?.toString(),
     );
   }
 

@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../../services/firebase_services/database_service.dart';
 import '../../problem_page/problem_page.dart';
 
 class ProblemListBody extends StatelessWidget {
@@ -13,13 +12,10 @@ class ProblemListBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _databaseService = DatabaseService();
     final size = MediaQuery.of(context).size;
 
     return StreamBuilder(
-        stream: _databaseService
-            .getDocument('chantier', 'V1YtkHvEVmCwOV8YSxBi')
-            .asStream(),
+        stream: null,
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Text('Pas de Données');

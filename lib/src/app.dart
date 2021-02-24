@@ -1,9 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/provider_image_list.dart';
-import 'services/firebase_services/auth_service.dart';
 import 'wrappers/auth_wrapper/auth_wrapper.dart';
 
 class App extends StatelessWidget {
@@ -15,14 +14,11 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<AuthService>(
-          create: (_) => AuthService(FirebaseAuth.instance),
-        ),
-        StreamProvider(
-          create: (context) => context.read<AuthService>().idTokenChanges,
+        Provider<FlutterSecureStorage>(
+          create: (_) => const FlutterSecureStorage(),
         ),
         ChangeNotifierProvider<ProviderImageList>(
-          create: (context) => ProviderImageList(),
+          create: (_) => ProviderImageList(),
         )
       ],
       child: MaterialApp(
@@ -31,7 +27,7 @@ class App extends StatelessWidget {
           primarySwatch: Colors.blueGrey,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: const AuthWrapper(),
+        home: AuthWrapper(),
       ),
     );
   }

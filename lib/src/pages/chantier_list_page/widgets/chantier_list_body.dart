@@ -6,8 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
 import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
 
-import '../../../services/firebase_services/database_service.dart';
-
 class ChantierListBody extends StatelessWidget {
   ChantierListBody({
     Key key,
@@ -21,7 +19,6 @@ class ChantierListBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _databaseService = DatabaseService();
     return Expanded(
       child: ListView.builder(
           scrollDirection: Axis.vertical,
