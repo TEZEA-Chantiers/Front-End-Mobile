@@ -1,9 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:tezea_chantiers/src/models/chantier/photo.dart';
+import '../../../models/chantier/photo.dart';
 
-import '../../../models/client/client.dart';
 import '../../database/database_service.dart';
 
 class PhotoService {
