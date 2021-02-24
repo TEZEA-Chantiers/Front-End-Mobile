@@ -17,11 +17,9 @@ import '../../../models/chantier/chantier.dart';
 import 'package:tezea_chantiers/src/models/chantier/probleme.dart';
 
 class ProblemBody extends StatelessWidget {
-  Probleme probleme;
 
   ProblemBody({
     Key key,
-    Probleme this.probleme
   }) : super(key: key);
 
   @override
@@ -30,7 +28,7 @@ class ProblemBody extends StatelessWidget {
     final chantier = context.read<Chantier>();
     final providerImgList = context.watch<ProviderImageList>();
     final size = MediaQuery.of(context).size;
-
+    Probleme probleme = context.read<Probleme>();
     final descriptionInputText = TextFormField(
         maxLines: 8,
         controller: context.watch<TextEditingController>(),
@@ -59,8 +57,26 @@ class ProblemBody extends StatelessWidget {
                   descriptionInputText,
                   ElevatedButton(
                     onPressed: () {
-                      this.probleme.description = context.read<TextEditingController>().text;
-                      problemeService.updateProbleme(this.probleme.id, this.probleme);
+                      bool creation=false;
+                      probleme != null?
+                      creation = false : creation = true;
+                      print(probleme);
+                      if(creation){
+                        probleme = new Probleme(id : 0,date : DateTime.now(), imagesURL: [], description: context.read<TextEditingController>().text);
+                        problemeService.addProbleme(probleme);
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text("Le problème a été mis à jour"),
+                        ));
+                        Navigator.pop(context);
+                      }
+                      else {
+                        probleme.description = context
+                            .read<TextEditingController>()
+                            .text;
+                        problemeService.updateProbleme(
+                            probleme.id, probleme);
+                      }
+
                     },
                     child: const Text('Enregistrer'),
                     style: ButtonStyle(
@@ -99,11 +115,11 @@ class ProblemBody extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => CheckPicturePage(
-                                          imagePath:
-                                              providerImgList.imageList[index],
-                                          controller: 'check',
-                                          type: 'pb',
-                                        )),
+                                      imagePath:
+                                      providerImgList.imageList[index],
+                                      controller: 'check',
+                                      type: 'pb',
+                                    )),
                               );
                             },
                             child: Image.file(
@@ -137,9 +153,5 @@ class ProblemBody extends StatelessWidget {
       ),
     );
   }
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Probleme>('probleme', probleme));
-  }
+
 }
