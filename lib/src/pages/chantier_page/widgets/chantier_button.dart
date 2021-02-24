@@ -43,7 +43,7 @@ class ChantierButton extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const ProblemListPage()));
+                      builder: (context) => ProblemListPage(chantier: _chantier,)));
             },
             child: const Text.rich(TextSpan(
               text: 'Liste des Problèmes',
