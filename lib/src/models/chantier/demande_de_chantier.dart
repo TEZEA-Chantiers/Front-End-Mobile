@@ -37,7 +37,7 @@ class DemandeDeChantier {
           DateTime.parse(jsonData['dateDebutRegularite'].toString()),
       dateFinRegularite:
           DateTime.parse(jsonData['dateFinRegularite'].toString()),
-      joursRegularite: jsonData['joursRegularite'] as List<JourSemaineType>,
+      joursRegularite: jsonData['joursRegularite']?.cast<JourSemaineType>()?.toSet(),
     );
   }
 
@@ -54,7 +54,7 @@ class DemandeDeChantier {
   final String infoInterne;
   final DateTime dateDebutRegularite;
   final DateTime dateFinRegularite;
-  final List<JourSemaineType> joursRegularite;
+  final Set<JourSemaineType> joursRegularite;
 
   Map<String, dynamic> toJson() {
     return {
