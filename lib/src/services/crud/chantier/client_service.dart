@@ -32,7 +32,7 @@ class ClientService {
         headers: _hearders);
 
     if (response.statusCode == 200) {
-      Set<Client> clients;
+      final clients = <Client>{};
 
       (jsonDecode(response.body) as List<dynamic>).forEach((element) {
         clients.add(Client.fromJson(element as Map<String, dynamic>));

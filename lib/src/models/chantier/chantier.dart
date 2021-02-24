@@ -22,7 +22,7 @@ class Chantier {
     this.dateFinTheorique,
     this.estimationTemps,
     this.telephone,
-    this.statutChantier,
+    this.statusChantier,
     this.nomChantier,
     this.informationsInterne,
     this.description,
@@ -106,8 +106,8 @@ class Chantier {
           : null,
       estimationTemps: jsonData['estimationTemps'] as int,
       telephone: jsonData['telephone']?.toString(),
-      statutChantier: EnumToString.fromString(
-          StatusType.values, jsonData['statutChantier']?.toString()),
+      statusChantier: EnumToString.fromString(
+          StatusType.values, jsonData['statusChantier']?.toString()),
       nomChantier: jsonData['nomChantier']?.toString(),
       informationsInterne: jsonData['informationsInterne']?.toString(),
       description: jsonData['description']?.toString(),
@@ -144,7 +144,7 @@ class Chantier {
 
   final int estimationTemps;
   final String telephone;
-  final StatusType statutChantier;
+  final StatusType statusChantier;
   final String nomChantier;
   final String informationsInterne;
   final String description;
@@ -172,7 +172,7 @@ class Chantier {
       'dateFinTheorique': dateFinTheorique?.toString(),
       'estimationTemps': estimationTemps,
       'telephone': telephone,
-      'statutChantier': statutChantier,
+      'statusChantier': statusChantier,
       'nomChantier': nomChantier,
       'informationsInterne': informationsInterne,
       'description': description,

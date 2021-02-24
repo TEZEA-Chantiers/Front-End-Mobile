@@ -32,7 +32,7 @@ class MediaService {
         headers: _hearders);
 
     if (response.statusCode == 200) {
-      Set<Media> medias;
+      final medias = <Media>{};
 
       (jsonDecode(response.body) as List<dynamic>).forEach((element) {
         medias.add(Media.fromJson(element as Map<String, dynamic>));

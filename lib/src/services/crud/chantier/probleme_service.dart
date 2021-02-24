@@ -33,7 +33,7 @@ class ProblemeService {
         headers: _hearders);
 
     if (response.statusCode == 200) {
-      Set<Probleme> problemes;
+      final problemes = <Probleme>{};
 
       (jsonDecode(response.body) as List<dynamic>).forEach((element) {
         problemes.add(Probleme.fromJson(element as Map<String, dynamic>));
