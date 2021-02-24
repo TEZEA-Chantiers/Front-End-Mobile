@@ -34,4 +34,6 @@ class Photo {
     };
   }
 
+  void setFile(File f){ file = f; }
+
 }

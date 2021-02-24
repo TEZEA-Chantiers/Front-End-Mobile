@@ -111,7 +111,7 @@ class ProblemBody extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => CameraPage(type: 'pb'),
+                    builder: (context) => CameraPage(type: 'pb', probleme: probleme, chantier: _chantier,),
                   ));
                 },
                 child: const Text('Ajouter une photo'),

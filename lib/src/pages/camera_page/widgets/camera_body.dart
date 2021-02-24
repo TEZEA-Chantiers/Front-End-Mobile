@@ -1,11 +1,15 @@
 import 'dart:developer';
 import 'dart:ffi';
 
+import 'package:provider/provider.dart';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:tezea_chantiers/src/models/chantier/probleme.dart';
+import '../../../models/chantier/chantier.dart';
 
 import '../../check_picture_page/check_picture_page.dart';
 
@@ -26,6 +30,8 @@ class _CameraBody extends State<CameraBody> {
   Future<void> _initializeControllerFuture;
   bool isCameraReady = false;
   List<CameraDescription> cameras;
+  Chantier _chantier;
+  Probleme _probleme;
 
   @override
   void initState() {
@@ -58,6 +64,9 @@ class _CameraBody extends State<CameraBody> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final deviceRatio = size.width / size.height;
+
+    _chantier = context.read<Chantier>();
+    _probleme = context.read<Probleme>();
 
     return FutureBuilder<void>(
       future: _initializeControllerFuture,
@@ -123,7 +132,8 @@ class _CameraBody extends State<CameraBody> {
           this.context,
           MaterialPageRoute(
             builder: (context) => CheckPicturePage(
-                imagePath: path, controller: 'taken', type: widget.type),
+                imagePath: path, controller: 'taken', type: widget.type
+              , chantier: _chantier, probleme: _probleme),
           ));
     } catch (e) {
       log(e.toString());

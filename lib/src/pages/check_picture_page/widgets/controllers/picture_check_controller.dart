@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/models/chantier/probleme.dart';
+import 'package:tezea_chantiers/src/services/crud/chantier/media_service.dart';
+import 'package:tezea_chantiers/src/services/crud/chantier/photo_service.dart';
 
 import '../../../../providers/provider_image_list.dart';
 import '../../../photo_doc_page/photo_doc_page.dart';
@@ -17,7 +20,11 @@ class PictureCheckController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final providerImgList = Provider.of<ProviderImageList>(context);
+
     final _chantier = context.read<Chantier>();
+    final _probleme = context.read<Probleme>();
+    final _photoTotal = PhotoService();
+
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
@@ -56,18 +63,22 @@ class PictureCheckController extends StatelessWidget {
                                         builder: (context) =>
                                             ProblemPage(chantier: _chantier,),
                                       ));
-                                      Provider.of<ProviderImageList>(context,
+                                      /*Provider.of<ProviderImageList>(context,
                                               listen: false)
-                                          .delImage(imagePath);
+                                          .delImage(imagePath);*/
+
+                                      //_photoTotal.deletePhoto(id)
+                                      _chantier.problemes.lookup(_probleme).imagesURL.remove(imagePath);
                                     } else {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
                                         builder: (context) =>
                                             PhotoDocPage(chantier: _chantier,),
                                       ));
-                                      Provider.of<ProviderImageList>(context,
+                                      /*Provider.of<ProviderImageList>(context,
                                               listen: false)
-                                          .delDoc(imagePath);
+                                          .delDoc(imagePath);*/
+                                      _chantier.medias.remove(imagePath);
                                     }
                                   },
                                   child: const Text('Oui'),
