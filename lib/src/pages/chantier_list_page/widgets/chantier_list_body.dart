@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
+import 'package:tezea_chantiers/src/models/chantier/status_type.dart';
+import 'package:tezea_chantiers/src/pages/chantier_page/chantier_page.dart';
+import 'package:tezea_chantiers/src/services/crud/chantier/chantier_service.dart';
 import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
 
 import '../../../services/firebase_services/database_service.dart';
@@ -15,118 +18,151 @@ class ChantierListBody extends StatelessWidget {
 
   String searchValue = '';
   bool showSearch = false;
-  final dateFormat = new DateFormat('dd-MM-yyyy HH:mm');
-  var chantiers = <Chantier>{};
-  var filteredChantiers = <Chantier>{};
+  final dateFormat = new DateFormat('dd-MM-yyyy à HH:mm');
+  final chantierService = new ChantierService();
+  var chantiers = <Chantier>[];
+  var filteredChantiers = <Chantier>[];
 
   @override
   Widget build(BuildContext context) {
-    final _databaseService = DatabaseService();
-    return Expanded(
-      child: ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          padding: const EdgeInsets.all(5),
-          itemCount: 10,
-          itemBuilder: (BuildContext context, int index) {
-            return Card(
-              color: ColorBank.CARD_COLOR,
-              child: ListTile(
-                onTap: () {},
-                leading: false
-                    ? Container()
-                    : Icon(
+    return FutureBuilder<Set<Chantier>>(
+        future: chantierService.getAllChantiers(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          this.chantiers = snapshot.data.toList();
+          this.updateChantiers(context);
+          return Expanded(
+            child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                padding: const EdgeInsets.all(5),
+                itemCount: this.filteredChantiers.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                    color: ColorBank.CARD_COLOR,
+                    child: ListTile(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ChantierPage(chantier: this.filteredChantiers[index])));
+                      },
+                      leading: this.filteredChantiers[index].statusChantier==StatusType.DEMARRE?
+                      Icon(
                         Icons.construction,
                         color: ColorBank.TEZEA_VERT,
                         size: 40,
+                        semanticLabel: "Démarré",
+                      )
+                          :
+                      (this.filteredChantiers[index].statusChantier==StatusType.ENATTENTE?
+                      Icon(
+                        Icons.construction,
+                        color: Colors.orange,
+                        size: 40,
+                        semanticLabel: "En attente",
+                      )
+                          :
+                      Icon(
+                        Icons.construction,
+                        color: Colors.grey[600],
+                        size: 40)
                       ),
-                title: Text("Juan Pedrinos",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
-                contentPadding:
-                    const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 5),
-                subtitle: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.6,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (true)
-                              Text.rich(TextSpan(
-                                text:
-                                    "15 rue des biscuits sales, 35014 Pipriac",
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
-                              )),
-                            const Padding(padding: EdgeInsets.only(top: 5)),
-                            if (true)
-                              Text.rich(TextSpan(
-                                text:
-                                    'Démarré le ${dateFormat.format(DateTime.now())}',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
-                              )),
-                            const Padding(padding: EdgeInsets.only(top: 10)),
-                            //Row avec les petites icônes sympa
-                            Row(
+                      title: Text(this.filteredChantiers[index].client.prenom + " " + this.filteredChantiers[index].client.nom,
+                          style:
+                          TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15.0)),
+                      contentPadding:
+                      const EdgeInsets.only(
+                          left: 5, top: 5, bottom: 5, right: 5),
+                      subtitle: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Container(
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width * 0.7,
+                              child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Icon(
-                                    Icons.supervisor_account,
-                                    color: ColorBank.TEZEA_VERT,
-                                    size: 30,
-                                  ),
-                                  Text.rich(TextSpan(
-                                    text: '45',
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  )),
+                                  if (true)
+                                    Text.rich(TextSpan(
+                                      text:
+                                      this.filteredChantiers[index].adresse,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    )),
                                   const Padding(
-                                      padding: EdgeInsets.only(left: 15)),
-                                  Icon(
-                                    Icons.car_rental,
-                                    color: false
-                                        ? ColorBank.TEZEA_VERT
-                                        : Colors.red,
-                                    size: 30,
-                                  )
-                                ])
-                          ],
-                        ),
-                      ),
-                      Container(
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: <Widget>[]),
-                      )
-                    ]),
-              ),
-            );
-          }),
+                                      padding: EdgeInsets.only(top: 5)),
+                                  if (true)
+                                    Text.rich(TextSpan(
+                                      text:
+                                      this.filteredChantiers[index].statusChantier==StatusType.DEMARRE?
+                                      'Démarré le ${dateFormat.format(this.filteredChantiers[index].dateDebutEffectif)}' :
+                                      'Démarrage prévu le ${dateFormat.format(this.filteredChantiers[index].dateDebutTheorique)}',
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                  const Padding(
+                                      padding: EdgeInsets.only(top: 10)),
+                                  //Row avec les petites icônes sympa
+                                  Row(
+                                      crossAxisAlignment: CrossAxisAlignment
+                                          .start,
+                                      children: [
+                                        Icon(
+                                          Icons.supervisor_account,
+                                          color: ColorBank.TEZEA_VERT,
+                                          size: 30,
+                                        ),
+                                        Text.rich(TextSpan(
+                                          text: this.filteredChantiers[index].ouvriers.length.toString(),
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                        const Padding(
+                                            padding: EdgeInsets.only(left: 15)),
+                                        Icon(
+                                          Icons.car_rental,
+                                          color: this.filteredChantiers[index].conducteurPresent
+                                              ? ColorBank.TEZEA_VERT
+                                              : Colors.red,
+                                          size: 30,
+                                        )
+                                      ])
+                                ],
+                              ),
+                            ),
+                            Container(
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: <Widget>[]),
+                            )
+                          ]),
+                    ),
+                  );
+                }),
+          );
+        }
     );
   }
 
-  bool searchChantierTester(String element) {
-    // autre critères de recherche ?
-    /*var res = (element.nomChantier.contains(searchValue) ||
-        element.description.contains(searchValue) ||
-        element.dateDebut.contains(searchValue));*/
-
-    //return res;
-    return false;
-  }
 
   void updateChantiers(BuildContext context) {
     String request =
-        context.watch<TextEditingController>().text.trim().toLowerCase();
+    context.watch<TextEditingController>().text.trim().toLowerCase();
     if (request == "") {
-      return;
+      this.filteredChantiers = this.chantiers;
     }
-    this.filteredChantiers = new Set<Chantier>();
+    this.filteredChantiers = <Chantier>[];
     for (final chantier in this.chantiers) {
       if (chantier.client.nom.contains(request)) {
         this.filteredChantiers.add(chantier);

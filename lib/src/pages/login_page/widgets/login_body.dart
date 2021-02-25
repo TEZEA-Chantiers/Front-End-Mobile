@@ -40,7 +40,7 @@ class LoginBody extends StatelessWidget {
                             .watch<LoginInputControllerModel>()
                             .emailController,
                         textInputType: TextInputType.emailAddress,
-                        hintText: 'Email',
+                        hintText: 'Nom d\'utilisateur',
                         obscureText: false,
                         validator: (value) {
                           return null;

@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
 
 import '../../../providers/provider_image_list.dart';
 import '../../camera_page/camera_page.dart';
@@ -21,6 +22,9 @@ class PhotoDocBody extends StatelessWidget {
     var dropdownValue = 'Signature';
     final providerImgList = context.watch<ProviderImageList>();
 
+    double width = MediaQuery.of(context).size.width;
+    final _chantier = context.read<Chantier>();
+
     return Column(
       children: <Widget>[
         TextFormField(
@@ -33,9 +37,9 @@ class PhotoDocBody extends StatelessWidget {
         const Padding(padding: EdgeInsets.only(top: 10, bottom: 15)),
         Row(
           children: [
-            const Text(
+            Text(
               'Type du Document :',
-              textScaleFactor: 1.3,
+              style: TextStyle(fontSize: width * 0.05),
             ),
             const Padding(padding: EdgeInsets.all(10)),
             Provider.value(
@@ -57,7 +61,7 @@ class PhotoDocBody extends StatelessWidget {
                     value: value,
                     child: Text(
                       value,
-                      textScaleFactor: 1.2,
+                      style: TextStyle(fontSize :width * 0.05),
                     ),
                   );
                 }).toList(),
@@ -114,7 +118,7 @@ class PhotoDocBody extends StatelessWidget {
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const PhotoDocPage()),
+                        builder: (context) => PhotoDocPage(chantier: _chantier)),
                   );
                 },
                 child:

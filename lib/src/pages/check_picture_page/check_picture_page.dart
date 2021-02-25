@@ -2,16 +2,20 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
 
 import 'widgets/controllers/picture_check_controller.dart';
 import 'widgets/controllers/picture_taken_controller.dart';
+import 'package:provider/provider.dart';
 
 class CheckPicturePage extends StatelessWidget {
-  const CheckPicturePage(
+  Chantier chantier;
+  CheckPicturePage(
       {Key key,
-      @required this.imagePath,
-      @required this.controller,
-      @required this.type})
+        @required this.chantier,
+        @required this.imagePath,
+        @required this.controller,
+        @required this.type})
       : super(key: key);
 
   final String imagePath, controller, type;
@@ -32,9 +36,13 @@ class CheckPicturePage extends StatelessWidget {
 
   Widget selectController() {
     if (controller == 'taken') {
-      return PictureTakenController(imagePath: imagePath, type: type);
+      return Provider.value(
+          value: chantier,
+          child: PictureTakenController(imagePath: imagePath, type: type));
     } else {
-      return PictureCheckController(imagePath: imagePath, type: type);
+      return Provider.value(
+          value: chantier,
+          child: PictureCheckController(imagePath: imagePath, type: type));
     }
   }
 }

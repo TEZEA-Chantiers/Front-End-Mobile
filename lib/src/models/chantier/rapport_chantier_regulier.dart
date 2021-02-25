@@ -36,10 +36,10 @@ class RapportChantierRegulier {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'dateDebutTheorique': dateDebutTheorique.toString(),
-      'dateFinTheorique': dateFinTheorique.toString(),
-      'dateDebutEffectif': dateDebutEffectif.toString(),
-      'dateFinEffectif': dateFinEffectif.toString(),
+      'dateDebutTheorique': dateDebutTheorique.toIso8601String(),
+      'dateFinTheorique': dateFinTheorique.toIso8601String(),
+      'dateDebutEffectif': dateDebutEffectif.toIso8601String(),
+      'dateFinEffectif': dateFinEffectif.toIso8601String(),
       'status': status,
     };
   }

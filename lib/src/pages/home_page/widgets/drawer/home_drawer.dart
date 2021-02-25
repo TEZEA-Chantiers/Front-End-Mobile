@@ -91,7 +91,7 @@ class HomeDrawer extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ProblemPage(),
+                      builder: (context) => ProblemPage(),
                     ),
                   );
                 },
@@ -102,7 +102,7 @@ class HomeDrawer extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ProblemListPage(),
+                      builder: (context) => ProblemListPage(),
                     ),
                   );
                 },
@@ -124,7 +124,7 @@ class HomeDrawer extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ChantierPage(),
+                      builder: (context) => ChantierPage(),
                     ),
                   );
                 },

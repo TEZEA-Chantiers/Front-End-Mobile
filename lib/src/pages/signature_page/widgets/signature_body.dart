@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
+import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
 
 class SignatureBody extends StatelessWidget {
   const SignatureBody({
@@ -11,6 +13,7 @@ class SignatureBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _signaturePadKey = GlobalKey<SfSignaturePadState>();
+    final _chantier = context.read<Chantier>();
 
     return Padding(
       padding: const EdgeInsets.all(20),
@@ -18,6 +21,7 @@ class SignatureBody extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.only(bottom: 20),
+            alignment: Alignment.centerLeft,
             child: const Text(
               'Signature :',
               textScaleFactor: 1.4,

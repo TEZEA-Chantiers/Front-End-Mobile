@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
+import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
+import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/models/chantier/probleme.dart';
+import 'package:intl/intl.dart';
 import '../../../services/firebase_services/database_service.dart';
 import '../../problem_page/problem_page.dart';
 
@@ -13,61 +16,49 @@ class ProblemListBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _databaseService = DatabaseService();
     final size = MediaQuery.of(context).size;
 
-    return StreamBuilder(
-        stream: _databaseService
-            .getDocument('chantier', 'V1YtkHvEVmCwOV8YSxBi')
-            .asStream(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Text('Pas de Données');
-          }
-          return Container(
-            padding: const EdgeInsets.all(20),
-            child: Column(
+    final _chantier = context.read<Chantier>();
+    return Container(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(_chantier.nomChantier,
+                  style: const TextStyle(fontSize: 20)),
+            ],
+          ),
+          Container(
+            padding: const EdgeInsets.only(top: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(snapshot.data['nomChantier'].toString(),
-                        style: const TextStyle(fontSize: 20)),
-                  ],
-                ),
-                Container(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(snapshot.data['adresse'].toString(),
-                          style: const TextStyle(fontSize: 16)),
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.only(top: 20),
-                  height: size.height - 180,
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: [
-                      buildListCard(context),
-                      buildListCard(context),
-                      buildListCard(context),
-                      buildListCard(context),
-                      buildListCard(context),
-                      buildListCard(context),
-                      buildListCard(context),
-                    ],
-                  ),
-                ),
+                Text(_chantier.adresse,
+                    style: const TextStyle(fontSize: 16)),
               ],
             ),
-          );
-        });
+          ),
+          ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.all(5),
+                  itemCount: _chantier.problemes.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return buildListCard(context, _chantier, _chantier.problemes.toList()[index]);
+
+                  }
+              )
+
+        ],
+      ),
+    );
   }
 
-  Card buildListCard(BuildContext context) {
+  Card buildListCard(BuildContext context, Chantier chantier, Probleme probleme) {
+    final _dateFormat = new DateFormat('dd/MM/yyyy à HH:mm');
+
     return Card(
       child: ListTile(
           leading: ConstrainedBox(
@@ -77,20 +68,25 @@ class ProblemListBody extends StatelessWidget {
               maxWidth: 40,
               maxHeight: 40,
             ),
-            child: Image.asset('assets/images/profile/avatar-anonym.png'),
+            child: Icon(
+              Icons.warning_amber_outlined,
+              color: Colors.orange,
+              size: 40,
+              semanticLabel: "En attente",
+            ),
           ),
           title: Row(
-            children: const [
-              Text('Nom probleme', style: TextStyle(fontSize: 18)),
+            children: [
+              Text(_dateFormat.format(probleme.date), style: TextStyle(fontSize: 18)),
             ],
           ),
-          subtitle: const Text('Description wrappee du probleme'),
-          onTap: () {
-            Navigator.push(
+          subtitle:  Text(probleme.description),
+          onTap: () async {
+            await Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    const ProblemPage(), // argument manquant: id pb
+                    ProblemPage(chantier: chantier, probleme: probleme), // argument manquant: id pb
               ),
             );
           }),

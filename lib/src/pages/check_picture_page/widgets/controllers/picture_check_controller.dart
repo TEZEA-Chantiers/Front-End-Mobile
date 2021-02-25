@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import '../../../../providers/provider_image_list.dart';
 import '../../../photo_doc_page/photo_doc_page.dart';
 import '../../../problem_page/problem_page.dart';
+import '../../../../models/chantier/chantier.dart';
+
 
 class PictureCheckController extends StatelessWidget {
   const PictureCheckController({Key key, this.imagePath, this.type})
@@ -15,7 +17,7 @@ class PictureCheckController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final providerImgList = Provider.of<ProviderImageList>(context);
-
+    final _chantier = context.read<Chantier>();
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
@@ -52,7 +54,7 @@ class PictureCheckController extends StatelessWidget {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
                                         builder: (context) =>
-                                            const ProblemPage(),
+                                            ProblemPage(chantier: _chantier,),
                                       ));
                                       Provider.of<ProviderImageList>(context,
                                               listen: false)
@@ -61,7 +63,7 @@ class PictureCheckController extends StatelessWidget {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
                                         builder: (context) =>
-                                            const PhotoDocPage(),
+                                            PhotoDocPage(chantier: _chantier,),
                                       ));
                                       Provider.of<ProviderImageList>(context,
                                               listen: false)
