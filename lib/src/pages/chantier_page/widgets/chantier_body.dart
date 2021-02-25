@@ -16,9 +16,9 @@ class ChantierBody extends StatelessWidget {
   String listToString(List<String> list) {
     var res = '';
     for (var str in list) {
-      res += '  - ${str} \n';
+      res += '  • ${str} \n';
     }
-    return res;
+    return res.substring(0,res.length-1);
   }
 
   @override
@@ -59,6 +59,7 @@ class ChantierBody extends StatelessWidget {
                 height: MediaQuery.of(context).size.width * 0.2,
                 width: MediaQuery.of(context).size.width * 0.7,
                 child: RaisedButton(
+                  color : Color.fromRGBO(240, 240, 240, 1.0),
                   onPressed: () {},
                   child: const Text.rich(TextSpan(
                     text: 'Demarrer ce Chantier',
@@ -137,7 +138,7 @@ class ChantierBody extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Materiel : ${_chantier.materiel}',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: titleSize),
+                  style: TextStyle(fontSize: textSize),
                 ),
               ),
               Container(
@@ -149,13 +150,14 @@ class ChantierBody extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.only(bottom: 30),
+                padding: const EdgeInsets.only(bottom: 20),
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Telephone client : TELEPHONE CLIENT',
                   style: TextStyle(fontSize: textSize),
                 ),
               ),
+              divider
             ]));
   }
 }

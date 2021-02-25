@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
 
 import '../../../models/chantier/chantier.dart';
 import '../../photo_doc_page/photo_doc_page.dart';
@@ -16,13 +17,17 @@ class ChantierButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const buttonRatioSize = 0.9;
+    const buttonColor = Color.fromRGBO(240, 240, 240, 1.0);
     final _chantier = context.read<Chantier>();
+
 
     return Column(
       children: [
         Container(
-          width: MediaQuery.of(context).size.width * 0.7,
+          width: MediaQuery.of(context).size.width * buttonRatioSize,
           child: RaisedButton(
+            color : buttonColor,
             onPressed: () {
               Navigator.push(
                   context,
@@ -38,8 +43,9 @@ class ChantierButton extends StatelessWidget {
           ),
         ),
         Container(
-          width: MediaQuery.of(context).size.width * 0.7,
+          width: MediaQuery.of(context).size.width * buttonRatioSize,
           child: RaisedButton(
+            color : buttonColor,
             onPressed: () {
               Navigator.push(
                   context,
@@ -55,8 +61,9 @@ class ChantierButton extends StatelessWidget {
           ),
         ),
         Container(
-          width: MediaQuery.of(context).size.width * 0.7,
+          width: MediaQuery.of(context).size.width * buttonRatioSize,
           child: RaisedButton(
+            color : buttonColor,
             onPressed: () {
               Navigator.push(
                   context,
@@ -72,8 +79,9 @@ class ChantierButton extends StatelessWidget {
           ),
         ),
         Container(
-          width: MediaQuery.of(context).size.width * 0.7,
+          width: MediaQuery.of(context).size.width * buttonRatioSize,
           child: RaisedButton(
+            color : buttonColor,
             onPressed: () {
               Navigator.push(
                   context,
