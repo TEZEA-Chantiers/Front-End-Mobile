@@ -26,17 +26,17 @@ class ProblemBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final problemeService = new ProblemeService();
-    final chantier = context.read<Chantier>();
+    final problemeService = ProblemeService();
+    final _chantier = context.read<Chantier>();
     final providerImgList = context.watch<ProviderImageList>();
     final size = MediaQuery.of(context).size;
 
     final descriptionInputText = TextFormField(
         maxLines: 8,
         controller: context.watch<TextEditingController>(),
-        decoration: InputDecoration.collapsed(
+        decoration: const InputDecoration.collapsed(
           fillColor: Colors.white,
-          filled: true,
+          filled: true, hintText: '',
         )
     );
 
