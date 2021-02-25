@@ -134,7 +134,7 @@ class Chantier {
   final Site site;
   final Client client;
   final Set<Probleme> problemes;
-  final Set<Media> medias;
+  Set<Media> medias;
   final String adresse;
   final Set<String> ouvriers;
   final String materiel;

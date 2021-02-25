@@ -29,6 +29,7 @@ class Photo {
   static File file;
 
   Map<String, dynamic> toJson() {
+    print(base64Encode(file.readAsBytesSync()));
     return {'image': base64Encode(file.readAsBytesSync()), 'id': id};
   }
 

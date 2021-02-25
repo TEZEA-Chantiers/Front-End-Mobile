@@ -41,12 +41,10 @@ class PhotoDocPage extends StatelessWidget {
         ),
         body: ChangeNotifierProvider.value(
             value: textEditingControllerSearchBar,
-            child: MultiProvider(
-                providers: [
-                  Provider.value(value: chantier),
-                  Provider.value(value: media)
-                ],
-                child: PhotoDocMain())),
+            child: MultiProvider(providers: [
+              Provider.value(value: chantier),
+              Provider.value(value: media)
+            ], child: PhotoDocMain())),
       ),
     );
   }

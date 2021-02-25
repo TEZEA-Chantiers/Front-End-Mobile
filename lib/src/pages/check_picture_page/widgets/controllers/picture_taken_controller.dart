@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
 import 'package:tezea_chantiers/src/models/chantier/media.dart';
-import '../../../../models/chantier/photo.dart';
 import 'package:tezea_chantiers/src/models/chantier/probleme.dart';
 import 'package:tezea_chantiers/src/pages/photo_doc_page/photo_doc_page.dart';
 import 'package:tezea_chantiers/src/pages/problem_page/problem_page.dart';
 import 'package:tezea_chantiers/src/services/crud/chantier/photo_service.dart';
 
+import '../../../../models/chantier/photo.dart';
 import '../../../../providers/provider_image_list.dart';
 
 class PictureTakenController extends StatelessWidget {
@@ -50,26 +50,36 @@ class PictureTakenController extends StatelessWidget {
                           Photo(image: Image.asset(imagePath), id: 0));
                       if (type == 'pb') {
                         //providerImgList.addImage(imagePath);
+                        if (_chantier.problemes.lookup(_probleme).imagesURL ==
+                            null) {
+                          _chantier.problemes.lookup(_probleme).imagesURL =
+                              <String>[];
+                        }
                         _chantier.problemes
                             .lookup(_probleme)
                             .imagesURL
                             .add(imagePath);
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(
+                        Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ProblemPage(
-                            chantier: _chantier, probleme: _probleme,
+                            chantier: _chantier,
+                            probleme: _probleme,
                           ),
                         ));
                       } else {
                         //providerImgList.addDoc(imagePath);
+                        if(_chantier == null) print('chantier null');
+                        if (_chantier.medias.lookup(_media).imagesURL == null) {
+                          _chantier.medias.lookup(_media).imagesURL =
+                              <String>{};
+                        }
                         _chantier.medias
                             .lookup(_media)
                             .imagesURL
                             .add(imagePath);
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(
+                        Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => PhotoDocPage(
-                            chantier: _chantier, media: _media,
+                            chantier: _chantier,
+                            media: _media,
                           ),
                         ));
                       }

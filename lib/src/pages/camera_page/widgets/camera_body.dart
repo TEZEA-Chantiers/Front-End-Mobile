@@ -134,12 +134,13 @@ class _CameraBody extends State<CameraBody> {
           this.context,
           MaterialPageRoute(
             builder: (context) => CheckPicturePage(
-                imagePath: path,
-                controller: 'taken',
-                type: widget.type,
-                chantier: _chantier,
-                probleme: _probleme,
-                media: _media,),
+              imagePath: path,
+              controller: 'taken',
+              type: widget.type,
+              chantier: _chantier,
+              probleme: _probleme,
+              media: _media,
+            ),
           ));
     } catch (e) {
       log(e.toString());

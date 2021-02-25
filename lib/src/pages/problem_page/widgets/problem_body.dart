@@ -23,7 +23,7 @@ class ProblemBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final problemeService = ProblemeService();
     final _chantier = context.read<Chantier>();
-    final providerImgList = context.watch<ProviderImageList>();
+    //final providerImgList = context.watch<ProviderImageList>();
     final size = MediaQuery.of(context).size;
 
     var probleme = context.read<Probleme>();
@@ -102,9 +102,9 @@ class ProblemBody extends StatelessWidget {
                   child: ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: providerImgList.imageList.length,
+                    itemCount: probleme.imagesURL.length,
                     itemBuilder: (context, index) {
-                      if (providerImgList.imageList.isNotEmpty) {
+                      if (probleme.imagesURL.isNotEmpty) {
                         print('not empty');
                         return Container(
                           padding: const EdgeInsets.only(right: 5),
@@ -115,14 +115,14 @@ class ProblemBody extends StatelessWidget {
                                 MaterialPageRoute(
                                     builder: (context) => CheckPicturePage(
                                           imagePath:
-                                              providerImgList.imageList[index],
+                                          probleme.imagesURL[index],
                                           controller: 'check',
-                                          type: 'pb',
+                                          type: 'pb', chantier: _chantier, probleme: probleme,
                                         )),
                               );
                             },
                             child: Image.file(
-                                File(providerImgList.imageList[index])),
+                                File(probleme.imagesURL[index])),
                           ),
                         );
                       } else {

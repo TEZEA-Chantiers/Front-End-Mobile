@@ -6,7 +6,6 @@ import 'package:tezea_chantiers/src/models/chantier/probleme.dart';
 import 'package:tezea_chantiers/src/services/crud/chantier/photo_service.dart';
 
 import '../../../../models/chantier/chantier.dart';
-import '../../../../providers/provider_image_list.dart';
 import '../../../photo_doc_page/photo_doc_page.dart';
 import '../../../problem_page/problem_page.dart';
 
@@ -71,7 +70,8 @@ class PictureCheckController extends StatelessWidget {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
                                         builder: (context) => ProblemPage(
-                                          chantier: _chantier, probleme: _probleme,
+                                          chantier: _chantier,
+                                          probleme: _probleme,
                                         ),
                                       ));
                                     } else {
@@ -87,7 +87,8 @@ class PictureCheckController extends StatelessWidget {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
                                         builder: (context) => PhotoDocPage(
-                                          chantier: _chantier, media: _media,
+                                          chantier: _chantier,
+                                          media: _media,
                                         ),
                                       ));
                                     }

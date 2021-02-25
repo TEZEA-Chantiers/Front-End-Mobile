@@ -10,8 +10,8 @@ import 'widgets/camera_main.dart';
 class CameraPage extends StatelessWidget {
   CameraPage({
     Key key,
-    this.type,
-    this.chantier,
+    @required this.type,
+    @required this.chantier,
     this.probleme,
     this.media,
   }) : super(key: key);

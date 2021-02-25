@@ -133,11 +133,13 @@ class ChantierListBody extends StatelessWidget {
                                             padding: EdgeInsets.only(left: 15)),
                                         Icon(
                                           Icons.car_rental,
-                                          color: this
+                                          color:
+                                              /*this
                                                   .filteredChantiers[index]
                                                   .conducteurPresent
                                               ? ColorBank.TEZEA_VERT
-                                              : Colors.red,
+                                              : */
+                                              Colors.red,
                                           size: 30,
                                         )
                                       ])

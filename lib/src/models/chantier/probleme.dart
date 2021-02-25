@@ -19,7 +19,7 @@ class Probleme {
 
   final int id; // pas de type long dans Dart, int equivalent
   String description;
-  final List<String> imagesURL;
+  List<String> imagesURL;
   final DateTime date;
 
   Map<String, dynamic> toJson() {

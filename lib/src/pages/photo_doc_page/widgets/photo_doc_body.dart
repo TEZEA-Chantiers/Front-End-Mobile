@@ -27,6 +27,10 @@ class PhotoDocBody extends StatelessWidget {
     final _chantier = context.read<Chantier>();
     var _media = context.read<Media>();
 
+    if (_chantier.medias.lookup(_media) == null) {
+      _chantier.medias.add(_media);
+    }
+
     return Column(
       children: <Widget>[
         TextFormField(
@@ -117,17 +121,17 @@ class PhotoDocBody extends StatelessWidget {
                   _image = await ImagePicker.pickImage(
                       source: ImageSource.gallery, imageQuality: 50);
                   //providerImgList.docList.add(_image.path);
-                  if(_chantier.medias.lookup(_media) == null){
-                    _chantier.medias.add(_media);
-                  }
+
                   _chantier.medias.lookup(_media).imagesURL.add(_image.path);
                   // sale, voir autre moyen pour rebuild si possible (sinon stateful)
                   Navigator.of(context).pop();
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            PhotoDocPage(chantier: _chantier, media: _media,)),
+                        builder: (context) => PhotoDocPage(
+                              chantier: _chantier,
+                              media: _media,
+                            )),
                   );
                 },
                 child:
@@ -137,7 +141,7 @@ class PhotoDocBody extends StatelessWidget {
               RaisedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => CameraPage(type: 'doc'),
+                    builder: (context) => CameraPage(type: 'doc', chantier: _chantier, media: _media,),
                   ));
                 },
                 child: const IconButton(

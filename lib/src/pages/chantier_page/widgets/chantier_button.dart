@@ -59,11 +59,13 @@ class ChantierButton extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.7,
           child: RaisedButton(
             onPressed: () {
+              _chantier.medias ??= <Media>{};
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => PhotoDocPage(
-                            chantier: _chantier, media: Media(imagesURL: <String>{}),
+                            chantier: _chantier,
+                            media: Media(imagesURL: <String>{}),
                           )));
             },
             child: const Text.rich(TextSpan(
