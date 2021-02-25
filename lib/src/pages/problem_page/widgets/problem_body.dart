@@ -9,7 +9,6 @@ import 'package:tezea_chantiers/src/services/crud/chantier/probleme_service.dart
 import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
 
 import '../../../providers/provider_image_list.dart';
-import '../../../services/firebase_services/database_service.dart';
 import '../../camera_page/camera_page.dart';
 import '../../check_picture_page/check_picture_page.dart';
 import 'package:provider/provider.dart';

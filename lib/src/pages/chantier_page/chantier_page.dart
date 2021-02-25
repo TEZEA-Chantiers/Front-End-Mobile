@@ -6,7 +6,6 @@ import '../../models/chantier/status_type.dart';
 import '../../models/chantier/chantier.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 
-import '../../services/firebase_services/database_service.dart';
 import 'widgets/chantier_main.dart';
 
 class ChantierPage extends StatelessWidget {

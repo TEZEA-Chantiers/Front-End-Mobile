@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/models/chantier/status_type.dart';
 import '../../../models/chantier/chantier.dart';
-
-import '../../../services/firebase_services/database_service.dart';
 
 class ChantierBody extends StatelessWidget {
 
