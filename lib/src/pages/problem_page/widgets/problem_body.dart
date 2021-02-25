@@ -26,6 +26,7 @@ class ProblemBody extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     var probleme = context.read<Probleme>();
+    probleme.imagesURL ??= <String>[];
 
     final descriptionInputText = TextFormField(
         maxLines: 8,
