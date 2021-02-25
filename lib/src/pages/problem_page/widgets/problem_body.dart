@@ -10,7 +10,6 @@ import 'package:tezea_chantiers/src/services/crud/chantier/probleme_service.dart
 import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
 
 import '../../../models/chantier/chantier.dart';
-import '../../../providers/provider_image_list.dart';
 import '../../camera_page/camera_page.dart';
 import '../../check_picture_page/check_picture_page.dart';
 
@@ -114,15 +113,15 @@ class ProblemBody extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => CheckPicturePage(
-                                          imagePath:
-                                          probleme.imagesURL[index],
+                                          imagePath: probleme.imagesURL[index],
                                           controller: 'check',
-                                          type: 'pb', chantier: _chantier, probleme: probleme,
+                                          type: 'pb',
+                                          chantier: _chantier,
+                                          probleme: probleme,
                                         )),
                               );
                             },
-                            child: Image.file(
-                                File(probleme.imagesURL[index])),
+                            child: Image.file(File(probleme.imagesURL[index])),
                           ),
                         );
                       } else {

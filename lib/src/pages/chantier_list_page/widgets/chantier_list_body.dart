@@ -9,8 +9,6 @@ import 'package:tezea_chantiers/src/pages/chantier_page/chantier_page.dart';
 import 'package:tezea_chantiers/src/services/crud/chantier/chantier_service.dart';
 import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
 
-import '../../../services/firebase_services/database_service.dart';
-
 class ChantierListBody extends StatelessWidget {
   ChantierListBody({
     Key key,

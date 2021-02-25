@@ -141,7 +141,11 @@ class PhotoDocBody extends StatelessWidget {
               RaisedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => CameraPage(type: 'doc', chantier: _chantier, media: _media,),
+                    builder: (context) => CameraPage(
+                      type: 'doc',
+                      chantier: _chantier,
+                      media: _media,
+                    ),
                   ));
                 },
                 child: const IconButton(

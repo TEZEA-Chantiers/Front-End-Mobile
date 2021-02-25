@@ -67,7 +67,7 @@ class PictureTakenController extends StatelessWidget {
                         ));
                       } else {
                         //providerImgList.addDoc(imagePath);
-                        if(_chantier == null) print('chantier null');
+                        if (_chantier == null) print('chantier null');
                         if (_chantier.medias.lookup(_media).imagesURL == null) {
                           _chantier.medias.lookup(_media).imagesURL =
                               <String>{};
