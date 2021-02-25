@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/models/utilisateur/utilisateur.dart';
+import 'package:tezea_chantiers/src/pages/chantier_list_page/widgets/drawer/chantier_drawer.dart';
 import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
 
 import 'widgets/chantier_list_main.dart';
@@ -25,14 +26,11 @@ class ChantierListPage extends StatelessWidget {
         }
       },
       child: Scaffold(
+        drawer: const ChantierListDrawer(),
         backgroundColor: ColorBank.BACKGROUND_COLOR,
         appBar: AppBar(
           backgroundColor: const Color.fromRGBO(50, 147, 207, 1.0),
           title: const Text('Liste des chantiers'),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
         ),
         body: ChangeNotifierProvider.value(
             value: textEditingControllerSearchBar,

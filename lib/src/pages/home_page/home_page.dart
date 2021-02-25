@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http_interceptor/http_client_with_interceptor.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/pages/chantier_list_page/chantier_list_page.dart';
 import 'package:tezea_chantiers/src/services/crud/chantier/media_service.dart';
 import 'package:tezea_chantiers/src/services/crud/chantier/probleme_service.dart';
 import 'package:tezea_chantiers/src/services/interceptor/interceptor.dart';
@@ -50,15 +51,16 @@ class HomePage extends StatelessWidget {
           currentFocus.unfocus();
         }
       },
-      child: Scaffold(
-        backgroundColor: const Color(0xff2E4053),
-        appBar: AppBar(
-          backgroundColor: const Color(0xff2E4060),
-          title: const Text('Accueil'),
-        ),
-        drawer: const HomeDrawer(),
-        body: const HomeMain(),
-      ),
+      child: ChantierListPage()
+      // Scaffold(
+      //   backgroundColor: const Color(0xff2E4053),
+      //   appBar: AppBar(
+      //     backgroundColor: const Color(0xff2E4060),
+      //     title: const Text('Accueil'),
+      //   ),
+      //   drawer: const HomeDrawer(),
+      //   body: const HomeMain(),
+      // ),
     );
   }
 }

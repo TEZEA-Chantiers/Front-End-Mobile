@@ -57,7 +57,7 @@ class ChantierListBody extends StatelessWidget {
                                     chantier: this.filteredChantiers[index])));
                       },
                       leading: this.filteredChantiers[index].statusChantier ==
-                              StatusType.DEMARRE
+                              StatusType.ENCOURS
                           ? Icon(
                               Icons.construction,
                               color: ColorBank.TEZEA_VERT,
@@ -72,8 +72,8 @@ class ChantierListBody extends StatelessWidget {
                                   size: 40,
                                   semanticLabel: "En attente",
                                 )
-                              : Icon(Icons.construction,
-                                  color: Colors.grey[600], size: 40)),
+                              : Icon(Icons.check_circle,
+                                  color: ColorBank.TEZEA_VERT, size: 40)),
                       title: Text(
                           this.filteredChantiers[index].client.prenom +
                               " " +
@@ -102,12 +102,11 @@ class ChantierListBody extends StatelessWidget {
                                       padding: EdgeInsets.only(top: 5)),
                                   if (true)
                                     Text.rich(TextSpan(
-                                      text: this
-                                                  .filteredChantiers[index]
-                                                  .statusChantier ==
-                                              StatusType.DEMARRE
+                                      text: this.filteredChantiers[index].statusChantier == StatusType.ENCOURS
                                           ? 'Démarré le ${dateFormat.format(this.filteredChantiers[index].dateDebutEffectif)}'
-                                          : 'Démarrage prévu le ${dateFormat.format(this.filteredChantiers[index].dateDebutTheorique)}',
+                                          : this.filteredChantiers[index].statusChantier == StatusType.ENATTENTE?
+                                      'Démarrage prévu le ${dateFormat.format(this.filteredChantiers[index].dateDebutTheorique)}':
+                                      'Terminé le ${dateFormat.format(this.filteredChantiers[index].dateFinEffectif)}',
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold),
                                     )),

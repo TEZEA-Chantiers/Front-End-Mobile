@@ -88,50 +88,6 @@ class HomeDrawer extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ProblemPage(),
-                    ),
-                  );
-                },
-                child: const Text('Test ProblemPage'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ProblemListPage(),
-                    ),
-                  );
-                },
-                child: const Text('Test ProblemListPage'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ChantierListPage(),
-                    ),
-                  );
-                },
-                child: const Text('Test ChantierListPage'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ChantierPage(),
-                    ),
-                  );
-                },
-                child: const Text('Test ChantierPage'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
                       builder: (context) => const LoginPage(),
                     ),
                   );

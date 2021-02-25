@@ -79,9 +79,9 @@ class LoginBottom extends StatelessWidget {
               color: ColorBank.APP_BAR_COLOR,
             ),
             const Padding(padding: EdgeInsets.only(top: 5)),
-            const Text.rich(TextSpan(
+            Text.rich(TextSpan(
               text: "En cas d'oubli, contactez l'administration.",
-              style: TextStyle(color: Colors.white70),
+              style: TextStyle(color: Colors.grey[700]),
             )),
           ],
         ),

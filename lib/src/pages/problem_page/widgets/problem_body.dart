@@ -43,6 +43,7 @@ class ProblemBody extends StatelessWidget {
         maxLines: 8,
         controller: context.watch<TextEditingController>(),
         decoration: InputDecoration.collapsed(
+          hintText: "Saisissez la description de votre problème. Si nécessaire, vous pouvez joindre des photos pour illustrer son contexte.",
           fillColor: Colors.white,
           filled: true,
         ));
@@ -54,7 +55,7 @@ class ProblemBody extends StatelessWidget {
           Row(
             children: [
               Text('Description :',
-                  style: TextStyle(fontSize: 20, color: Colors.grey[600])),
+                  style: TextStyle(fontSize: 20, color: Colors.grey[900])),
             ],
           ),
           Container(
@@ -64,6 +65,7 @@ class ProblemBody extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   descriptionInputText,
+                  Padding(padding: EdgeInsets.only(bottom: 10)),
                   ElevatedButton(
                     onPressed: () {
                       bool creation = false;

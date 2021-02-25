@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:http_interceptor/http_client_with_interceptor.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/models/chantier/status_type.dart';
+import 'package:tezea_chantiers/src/pages/chantier_page/chantier_page.dart';
+import 'package:tezea_chantiers/src/services/crud/chantier/chantier_service.dart';
+import 'package:tezea_chantiers/src/services/interceptor/interceptor.dart';
 import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
 
 import '../../../models/chantier/chantier.dart';
@@ -23,11 +27,17 @@ class ChantierBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _chantier = context.read<Chantier>();
+    final _chantier = context.watch<Chantier>();
     final ouvr = _chantier.ouvriers;
     final dateFormat = new DateFormat('dd/MM à HH:mm');
     const titleSize = 18.0;
     const textSize = 16.0;
+
+    final chantierService = ChantierService(
+      HttpClientWithInterceptor.build(interceptors: [
+        context.read<Interceptor>(),
+      ]),
+    );
 
     Divider divider = const Divider(
       color: ColorBank.TEZEA_VERT,
@@ -43,7 +53,7 @@ class ChantierBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: const EdgeInsets.only(top: 10, bottom: 15),
+                padding: const EdgeInsets.only(top: 10, bottom: 0),
                 alignment: Alignment.center,
                 child: Text(
                   _chantier.adresse,
@@ -58,11 +68,53 @@ class ChantierBody extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 10, bottom: 10),
                 height: MediaQuery.of(context).size.width * 0.2,
                 width: MediaQuery.of(context).size.width * 0.7,
-                child: RaisedButton(
+
+
+                child: _chantier.statusChantier==StatusType.ENATTENTE?
+
+                RaisedButton(
                   color : Color.fromRGBO(240, 240, 240, 1.0),
-                  onPressed: () {},
+                  onPressed: () {
+                    _chantier.statusChantier = StatusType.ENCOURS;
+                    chantierService.updateChantier(_chantier.id, _chantier);
+                    Navigator.pushReplacement(context, MaterialPageRoute(
+                        builder: (context) => ChantierPage(
+                          chantier: _chantier,
+                        )));
+                  },
                   child: const Text.rich(TextSpan(
                     text: 'Demarrer ce Chantier',
+                    style: TextStyle( fontSize: titleSize, color: Colors.black),
+                  )),
+                ) :
+                _chantier.statusChantier==StatusType.ENCOURS?
+                RaisedButton(
+                  color : Color.fromRGBO(240, 240, 240, 1.0),
+                  onPressed: () {
+                    _chantier.statusChantier = StatusType.TERMINE;
+                    chantierService.updateChantier(_chantier.id, _chantier);
+                    Navigator.pushReplacement(context, MaterialPageRoute(
+                        builder: (context) => ChantierPage(
+                          chantier: _chantier,
+                        )));
+                  },
+                  child: const Text.rich(TextSpan(
+                    text: 'Terminer ce Chantier',
+                    style: TextStyle( fontSize: titleSize, color: Colors.black),
+                  )),
+                ):
+                RaisedButton(
+                  color : Color.fromRGBO(240, 240, 240, 1.0),
+                  onPressed: () {
+                    _chantier.statusChantier = StatusType.ENCOURS;
+                    chantierService.updateChantier(_chantier.id, _chantier);
+                    Navigator.pushReplacement(context, MaterialPageRoute(
+                        builder: (context) => ChantierPage(
+                          chantier: _chantier,
+                        )));
+                  },
+                  child: const Text.rich(TextSpan(
+                    text: 'Relancer le chantier',
                     style: TextStyle( fontSize: titleSize, color: Colors.black),
                   )),
                 ),
@@ -77,7 +129,7 @@ class ChantierBody extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
-              _chantier.statusChantier == StatusType.DEMARRE
+              _chantier.statusChantier == StatusType.ENCOURS
                   ? Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -85,8 +137,14 @@ class ChantierBody extends StatelessWidget {
                   textScaleFactor: 1.2,
                 ),
               )
-                  : Text(
+                  : _chantier.statusChantier == StatusType.ENATTENTE
+                  ? Text(
                 'En attente de démarrage.',
+                textAlign: TextAlign.left,
+                textScaleFactor: 1.2,
+              ):
+              Text(
+                'Le chantier est terminé.',
                 textAlign: TextAlign.left,
                 textScaleFactor: 1.2,
               ),
@@ -95,7 +153,7 @@ class ChantierBody extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 10),
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Prévu du ${dateFormat.format(_chantier.dateDebutTheorique)} au ${dateFormat.format(_chantier.dateFinTheorique)}.',
+                  'Réalisé entre le ${dateFormat.format(_chantier.dateDebutEffectif)} et ${dateFormat.format(_chantier.dateFinEffectif)}.',
                   textScaleFactor: 1.2,
                 ),
               ),
@@ -112,7 +170,7 @@ class ChantierBody extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 20),
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  _chantier.description,
+            _chantier.description,
                   textScaleFactor: 1.2,
                 ),
               ),

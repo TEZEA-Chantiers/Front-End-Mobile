@@ -1,4 +1,5 @@
 import 'package:enum_to_string/enum_to_string.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../client/client.dart';
 import '../site/site.dart';
@@ -8,7 +9,7 @@ import 'probleme.dart';
 import 'rapport_chantier_regulier.dart';
 import 'status_type.dart';
 
-class Chantier {
+class Chantier{
   Chantier({
     this.id,
     this.site,
@@ -145,7 +146,7 @@ class Chantier {
 
   final int estimationTemps;
   final String telephone;
-  final StatusType statusChantier;
+  StatusType statusChantier;
   final String nomChantier;
   final String informationsInterne;
   final String description;
@@ -223,5 +224,6 @@ class Chantier {
     }
     return jours;
   }
+
 
 }

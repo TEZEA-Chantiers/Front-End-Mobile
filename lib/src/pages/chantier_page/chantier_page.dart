@@ -76,7 +76,8 @@ class ChantierPage extends StatelessWidget {
             ],
           ),
         ),
-        body: Provider.value(value: chantier, child: ChantierMain()),
+        body:
+        Provider.value(value: chantier, child: ChantierMain()),
       ),
     );
   }
