@@ -36,14 +36,15 @@ class ProblemPage extends StatelessWidget {
           backgroundColor: ColorBank.BACKGROUND_COLOR,
           appBar: AppBar(
             backgroundColor: ColorBank.APP_BAR_COLOR,
-            title: Text(dateFormat.format(probleme.date)),
+            title: Text(this.probleme != null? dateFormat.format(probleme.date) : "Remonter un problème"),
           ),
           body: MultiProvider(
               providers: [
                 Provider.value(value: chantier),
-                ChangeNotifierProvider(create: (_) => TextEditingController(text: this.probleme.description)),
+                Provider.value(value: probleme),
+                ChangeNotifierProvider(create: (_) => TextEditingController(text: this.probleme != null? this.probleme.description:"")),
                 ],
-              child: ProblemMain(probleme : this.probleme))),
+              child: ProblemMain())),
 
       //),
     );
