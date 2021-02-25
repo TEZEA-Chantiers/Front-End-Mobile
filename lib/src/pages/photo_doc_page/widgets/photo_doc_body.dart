@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
 import 'package:tezea_chantiers/src/models/chantier/media.dart';
+import 'package:tezea_chantiers/src/services/crud/chantier/photo_service.dart';
 
 import '../../../providers/provider_image_list.dart';
 import '../../camera_page/camera_page.dart';
@@ -21,9 +22,8 @@ class PhotoDocBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var dropdownValue = 'Signature';
-    final providerImgList = context.watch<ProviderImageList>();
 
-    double width = MediaQuery.of(context).size.width;
+    var width = MediaQuery.of(context).size.width;
     final _chantier = context.read<Chantier>();
     var _media = context.read<Media>();
 

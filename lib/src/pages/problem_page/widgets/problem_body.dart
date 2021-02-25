@@ -22,7 +22,7 @@ class ProblemBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final problemeService = ProblemeService();
     final _chantier = context.read<Chantier>();
-    //final providerImgList = context.watch<ProviderImageList>();
+
     final size = MediaQuery.of(context).size;
 
     var probleme = context.read<Probleme>();
@@ -60,21 +60,23 @@ class ProblemBody extends StatelessWidget {
                       probleme != null ? creation = false : creation = true;
                       print(probleme);
                       if (creation) {
-                        probleme = new Probleme(
+                        probleme = Probleme(
                             id: 0,
                             date: DateTime.now(),
                             imagesURL: [],
                             description:
                                 context.read<TextEditingController>().text);
                         problemeService.addProbleme(probleme);
-                        Scaffold.of(context).showSnackBar(SnackBar(
+                        Scaffold.of(context).showSnackBar(const SnackBar(
                           content: Text("Le problème a été mis à jour"),
                         ));
                         Navigator.pop(context);
                       } else {
                         probleme.description =
                             context.read<TextEditingController>().text;
+                        print(probleme.imagesURL);
                         problemeService.updateProbleme(probleme.id, probleme);
+                        print("maj pb");
                       }
                     },
                     child: const Text('Enregistrer'),

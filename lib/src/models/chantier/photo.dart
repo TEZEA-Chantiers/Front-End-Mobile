@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 
 class Photo {
@@ -28,9 +29,9 @@ class Photo {
   final int id;
   static File file;
 
-  Map<String, dynamic> toJson() {
+  Future<Map<String, dynamic>> toJson() async{
     print(base64Encode(file.readAsBytesSync()));
-    return {'image': base64Encode(file.readAsBytesSync()), 'id': id};
+    return {'image': MultipartFile(file.openRead(), await file.length(), filename:file.path), 'id': id};
   }
 
   void setFile(File f) {

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dio/dio.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -25,18 +26,19 @@ class PhotoService {
 
   // Add
   Future<int> addPhoto(Photo photo) async {
-    final _hearders = <String, String>{'content-type': 'application/json'};
-    final _body = jsonEncode(photo.toJson());
-
-    final response = await http.post(
-        '${DatabaseService.URL}${'$SERVICE_NAME${'/add'}'}',
-        headers: _hearders,
-        body: _body);
-
-    if (response.statusCode == 201) {
-      return -1;
-    } else {
-      throw Exception('L\'ajout de la photo a échoué.');
+    var dio = Dio();
+    try {
+      final formData = FormData.fromMap(await photo.toJson());
+      final response = await dio.post('${DatabaseService.URL}${'$SERVICE_NAME${'/add'}'}'
+          , data: formData
+      );
+      if (response.statusCode == 201) {
+        return -1;
+      } else {
+        throw Exception('L\'ajout de la photo a échoué.');
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
