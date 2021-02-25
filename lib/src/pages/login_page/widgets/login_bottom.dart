@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
 import 'package:tezea_chantiers/src/wrappers/auth_wrapper/auth_wrapper.dart';
 
 import '../../../services/crud/utilisateur/utilisateur_service.dart';

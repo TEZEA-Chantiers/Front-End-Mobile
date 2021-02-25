@@ -11,10 +11,19 @@ class Utilisateur {
     );
   }
 
-  final int id;
-  final String username;
-  final String password;
-  final String role;
+  void updateUtilisateur(Utilisateur utilisateur)
+  {
+    id = utilisateur.id;
+    username = utilisateur.username;
+    password = utilisateur.password;
+    role = utilisateur.role;
+    jwt = utilisateur.jwt;
+  }
+
+  int id;
+  String username;
+  String password;
+  String role;
   String jwt;
 
   Map<String, dynamic> toJson() {

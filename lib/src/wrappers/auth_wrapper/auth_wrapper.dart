@@ -23,13 +23,11 @@ class AuthWrapper extends StatelessWidget {
             if (snapshot.data != null) {
               final utilisateur =
                   Utilisateur.fromJson(jsonDecode(snapshot.data));
-              return MultiProvider(
-                providers: [
-                  Provider<Utilisateur>.value(value: utilisateur),
-                  Provider<Interceptor>(create: (context) => Interceptor(utilisateur, context.read<FlutterSecureStorage>()))
-                ],
-                child: const HomePage(),
-              );
+
+              final _utilisateur = context.read<Utilisateur>()..updateUtilisateur(utilisateur);
+              context.read<Interceptor>().updateUtilisateur(_utilisateur);
+
+              return const HomePage();
             }
           }
           return const LoginPage();

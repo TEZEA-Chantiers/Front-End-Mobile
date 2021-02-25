@@ -6,7 +6,6 @@ import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
 import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/models/chantier/probleme.dart';
 import 'package:intl/intl.dart';
-import '../../../services/firebase_services/database_service.dart';
 import '../../problem_page/problem_page.dart';
 
 class ProblemListBody extends StatelessWidget {

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:no_context_navigation/no_context_navigation.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/models/utilisateur/utilisateur.dart';
+import 'package:tezea_chantiers/src/services/interceptor/interceptor.dart';
 
 import 'providers/provider_image_list.dart';
 import 'wrappers/auth_wrapper/auth_wrapper.dart';
@@ -13,6 +15,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _utilisateur = Utilisateur();
+
     return MultiProvider(
       providers: [
         Provider<FlutterSecureStorage>(
@@ -20,7 +24,9 @@ class App extends StatelessWidget {
         ),
         ChangeNotifierProvider<ProviderImageList>(
           create: (_) => ProviderImageList(),
-        )
+        ),
+        Provider<Utilisateur>.value(value: _utilisateur),
+        Provider<Interceptor>(create: (context) => Interceptor(_utilisateur, context.read<FlutterSecureStorage>()))
       ],
       child: MaterialApp(
         navigatorKey: NavigationService.navigationKey,

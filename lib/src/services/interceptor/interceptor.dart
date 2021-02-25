@@ -7,7 +7,12 @@ import '../../models/utilisateur/utilisateur.dart';
 class Interceptor implements InterceptorContract {
   Interceptor(this.utilisateur, this.flutterSecureStorage);
 
-  final Utilisateur utilisateur;
+  void updateUtilisateur(Utilisateur utilisateur)
+  {
+    this.utilisateur = utilisateur;
+  }
+
+  Utilisateur utilisateur;
   final FlutterSecureStorage flutterSecureStorage;
   final NavigationService navService = NavigationService();
 

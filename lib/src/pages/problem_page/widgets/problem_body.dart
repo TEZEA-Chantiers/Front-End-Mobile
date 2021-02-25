@@ -4,8 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:http_interceptor/http_client_with_interceptor.dart';
 import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/services/crud/chantier/probleme_service.dart';
+import 'package:tezea_chantiers/src/services/interceptor/interceptor.dart';
 import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
 
 import '../../../providers/provider_image_list.dart';
@@ -23,7 +25,11 @@ class ProblemBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final problemeService = new ProblemeService();
+    final problemeService = ProblemeService(
+      HttpClientWithInterceptor.build(interceptors: [
+        context.read<Interceptor>(),
+      ]),
+    );
     final chantier = context.read<Chantier>();
     final providerImgList = context.watch<ProviderImageList>();
     final size = MediaQuery.of(context).size;

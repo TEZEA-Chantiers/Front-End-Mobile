@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:http_interceptor/http_client_with_interceptor.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
 import 'package:tezea_chantiers/src/models/chantier/status_type.dart';
 import 'package:tezea_chantiers/src/pages/chantier_page/chantier_page.dart';
 import 'package:tezea_chantiers/src/services/crud/chantier/chantier_service.dart';
+import 'package:tezea_chantiers/src/services/interceptor/interceptor.dart';
 import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
 
 class ChantierListBody extends StatelessWidget {
@@ -16,15 +18,19 @@ class ChantierListBody extends StatelessWidget {
 
   String searchValue = '';
   bool showSearch = false;
-  final dateFormat = new DateFormat('dd-MM-yyyy à HH:mm');
-  final chantierService = new ChantierService();
+  final dateFormat = DateFormat('dd-MM-yyyy à HH:mm');
   var chantiers = <Chantier>[];
   var filteredChantiers = <Chantier>[];
 
   @override
   Widget build(BuildContext context) {
+    final _chantierService = ChantierService(
+      HttpClientWithInterceptor.build(interceptors: [
+        context.read<Interceptor>(),
+      ]),
+    );
     return FutureBuilder<Set<Chantier>>(
-        future: chantierService.getAllChantiers(),
+        future: _chantierService.getAllChantiers(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Center(
