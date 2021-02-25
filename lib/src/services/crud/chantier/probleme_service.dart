@@ -50,7 +50,7 @@ class ProblemeService {
   }
 
   // Add
-  Future<bool> addProbleme(Probleme probleme) async {
+  Future<int> addProbleme(Probleme probleme) async {
     final _hearders = <String, String>{'content-type': 'application/json'};
     final _body = jsonEncode(probleme.toJson());
 
@@ -60,7 +60,8 @@ class ProblemeService {
         body: _body);
 
     if (response.statusCode == 201) {
-      return true;
+      print("Probleme added as index " + response.headers["location"].split("/").last);
+      return int.parse(response.headers["location"].split("/").last);
     } else {
       throw Exception('Création du probleme échoué.');
     }

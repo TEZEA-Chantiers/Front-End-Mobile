@@ -24,13 +24,13 @@ class ChantierListBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _chantierService = ChantierService(
+    final chantierService = ChantierService(
       HttpClientWithInterceptor.build(interceptors: [
         context.read<Interceptor>(),
       ]),
     );
     return FutureBuilder<Set<Chantier>>(
-        future: _chantierService.getAllChantiers(),
+        future: chantierService.getAllChantiers(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Center(
@@ -67,8 +67,8 @@ class ChantierListBody extends StatelessWidget {
                           : (this.filteredChantiers[index].statusChantier ==
                                   StatusType.ENATTENTE
                               ? Icon(
-                                  Icons.construction,
-                                  color: Colors.orange,
+                                  Icons.schedule_rounded,
+                                  color: Colors.grey[600],
                                   size: 40,
                                   semanticLabel: "En attente",
                                 )

@@ -49,7 +49,7 @@ class MediaService {
   }
 
   // Add
-  Future<bool> addMedia(Media media) async {
+  Future<int> addMedia(Media media) async {
     final _hearders = <String, String>{'content-type': 'application/json'};
     final _body = jsonEncode(media.toJson());
 
@@ -59,7 +59,7 @@ class MediaService {
         body: _body);
 
     if (response.statusCode == 201) {
-      return true;
+      return int.parse(response.headers["location"].split("/").last);
     } else {
       throw Exception('Création du media échoué.');
     }

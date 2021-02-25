@@ -7,6 +7,8 @@ import 'package:flutter/widgets.dart';
 import 'package:http_interceptor/http_client_with_interceptor.dart';
 import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/models/chantier/probleme.dart';
+import 'package:tezea_chantiers/src/services/crud/chantier/chantier_service.dart';
+
 import 'package:tezea_chantiers/src/services/crud/chantier/probleme_service.dart';
 import 'package:tezea_chantiers/src/services/interceptor/interceptor.dart';
 import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
@@ -24,6 +26,11 @@ class ProblemBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final problemeService = ProblemeService(
+      HttpClientWithInterceptor.build(interceptors: [
+        context.read<Interceptor>(),
+      ]),
+    );
+    final chantierService = ChantierService(
       HttpClientWithInterceptor.build(interceptors: [
         context.read<Interceptor>(),
       ]),
@@ -63,27 +70,37 @@ class ProblemBody extends StatelessWidget {
                       probleme != null ? creation = false : creation = true;
                       print(probleme);
                       if (creation) {
+                        //Creation d'un nouveau probleme
                         probleme = new Probleme(
                             id: 0,
                             date: DateTime.now(),
-                            imagesURL: [],
+                            imagesIndex: [],
                             description:
-                                context.read<TextEditingController>().text);
-                        problemeService.addProbleme(probleme);
+                            context.read<TextEditingController>().text);
                         Scaffold.of(context).showSnackBar(SnackBar(
-                          content: Text("Le problème a été mis à jour"),
+                          content: Text("Le problème a été enregistré"),
                         ));
-                        Navigator.pop(context);
+                        problemeService.addProbleme(probleme)
+                            .then((problemeIndex) {
+                              probleme.id = problemeIndex;
+                              chantier.problemes.add(probleme);
+                              chantierService.updateChantier(chantier.id, chantier)
+                            .then((value) => Navigator.pop(context)); });
+
                       } else {
+                        //Mise à jour d'un problème
                         probleme.description =
                             context.read<TextEditingController>().text;
                         problemeService.updateProbleme(probleme.id, probleme);
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text("Les modifications ont été enregistrées"),
+                        ));
                       }
                     },
                     child: const Text('Enregistrer'),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                        (Set<MaterialState> states) {
+                            (Set<MaterialState> states) {
                           if (states.contains(MaterialState.pressed))
                             return ColorBank.APP_BAR_COLOR;
                           return null; // Use the component's default.
@@ -117,11 +134,11 @@ class ProblemBody extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => CheckPicturePage(
-                                          imagePath:
-                                              providerImgList.imageList[index],
-                                          controller: 'check',
-                                          type: 'pb',
-                                        )),
+                                      imagePath:
+                                      providerImgList.imageList[index],
+                                      controller: 'check',
+                                      type: 'pb',
+                                    )),
                               );
                             },
                             child: Image.file(

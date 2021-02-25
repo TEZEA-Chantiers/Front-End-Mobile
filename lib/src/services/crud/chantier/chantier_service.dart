@@ -42,7 +42,8 @@ class ChantierService {
       (jsonDecode(response.body) as List<dynamic>).forEach((element) {
         chantiers.add(Chantier.fromJson(element as Map<String, dynamic>));
       });
-
+      print("CHANTIERS");
+      print(chantiers);
       return chantiers;
     } else {
       throw Exception('Chargement du chantier échoué.');
@@ -70,7 +71,7 @@ class ChantierService {
   Future<Chantier> updateChantier(int id, Chantier chantier) async {
     final _hearders = <String, String>{'content-type': 'application/json'};
     final _body = jsonEncode(chantier.toJson());
-
+  print(_body);
     final response = await client.put(
         '${DatabaseService.URL}${'$SERVICE_NAME${'/update/$id'}'}',
         headers: _hearders,

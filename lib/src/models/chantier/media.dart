@@ -14,7 +14,7 @@ class Media {
     return Media(
       id: jsonData['id'] as int,
       nomMedia: jsonData['nomMedia']?.toString(),
-      imagesURL: jsonData['imagesURL']?.cast<String>()?.toSet(),
+      imagesURL: jsonData['imagesURL']?.cast<String>(),
       mediaType: EnumToString.fromString(
           MediaType.values, jsonData['mediaType']?.toString()),
     );
@@ -23,7 +23,7 @@ class Media {
   final int id;
   final String nomMedia;
   final MediaType mediaType;
-  Set<String> imagesURL;
+  List<String> imagesURL;
 
   Map<String, dynamic> toJson() {
     return {

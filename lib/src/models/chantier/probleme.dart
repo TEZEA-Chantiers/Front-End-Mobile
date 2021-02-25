@@ -2,7 +2,7 @@ class Probleme {
   Probleme({
     this.id,
     this.description,
-    this.imagesURL,
+    this.imagesIndex,
     this.date,
   });
 
@@ -10,23 +10,23 @@ class Probleme {
     return Probleme(
       id: jsonData['id'] as int,
       description: jsonData['description']?.toString(),
-      imagesURL: jsonData['imagesURL']?.cast<String>(),
+      imagesIndex: jsonData['imagesURL']?.cast<String>(),
       date: (jsonData['date'] != null)
           ? DateTime.parse(jsonData['date'].toString())
           : null,
     );
   }
 
-  final int id; // pas de type long dans Dart, int equivalent
+  int id; // pas de type long dans Dart, int equivalent
   String description;
-  final List<String> imagesURL;
+  final List<String> imagesIndex;
   final DateTime date;
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'description': description,
-      'imagesURL': imagesURL,
+      'imagesURL': imagesIndex,
       'date': date?.toIso8601String(),
     };
   }

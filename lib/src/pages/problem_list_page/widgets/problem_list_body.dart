@@ -21,7 +21,7 @@ class ProblemListBody extends StatelessWidget {
     final _chantier = context.read<Chantier>();
     return Container(
       padding: const EdgeInsets.all(20),
-      child: Column(
+      child: ListView(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -41,6 +41,7 @@ class ProblemListBody extends StatelessWidget {
           ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
               padding: const EdgeInsets.all(5),
               itemCount: _chantier.problemes.length,
               itemBuilder: (BuildContext context, int index) {

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http_interceptor/http_client_with_interceptor.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
 import 'package:tezea_chantiers/src/models/utilisateur/utilisateur.dart';
+import 'package:tezea_chantiers/src/services/crud/chantier/chantier_service.dart';
 import 'package:tezea_chantiers/src/services/interceptor/interceptor.dart';
 
 import '../../../models/client/client.dart';
@@ -17,7 +19,7 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _clientService = ClientService(
+    final _chantierService = ChantierService(
       HttpClientWithInterceptor.build(interceptors: [
         context.read<Interceptor>(),
       ]),
@@ -32,9 +34,9 @@ class HomeBody extends StatelessWidget {
               child: Column(
             children: [
               Text('hasData: ${snapshot.data}'),
-              FutureBuilder<Client>(
-                future: _clientService.getClient(
-                    1, context.read<Utilisateur>().jwt),
+              FutureBuilder<Chantier>(
+                future: _chantierService.getChantier(
+                    1),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     debugPrint(

@@ -37,6 +37,7 @@ class Chantier {
   });
 
   factory Chantier.fromJson(Map<String, dynamic> jsonData) {
+
     final _problemes = <Probleme>{};
 
     if (jsonData['problemes'] != null) {
@@ -163,27 +164,64 @@ class Chantier {
       'id': id,
       'site': site?.toJson(),
       'client': client?.toJson(),
-      'problemes': problemes,
-      'medias': medias,
-      'ouvriers': ouvriers,
+      'problemeIds': this.problemeListIdList(),
+      'mediaIds': this.mediaListIdList(),
+      'ouvriers': ouvriers.toList(),
       'adresse': adresse,
       'materiel': materiel,
       'dateDebutTheorique': dateDebutTheorique?.toIso8601String(),
       'dateFinTheorique': dateFinTheorique?.toIso8601String(),
       'estimationTemps': estimationTemps,
       'telephone': telephone,
-      'statusChantier': statusChantier,
+      'statusChantier': statusChantier.toString().split(".").last,
       'nomChantier': nomChantier,
       'informationsInterne': informationsInterne,
       'description': description,
-      'joursRegularite': joursRegularite,
+      'joursRegularite': this.joursSemaineToStringList(),
       'dateDebutRegularite': dateDebutRegularite?.toIso8601String(),
       'dateFinRegularite': dateFinRegularite?.toIso8601String(),
       'regularite': regularite,
       'dateDebutEffectif': dateDebutEffectif?.toIso8601String(),
       'dateFinEffectif': dateFinEffectif?.toIso8601String(),
       'conducteurPresent': conducteurPresent,
-      'rapportsRegulier': rapportsRegulier,
+      'rapportsRegulierIds': this.rapportChantierRegulierListIdList(),
     };
   }
+
+  List<int> mediaListIdList(){
+    List<int> mediaId = <int>[];
+    for(Media media in this.medias){
+      mediaId.add(media.id);
+    }
+    return mediaId;
+  }
+
+  List<int> problemeListIdList(){
+    List<int> problemeId = <int>[];
+    print(this.problemes);
+    for(Probleme probleme in this.problemes){
+      problemeId.add(probleme.id);
+      print("Probleme  " + probleme.toJson().toString());
+    }
+    return problemeId;
+  }
+
+  List<int> rapportChantierRegulierListIdList(){
+    List<int> rapportChantierRegulierId = <int>[];
+    for(RapportChantierRegulier rapportChantierRegulier in this.rapportsRegulier){
+      rapportChantierRegulierId.add(rapportChantierRegulier.id);
+    }
+    return rapportChantierRegulierId;
+  }
+
+
+  List<String> joursSemaineToStringList(){
+    List<String> jours = <String>[];
+    for(JourSemaineType jour in this.joursRegularite){
+      print("Joursemaine : " + jour.toString());
+      jours.add(jour.toString().split(".").last);
+    }
+    return jours;
+  }
+
 }

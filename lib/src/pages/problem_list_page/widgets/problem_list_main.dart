@@ -10,10 +10,6 @@ class ProblemListMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        ProblemListBody(),
-      ],
-    );
+        return ProblemListBody();
   }
 }

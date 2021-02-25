@@ -15,17 +15,24 @@ class AuthentificationService {
   Future<Jwt> authenticate(String username, String password) async {
     final _headers = <String, String>{'Content-Type': 'application/json'};
     final _body = jsonEncode({'username': username, 'password': password});
+    try{
+      final response = await http.post(
+          '${DatabaseService.URL}${'$SERVICE_NAME${'/authentifier'}'}',
+          body: _body,
+          headers: _headers);
 
-    final response = await http.post(
-        '${DatabaseService.URL}${'$SERVICE_NAME${'/authentifier'}'}',
-        body: _body,
-        headers: _headers);
-
-    if (response.statusCode == 200) {
-      return Jwt.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-    } else {
-      //throw Exception('L\'authentification a échoué. Response : ' + response.statusCode.toString());
+      if (response.statusCode == 200) {
+        return Jwt.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+      } else {
+        //throw Exception('L\'authentification a échoué. Response : ' + response.statusCode.toString());
+        return null;
+      }
+    }
+    catch(SocketException){
       return null;
     }
+
+
+
   }
 }

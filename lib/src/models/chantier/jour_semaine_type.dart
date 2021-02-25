@@ -5,5 +5,5 @@ enum JourSemaineType {
   JEUDI,
   VENDREDI,
   SAMEDI,
-  DICMANCHE,
+  DIMANCHE,
 }
