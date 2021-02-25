@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/models/chantier/status_type.dart';
 import '../../../models/chantier/chantier.dart';
 
 import '../../../services/firebase_services/database_service.dart';
@@ -53,7 +54,7 @@ class ChantierBody extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.only(top: 30, bottom: 20),
+            padding: const EdgeInsets.only(top: 30, bottom: 15),
             alignment: Alignment.centerLeft,
             child: const Text(
               'Horaire : ',
@@ -61,27 +62,23 @@ class ChantierBody extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-          Container(
-            padding: const EdgeInsets.only(bottom: 10),
+          _chantier.statusChantier == StatusType.DEMARRE? Container(
             alignment: Alignment.centerLeft,
             child: Text(
-              'Debut : ${dateFormat.format(_chantier.dateDebutTheorique)}',
+              'Débuté le ${dateFormat.format(_chantier.dateDebutEffectif)}.',
               textScaleFactor: 1.2,
             ),
+          ) : Text(
+            'En attente de démarrage.',
+            textAlign : TextAlign.left,
+            textScaleFactor: 1.2,
           ),
-          Container(
-            padding: const EdgeInsets.only(bottom: 10),
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Fin : ${dateFormat.format(_chantier.dateFinTheorique)}',
-              textScaleFactor: 1.2,
-            ),
-          ),
+          Padding(padding: EdgeInsets.only(bottom: 10)),
           Container(
             padding: const EdgeInsets.only(bottom: 20),
             alignment: Alignment.centerLeft,
             child: Text(
-              'Débuté le ${dateFormat.format(_chantier.dateDebutEffectif)}',
+              'Prévu du ${dateFormat.format(_chantier.dateDebutTheorique)} au ${dateFormat.format(_chantier.dateFinTheorique)}',
               textScaleFactor: 1.2,
             ),
           ),
@@ -105,7 +102,7 @@ class ChantierBody extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 10),
               alignment: Alignment.centerLeft,
               child: const Text(
-                'Employés Affectés : ',
+                'Employés Affectés à l\'intervention : ',
                 textScaleFactor: 1.4,
                 style: TextStyle(fontWeight: FontWeight.bold),
               )),
