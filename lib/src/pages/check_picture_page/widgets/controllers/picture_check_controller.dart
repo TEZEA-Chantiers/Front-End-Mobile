@@ -2,11 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../models/chantier/chantier.dart';
 import '../../../../providers/provider_image_list.dart';
 import '../../../photo_doc_page/photo_doc_page.dart';
 import '../../../problem_page/problem_page.dart';
-import '../../../../models/chantier/chantier.dart';
-
 
 class PictureCheckController extends StatelessWidget {
   const PictureCheckController({Key key, this.imagePath, this.type})
@@ -53,8 +52,9 @@ class PictureCheckController extends StatelessWidget {
                                     if (type == "pb") {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
-                                        builder: (context) =>
-                                            ProblemPage(chantier: _chantier,),
+                                        builder: (context) => ProblemPage(
+                                          chantier: _chantier,
+                                        ),
                                       ));
                                       Provider.of<ProviderImageList>(context,
                                               listen: false)
@@ -62,8 +62,9 @@ class PictureCheckController extends StatelessWidget {
                                     } else {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
-                                        builder: (context) =>
-                                            PhotoDocPage(chantier: _chantier,),
+                                        builder: (context) => PhotoDocPage(
+                                          chantier: _chantier,
+                                        ),
                                       ));
                                       Provider.of<ProviderImageList>(context,
                                               listen: false)

@@ -5,10 +5,10 @@ import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
 import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
 
 import 'widgets/photo_doc_main.dart';
-import 'package:provider/provider.dart';
 
 class PhotoDocPage extends StatelessWidget {
   Chantier chantier;
+
   PhotoDocPage({
     @required this.chantier,
     Key key,
@@ -37,9 +37,8 @@ class PhotoDocPage extends StatelessWidget {
           ),
         ),
         body: ChangeNotifierProvider.value(
-            value: textEditingControllerSearchBar, child: Provider.value(
-            value: chantier,
-            child: PhotoDocMain())),
+            value: textEditingControllerSearchBar,
+            child: Provider.value(value: chantier, child: PhotoDocMain())),
       ),
     );
   }

@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/models/chantier/status_type.dart';
+
 import '../../../models/chantier/chantier.dart';
 
 class ChantierBody extends StatelessWidget {
-
   const ChantierBody({
     Key key,
   }) : super(key: key);
@@ -22,7 +22,6 @@ class ChantierBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final _chantier = context.read<Chantier>();
     final ouvr = _chantier.ouvriers;
     final dateFormat = new DateFormat('dd/MM à HH:mm');
@@ -45,8 +44,7 @@ class ChantierBody extends StatelessWidget {
               onPressed: () {},
               child: const Text.rich(TextSpan(
                 text: 'Demarrer ce Chantier',
-                style:
-                TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               )),
             ),
           ),
@@ -59,17 +57,19 @@ class ChantierBody extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-          _chantier.statusChantier == StatusType.DEMARRE? Container(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Débuté le ${dateFormat.format(_chantier.dateDebutEffectif)}.',
-              textScaleFactor: 1.2,
-            ),
-          ) : Text(
-            'En attente de démarrage.',
-            textAlign : TextAlign.left,
-            textScaleFactor: 1.2,
-          ),
+          _chantier.statusChantier == StatusType.DEMARRE
+              ? Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Débuté le ${dateFormat.format(_chantier.dateDebutEffectif)}.',
+                    textScaleFactor: 1.2,
+                  ),
+                )
+              : Text(
+                  'En attente de démarrage.',
+                  textAlign: TextAlign.left,
+                  textScaleFactor: 1.2,
+                ),
           Padding(padding: EdgeInsets.only(bottom: 10)),
           Container(
             padding: const EdgeInsets.only(bottom: 20),
@@ -135,8 +135,6 @@ class ChantierBody extends StatelessWidget {
               textScaleFactor: 1.2,
             ),
           ),
-        ]
-        )
-    );
+        ]));
   }
 }

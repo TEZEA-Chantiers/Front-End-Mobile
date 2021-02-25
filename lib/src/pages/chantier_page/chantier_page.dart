@@ -1,25 +1,21 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
-import '../../models/chantier/status_type.dart';
-import '../../models/chantier/chantier.dart';
-import 'package:enum_to_string/enum_to_string.dart';
 
+import '../../models/chantier/chantier.dart';
+import '../../models/chantier/status_type.dart';
 import 'widgets/chantier_main.dart';
 
 class ChantierPage extends StatelessWidget {
-
   Chantier chantier;
 
-  ChantierPage({
-    Key key,
-    this.chantier
-  }) : super(key: key);
+  ChantierPage({Key key, this.chantier}) : super(key: key);
 
   Color statusColor = Colors.black;
 
-  void setStatusColor(){
+  void setStatusColor() {
     switch (chantier.statusChantier) {
       case StatusType.ENATTENTE:
         {
@@ -49,7 +45,6 @@ class ChantierPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final textEditingControllerSearchBar = TextEditingController();
     setStatusColor();
     return GestureDetector(
@@ -70,19 +65,18 @@ class ChantierPage extends StatelessWidget {
               Expanded(
                 child: RichText(
                   overflow: TextOverflow.ellipsis,
-                  text: TextSpan(
-                      text: chantier.nomChantier),
+                  text: TextSpan(text: chantier.nomChantier),
                 ),
               ),
-
-              Text(EnumToString.convertToString(chantier.statusChantier),style: TextStyle(fontSize: 10),),
+              Text(
+                EnumToString.convertToString(chantier.statusChantier),
+                style: TextStyle(fontSize: 10),
+              ),
               Icon(Icons.circle, color: statusColor),
             ],
           ),
         ),
-        body: Provider.value(
-          value: chantier,
-          child: ChantierMain()),
+        body: Provider.value(value: chantier, child: ChantierMain()),
       ),
     );
   }

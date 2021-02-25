@@ -4,11 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
 import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
 
-import '../chantier_page/chantier_page.dart';
 import 'widgets/problem_list_main.dart';
 
 class ProblemListPage extends StatelessWidget {
   Chantier chantier;
+
   ProblemListPage({
     Key key,
     @required this.chantier,
@@ -34,9 +34,7 @@ class ProblemListPage extends StatelessWidget {
         ),
         body: ChangeNotifierProvider.value(
             value: textEditingControllerSearchBar,
-            child: Provider.value(
-                value: chantier,
-                child: ProblemListMain())),
+            child: Provider.value(value: chantier, child: ProblemListMain())),
       ),
     );
   }

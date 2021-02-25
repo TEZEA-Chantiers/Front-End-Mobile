@@ -53,53 +53,48 @@ class ChantierListBody extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    ChantierPage(chantier: this.filteredChantiers[index])));
+                                builder: (context) => ChantierPage(
+                                    chantier: this.filteredChantiers[index])));
                       },
-                      leading: this.filteredChantiers[index].statusChantier==StatusType.DEMARRE?
-                      Icon(
-                        Icons.construction,
-                        color: ColorBank.TEZEA_VERT,
-                        size: 40,
-                        semanticLabel: "Démarré",
-                      )
-                          :
-                      (this.filteredChantiers[index].statusChantier==StatusType.ENATTENTE?
-                      Icon(
-                        Icons.construction,
-                        color: Colors.orange,
-                        size: 40,
-                        semanticLabel: "En attente",
-                      )
-                          :
-                      Icon(
-                        Icons.construction,
-                        color: Colors.grey[600],
-                        size: 40)
-                      ),
-                      title: Text(this.filteredChantiers[index].client.prenom + " " + this.filteredChantiers[index].client.nom,
-                          style:
-                          TextStyle(
+                      leading: this.filteredChantiers[index].statusChantier ==
+                              StatusType.DEMARRE
+                          ? Icon(
+                              Icons.construction,
+                              color: ColorBank.TEZEA_VERT,
+                              size: 40,
+                              semanticLabel: "Démarré",
+                            )
+                          : (this.filteredChantiers[index].statusChantier ==
+                                  StatusType.ENATTENTE
+                              ? Icon(
+                                  Icons.construction,
+                                  color: Colors.orange,
+                                  size: 40,
+                                  semanticLabel: "En attente",
+                                )
+                              : Icon(Icons.construction,
+                                  color: Colors.grey[600], size: 40)),
+                      title: Text(
+                          this.filteredChantiers[index].client.prenom +
+                              " " +
+                              this.filteredChantiers[index].client.nom,
+                          style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 15.0)),
-                      contentPadding:
-                      const EdgeInsets.only(
+                      contentPadding: const EdgeInsets.only(
                           left: 5, top: 5, bottom: 5, right: 5),
                       subtitle: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           mainAxisSize: MainAxisSize.max,
                           children: <Widget>[
                             Container(
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width * 0.7,
+                              width: MediaQuery.of(context).size.width * 0.7,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   if (true)
                                     Text.rich(TextSpan(
                                       text:
-                                      this.filteredChantiers[index].adresse,
+                                          this.filteredChantiers[index].adresse,
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold),
                                     )),
@@ -107,10 +102,12 @@ class ChantierListBody extends StatelessWidget {
                                       padding: EdgeInsets.only(top: 5)),
                                   if (true)
                                     Text.rich(TextSpan(
-                                      text:
-                                      this.filteredChantiers[index].statusChantier==StatusType.DEMARRE?
-                                      'Démarré le ${dateFormat.format(this.filteredChantiers[index].dateDebutEffectif)}' :
-                                      'Démarrage prévu le ${dateFormat.format(this.filteredChantiers[index].dateDebutTheorique)}',
+                                      text: this
+                                                  .filteredChantiers[index]
+                                                  .statusChantier ==
+                                              StatusType.DEMARRE
+                                          ? 'Démarré le ${dateFormat.format(this.filteredChantiers[index].dateDebutEffectif)}'
+                                          : 'Démarrage prévu le ${dateFormat.format(this.filteredChantiers[index].dateDebutTheorique)}',
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold),
                                     )),
@@ -118,8 +115,8 @@ class ChantierListBody extends StatelessWidget {
                                       padding: EdgeInsets.only(top: 10)),
                                   //Row avec les petites icônes sympa
                                   Row(
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Icon(
                                           Icons.supervisor_account,
@@ -127,7 +124,11 @@ class ChantierListBody extends StatelessWidget {
                                           size: 30,
                                         ),
                                         Text.rich(TextSpan(
-                                          text: this.filteredChantiers[index].ouvriers.length.toString(),
+                                          text: this
+                                              .filteredChantiers[index]
+                                              .ouvriers
+                                              .length
+                                              .toString(),
                                           style: const TextStyle(
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold),
@@ -136,7 +137,9 @@ class ChantierListBody extends StatelessWidget {
                                             padding: EdgeInsets.only(left: 15)),
                                         Icon(
                                           Icons.car_rental,
-                                          color: this.filteredChantiers[index].conducteurPresent
+                                          color: this
+                                                  .filteredChantiers[index]
+                                                  .conducteurPresent
                                               ? ColorBank.TEZEA_VERT
                                               : Colors.red,
                                           size: 30,
@@ -155,14 +158,12 @@ class ChantierListBody extends StatelessWidget {
                   );
                 }),
           );
-        }
-    );
+        });
   }
-
 
   void updateChantiers(BuildContext context) {
     String request =
-    context.watch<TextEditingController>().text.trim().toLowerCase();
+        context.watch<TextEditingController>().text.trim().toLowerCase();
     if (request == "") {
       this.filteredChantiers = this.chantiers;
     }

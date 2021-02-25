@@ -11,8 +11,7 @@ class Utilisateur {
     );
   }
 
-  void updateUtilisateur(Utilisateur utilisateur)
-  {
+  void updateUtilisateur(Utilisateur utilisateur) {
     id = utilisateur.id;
     username = utilisateur.username;
     password = utilisateur.password;

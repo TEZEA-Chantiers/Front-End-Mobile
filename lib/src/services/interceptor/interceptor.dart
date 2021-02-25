@@ -7,8 +7,7 @@ import '../../models/utilisateur/utilisateur.dart';
 class Interceptor implements InterceptorContract {
   Interceptor(this.utilisateur, this.flutterSecureStorage);
 
-  void updateUtilisateur(Utilisateur utilisateur)
-  {
+  void updateUtilisateur(Utilisateur utilisateur) {
     this.utilisateur = utilisateur;
   }
 
@@ -29,11 +28,10 @@ class Interceptor implements InterceptorContract {
 
   @override
   Future<ResponseData> interceptResponse({ResponseData data}) async {
-    if (data.statusCode == 403 || data.statusCode == 401)
-      {
-        await flutterSecureStorage.delete(key: 'utilisateur');
-        await navService.pushNamed('/auth_wrapper', args: 'Depuis interceptor');
-      }
+    if (data.statusCode == 403 || data.statusCode == 401) {
+      await flutterSecureStorage.delete(key: 'utilisateur');
+      await navService.pushNamed('/auth_wrapper', args: 'Depuis interceptor');
+    }
     return data;
   }
 }

@@ -24,7 +24,8 @@ class AuthWrapper extends StatelessWidget {
               final utilisateur =
                   Utilisateur.fromJson(jsonDecode(snapshot.data));
 
-              final _utilisateur = context.read<Utilisateur>()..updateUtilisateur(utilisateur);
+              final _utilisateur = context.read<Utilisateur>()
+                ..updateUtilisateur(utilisateur);
               context.read<Interceptor>().updateUtilisateur(_utilisateur);
 
               return const HomePage();

@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http_interceptor/http_client_with_interceptor.dart';
 import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/models/utilisateur/utilisateur.dart';
-import 'package:tezea_chantiers/src/services/crud/chantier/chantier_service.dart';
-import 'package:tezea_chantiers/src/services/interceptor/interceptor.dart';
 import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
 
 import 'widgets/chantier_list_main.dart';

@@ -26,7 +26,9 @@ class App extends StatelessWidget {
           create: (_) => ProviderImageList(),
         ),
         Provider<Utilisateur>.value(value: _utilisateur),
-        Provider<Interceptor>(create: (context) => Interceptor(_utilisateur, context.read<FlutterSecureStorage>()))
+        Provider<Interceptor>(
+            create: (context) =>
+                Interceptor(_utilisateur, context.read<FlutterSecureStorage>()))
       ],
       child: MaterialApp(
         navigatorKey: NavigationService.navigationKey,

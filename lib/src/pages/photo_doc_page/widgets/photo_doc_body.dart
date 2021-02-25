@@ -61,7 +61,7 @@ class PhotoDocBody extends StatelessWidget {
                     value: value,
                     child: Text(
                       value,
-                      style: TextStyle(fontSize :width * 0.05),
+                      style: TextStyle(fontSize: width * 0.05),
                     ),
                   );
                 }).toList(),
@@ -118,7 +118,8 @@ class PhotoDocBody extends StatelessWidget {
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => PhotoDocPage(chantier: _chantier)),
+                        builder: (context) =>
+                            PhotoDocPage(chantier: _chantier)),
                   );
                 },
                 child:
