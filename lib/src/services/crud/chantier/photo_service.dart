@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import '../../../models/chantier/photo.dart';
 
+import '../../../models/chantier/photo.dart';
 import '../../database/database_service.dart';
 
 class PhotoService {
@@ -51,5 +51,4 @@ class PhotoService {
       throw Exception('Suppression de la photo échouée.');
     }
   }
-
 }

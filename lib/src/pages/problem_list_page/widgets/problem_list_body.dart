@@ -26,8 +26,7 @@ class ProblemListBody extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(_chantier.nomChantier,
-                  style: const TextStyle(fontSize: 20)),
+              Text(_chantier.nomChantier, style: const TextStyle(fontSize: 20)),
             ],
           ),
           Container(
@@ -35,28 +34,26 @@ class ProblemListBody extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(_chantier.adresse,
-                    style: const TextStyle(fontSize: 16)),
+                Text(_chantier.adresse, style: const TextStyle(fontSize: 16)),
               ],
             ),
           ),
           ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.all(5),
-                  itemCount: _chantier.problemes.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return buildListCard(context, _chantier, _chantier.problemes.toList()[index]);
-
-                  }
-              )
-
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              padding: const EdgeInsets.all(5),
+              itemCount: _chantier.problemes.length,
+              itemBuilder: (BuildContext context, int index) {
+                return buildListCard(
+                    context, _chantier, _chantier.problemes.toList()[index]);
+              })
         ],
       ),
     );
   }
 
-  Card buildListCard(BuildContext context, Chantier chantier, Probleme probleme) {
+  Card buildListCard(
+      BuildContext context, Chantier chantier, Probleme probleme) {
     final _dateFormat = new DateFormat('dd/MM/yyyy à HH:mm');
 
     return Card(
@@ -77,16 +74,18 @@ class ProblemListBody extends StatelessWidget {
           ),
           title: Row(
             children: [
-              Text(_dateFormat.format(probleme.date), style: TextStyle(fontSize: 18)),
+              Text(_dateFormat.format(probleme.date),
+                  style: TextStyle(fontSize: 18)),
             ],
           ),
-          subtitle:  Text(probleme.description),
+          subtitle: Text(probleme.description),
           onTap: () async {
             await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    ProblemPage(chantier: chantier, probleme: probleme), // argument manquant: id pb
+                builder: (context) => ProblemPage(
+                    chantier: chantier,
+                    probleme: probleme), // argument manquant: id pb
               ),
             );
           }),

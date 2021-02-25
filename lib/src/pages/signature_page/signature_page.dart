@@ -8,10 +8,8 @@ import 'widgets/signature_main.dart';
 
 class SignaturePage extends StatelessWidget {
   Chantier chantier;
-  SignaturePage({
-    Key key,
-    @required this.chantier
-  }) : super(key: key);
+
+  SignaturePage({Key key, @required this.chantier}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +35,7 @@ class SignaturePage extends StatelessWidget {
         ),
         body: ChangeNotifierProvider.value(
             value: textEditingControllerSearchBar,
-            child: Provider.value(
-                value: chantier,
-                child: SignatureMain())),
+            child: Provider.value(value: chantier, child: SignatureMain())),
       ),
     );
   }

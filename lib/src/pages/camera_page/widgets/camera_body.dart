@@ -1,16 +1,16 @@
 import 'dart:developer';
 import 'dart:ffi';
 
-import 'package:provider/provider.dart';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:tezea_chantiers/src/models/chantier/probleme.dart';
-import '../../../models/chantier/chantier.dart';
+import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/models/chantier/media.dart';
 
+import '../../../models/chantier/chantier.dart';
+import '../../../models/chantier/probleme.dart';
 import '../../check_picture_page/check_picture_page.dart';
 
 class CameraBody extends StatefulWidget {
@@ -32,6 +32,7 @@ class _CameraBody extends State<CameraBody> {
   List<CameraDescription> cameras;
   Chantier _chantier;
   Probleme _probleme;
+  Media _media;
 
   @override
   void initState() {
@@ -67,6 +68,7 @@ class _CameraBody extends State<CameraBody> {
 
     _chantier = context.read<Chantier>();
     _probleme = context.read<Probleme>();
+    _media = context.read<Media>();
 
     return FutureBuilder<void>(
       future: _initializeControllerFuture,
@@ -132,8 +134,12 @@ class _CameraBody extends State<CameraBody> {
           this.context,
           MaterialPageRoute(
             builder: (context) => CheckPicturePage(
-                imagePath: path, controller: 'taken', type: widget.type
-              , chantier: _chantier, probleme: _probleme),
+                imagePath: path,
+                controller: 'taken',
+                type: widget.type,
+                chantier: _chantier,
+                probleme: _probleme,
+                media: _media,),
           ));
     } catch (e) {
       log(e.toString());

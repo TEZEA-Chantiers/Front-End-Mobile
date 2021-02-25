@@ -1,15 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
 import '../../../models/chantier/chantier.dart';
 
-import '../../../services/firebase_services/database_service.dart';
-
 class ChantierBody extends StatelessWidget {
-
   const ChantierBody({
     Key key,
   }) : super(key: key);
@@ -24,7 +21,6 @@ class ChantierBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final _chantier = context.read<Chantier>();
     final ouvr = _chantier.ouvriers;
     final dateFormat = new DateFormat('dd/MM à HH:mm');
@@ -47,8 +43,7 @@ class ChantierBody extends StatelessWidget {
               onPressed: () {},
               child: const Text.rich(TextSpan(
                 text: 'Demarrer ce Chantier',
-                style:
-                TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               )),
             ),
           ),
@@ -141,8 +136,6 @@ class ChantierBody extends StatelessWidget {
               textScaleFactor: 1.2,
             ),
           ),
-        ]
-        )
-    );
+        ]));
   }
 }

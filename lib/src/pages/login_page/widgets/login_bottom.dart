@@ -56,13 +56,15 @@ class LoginBottom extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  ChantierListPage()));
+                              builder: (context) => ChantierListPage()));
                     }
                   });
                 }
               },
-              icon: const Icon(Icons.arrow_forward_rounded, color: ColorBank.CARD_COLOR,),
+              icon: const Icon(
+                Icons.arrow_forward_rounded,
+                color: ColorBank.CARD_COLOR,
+              ),
               label: Text.rich(TextSpan(
                 text: 'Connexion',
                 style: TextStyle(color: ColorBank.CARD_COLOR),

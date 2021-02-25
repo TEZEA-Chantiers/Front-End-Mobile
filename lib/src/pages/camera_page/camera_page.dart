@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
+import 'package:tezea_chantiers/src/models/chantier/media.dart';
 import 'package:tezea_chantiers/src/models/chantier/probleme.dart';
 
 import 'widgets/camera_main.dart';
@@ -12,11 +13,13 @@ class CameraPage extends StatelessWidget {
     this.type,
     this.chantier,
     this.probleme,
+    this.media,
   }) : super(key: key);
 
   String type;
   Chantier chantier;
   Probleme probleme;
+  Media media;
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +33,16 @@ class CameraPage extends StatelessWidget {
         }
       },
       child: Scaffold(
-          backgroundColor: const Color(0xff2E4053),
-          body: MultiProvider(
-            providers: [Provider.value(value: chantier),
-              Provider.value(value: probleme)],
-            child: CameraMain(type: type,)),
+        backgroundColor: const Color(0xff2E4053),
+        body: MultiProvider(
+            providers: [
+              Provider.value(value: chantier),
+              Provider.value(value: probleme),
+              Provider.value(value: media),
+            ],
+            child: CameraMain(
+              type: type,
+            )),
       ),
     );
   }

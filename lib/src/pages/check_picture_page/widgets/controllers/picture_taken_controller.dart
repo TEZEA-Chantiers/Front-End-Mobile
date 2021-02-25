@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
 import 'package:tezea_chantiers/src/models/chantier/media.dart';
-import 'package:tezea_chantiers/src/models/chantier/photo.dart';
+import '../../../../models/chantier/photo.dart';
 import 'package:tezea_chantiers/src/models/chantier/probleme.dart';
-import 'package:tezea_chantiers/src/services/crud/chantier/media_service.dart';
+import 'package:tezea_chantiers/src/pages/photo_doc_page/photo_doc_page.dart';
+import 'package:tezea_chantiers/src/pages/problem_page/problem_page.dart';
 import 'package:tezea_chantiers/src/services/crud/chantier/photo_service.dart';
 
 import '../../../../providers/provider_image_list.dart';
@@ -24,7 +25,7 @@ class PictureTakenController extends StatelessWidget {
 
     final _chantier = context.read<Chantier>();
     final _probleme = context.read<Probleme>();
-    final _mediasTotal = MediaService();
+    final _media = context.read<Media>();
     final _photoTotal = PhotoService();
 
     return Align(
@@ -43,17 +44,35 @@ class PictureTakenController extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
+                      var p = Photo(image: Image.asset(imagePath), id: 0);
+                      p.setFile(File(imagePath));
+                      _photoTotal.addPhoto(
+                          Photo(image: Image.asset(imagePath), id: 0));
                       if (type == 'pb') {
                         //providerImgList.addImage(imagePath);
-                        var p = Photo(image: Image.asset(imagePath), id: 0);
-                        p.setFile(File(imagePath));
-                        _photoTotal.addPhoto(Photo(image: Image.asset(imagePath), id: 0));
-                        _chantier.problemes.lookup(_probleme).imagesURL.add(imagePath);
+                        _chantier.problemes
+                            .lookup(_probleme)
+                            .imagesURL
+                            .add(imagePath);
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(
+                          builder: (context) => ProblemPage(
+                            chantier: _chantier, probleme: _probleme,
+                          ),
+                        ));
                       } else {
-                        providerImgList.addDoc(imagePath);
+                        //providerImgList.addDoc(imagePath);
+                        _chantier.medias
+                            .lookup(_media)
+                            .imagesURL
+                            .add(imagePath);
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(
+                          builder: (context) => PhotoDocPage(
+                            chantier: _chantier, media: _media,
+                          ),
+                        ));
                       }
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pop();
                     },
                     child: const Text('OK'),
                   ),

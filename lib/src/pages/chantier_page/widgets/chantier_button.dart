@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/models/chantier/media.dart';
 
-import '../../../services/firebase_services/database_service.dart';
+import '../../../models/chantier/chantier.dart';
 import '../../photo_doc_page/photo_doc_page.dart';
 import '../../problem_list_page/problem_list_page.dart';
 import '../../problem_page/problem_page.dart';
 import '../../signature_page/signature_page.dart';
-import 'package:provider/provider.dart';
-import '../../../models/chantier/chantier.dart';
 
 class ChantierButton extends StatelessWidget {
   const ChantierButton({
@@ -17,7 +17,6 @@ class ChantierButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final _chantier = context.read<Chantier>();
 
     return Column(
@@ -26,9 +25,12 @@ class ChantierButton extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.7,
           child: RaisedButton(
             onPressed: () {
-              Navigator.push(context,
+              Navigator.push(
+                  context,
                   MaterialPageRoute(
-                      builder: (context) => ProblemPage(chantier: _chantier,)));
+                      builder: (context) => ProblemPage(
+                            chantier: _chantier,
+                          )));
             },
             child: const Text.rich(TextSpan(
               text: 'Remonter un problème',
@@ -43,7 +45,9 @@ class ChantierButton extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ProblemListPage(chantier: _chantier,)));
+                      builder: (context) => ProblemListPage(
+                            chantier: _chantier,
+                          )));
             },
             child: const Text.rich(TextSpan(
               text: 'Liste des Problèmes',
@@ -58,7 +62,9 @@ class ChantierButton extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => PhotoDocPage(chantier: _chantier,)));
+                      builder: (context) => PhotoDocPage(
+                            chantier: _chantier, media: Media(imagesURL: <String>{}),
+                          )));
             },
             child: const Text.rich(TextSpan(
               text: 'Photographier un Document',
@@ -73,7 +79,9 @@ class ChantierButton extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => SignaturePage(chantier: _chantier,)));
+                      builder: (context) => SignaturePage(
+                            chantier: _chantier,
+                          )));
             },
             child: const Text.rich(TextSpan(
               text: 'Récupérer une Signature',

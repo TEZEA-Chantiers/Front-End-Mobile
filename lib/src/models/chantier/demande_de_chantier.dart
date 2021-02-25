@@ -37,7 +37,8 @@ class DemandeDeChantier {
           DateTime.parse(jsonData['dateDebutRegularite'].toString()),
       dateFinRegularite:
           DateTime.parse(jsonData['dateFinRegularite'].toString()),
-      joursRegularite: jsonData['joursRegularite']?.cast<JourSemaineType>()?.toSet(),
+      joursRegularite:
+          jsonData['joursRegularite']?.cast<JourSemaineType>()?.toSet(),
     );
   }
 

@@ -2,15 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
+import 'package:tezea_chantiers/src/models/chantier/media.dart';
 import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
 
 import 'widgets/photo_doc_main.dart';
-import 'package:provider/provider.dart';
 
 class PhotoDocPage extends StatelessWidget {
   Chantier chantier;
+  Media media;
+
   PhotoDocPage({
     @required this.chantier,
+    @required this.media,
     Key key,
   }) : super(key: key);
 
@@ -37,9 +40,13 @@ class PhotoDocPage extends StatelessWidget {
           ),
         ),
         body: ChangeNotifierProvider.value(
-            value: textEditingControllerSearchBar, child: Provider.value(
-            value: chantier,
-            child: PhotoDocMain())),
+            value: textEditingControllerSearchBar,
+            child: MultiProvider(
+                providers: [
+                  Provider.value(value: chantier),
+                  Provider.value(value: media)
+                ],
+                child: PhotoDocMain())),
       ),
     );
   }

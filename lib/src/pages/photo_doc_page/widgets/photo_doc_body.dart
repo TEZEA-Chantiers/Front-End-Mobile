@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:tezea_chantiers/src/models/chantier/chantier.dart';
+import 'package:tezea_chantiers/src/models/chantier/media.dart';
 
 import '../../../providers/provider_image_list.dart';
 import '../../camera_page/camera_page.dart';
@@ -24,6 +25,7 @@ class PhotoDocBody extends StatelessWidget {
 
     double width = MediaQuery.of(context).size.width;
     final _chantier = context.read<Chantier>();
+    var _media = context.read<Media>();
 
     return Column(
       children: <Widget>[
@@ -61,7 +63,7 @@ class PhotoDocBody extends StatelessWidget {
                     value: value,
                     child: Text(
                       value,
-                      style: TextStyle(fontSize :width * 0.05),
+                      style: TextStyle(fontSize: width * 0.05),
                     ),
                   );
                 }).toList(),
@@ -74,9 +76,9 @@ class PhotoDocBody extends StatelessWidget {
           height: 200,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: providerImgList.docList.length,
+            itemCount: _media.imagesURL.length,
             itemBuilder: (context, index) {
-              if (providerImgList.docList.isNotEmpty) {
+              if (_media.imagesURL.isNotEmpty) {
                 print('not empty');
                 return Container(
                   padding: const EdgeInsets.only(right: 5),
@@ -86,13 +88,15 @@ class PhotoDocBody extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => CheckPicturePage(
-                                  imagePath: providerImgList.docList[index],
+                                  imagePath: _media.imagesURL.elementAt(index),
                                   controller: 'check',
                                   type: 'doc',
+                                  chantier: _chantier,
+                                  media: _media,
                                 )),
                       );
                     },
-                    child: Image.file(File(providerImgList.docList[index])),
+                    child: Image.file(File(_media.imagesURL.elementAt(index))),
                   ),
                 );
               } else {
@@ -112,13 +116,18 @@ class PhotoDocBody extends StatelessWidget {
                   File _image;
                   _image = await ImagePicker.pickImage(
                       source: ImageSource.gallery, imageQuality: 50);
-                  providerImgList.docList.add(_image.path);
+                  //providerImgList.docList.add(_image.path);
+                  if(_chantier.medias.lookup(_media) == null){
+                    _chantier.medias.add(_media);
+                  }
+                  _chantier.medias.lookup(_media).imagesURL.add(_image.path);
                   // sale, voir autre moyen pour rebuild si possible (sinon stateful)
                   Navigator.of(context).pop();
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => PhotoDocPage(chantier: _chantier)),
+                        builder: (context) =>
+                            PhotoDocPage(chantier: _chantier, media: _media,)),
                   );
                 },
                 child:
@@ -139,7 +148,11 @@ class PhotoDocBody extends StatelessWidget {
         ),
         Container(
           alignment: Alignment.centerRight,
-          child: RaisedButton(onPressed: () {}, child: const Text('Envoyer')),
+          child: RaisedButton(
+              onPressed: () {
+                // add media
+              },
+              child: const Text('Envoyer')),
         ),
       ],
     );

@@ -5,19 +5,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/models/chantier/probleme.dart';
 import 'package:tezea_chantiers/src/services/crud/chantier/probleme_service.dart';
 import 'package:tezea_chantiers/src/widgets_generic/color_bank.dart';
 
+import '../../../models/chantier/chantier.dart';
 import '../../../providers/provider_image_list.dart';
-import '../../../services/firebase_services/database_service.dart';
 import '../../camera_page/camera_page.dart';
 import '../../check_picture_page/check_picture_page.dart';
-import 'package:provider/provider.dart';
-import '../../../models/chantier/chantier.dart';
-import 'package:tezea_chantiers/src/models/chantier/probleme.dart';
 
 class ProblemBody extends StatelessWidget {
-
   ProblemBody({
     Key key,
   }) : super(key: key);
@@ -28,15 +25,17 @@ class ProblemBody extends StatelessWidget {
     final _chantier = context.read<Chantier>();
     final providerImgList = context.watch<ProviderImageList>();
     final size = MediaQuery.of(context).size;
-    Probleme probleme = context.read<Probleme>();
+
+    var probleme = context.read<Probleme>();
+
     final descriptionInputText = TextFormField(
         maxLines: 8,
         controller: context.watch<TextEditingController>(),
         decoration: const InputDecoration.collapsed(
           fillColor: Colors.white,
-          filled: true, hintText: '',
-        )
-    );
+          filled: true,
+          hintText: '',
+        ));
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -57,31 +56,31 @@ class ProblemBody extends StatelessWidget {
                   descriptionInputText,
                   ElevatedButton(
                     onPressed: () {
-                      bool creation=false;
-                      probleme != null?
-                      creation = false : creation = true;
+                      bool creation = false;
+                      probleme != null ? creation = false : creation = true;
                       print(probleme);
-                      if(creation){
-                        probleme = new Probleme(id : 0,date : DateTime.now(), imagesURL: [], description: context.read<TextEditingController>().text);
+                      if (creation) {
+                        probleme = new Probleme(
+                            id: 0,
+                            date: DateTime.now(),
+                            imagesURL: [],
+                            description:
+                                context.read<TextEditingController>().text);
                         problemeService.addProbleme(probleme);
                         Scaffold.of(context).showSnackBar(SnackBar(
                           content: Text("Le problème a été mis à jour"),
                         ));
                         Navigator.pop(context);
+                      } else {
+                        probleme.description =
+                            context.read<TextEditingController>().text;
+                        problemeService.updateProbleme(probleme.id, probleme);
                       }
-                      else {
-                        probleme.description = context
-                            .read<TextEditingController>()
-                            .text;
-                        problemeService.updateProbleme(
-                            probleme.id, probleme);
-                      }
-
                     },
                     child: const Text('Enregistrer'),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                            (Set<MaterialState> states) {
+                        (Set<MaterialState> states) {
                           if (states.contains(MaterialState.pressed))
                             return ColorBank.APP_BAR_COLOR;
                           return null; // Use the component's default.
@@ -115,11 +114,11 @@ class ProblemBody extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => CheckPicturePage(
-                                      imagePath:
-                                      providerImgList.imageList[index],
-                                      controller: 'check',
-                                      type: 'pb',
-                                    )),
+                                          imagePath:
+                                              providerImgList.imageList[index],
+                                          controller: 'check',
+                                          type: 'pb',
+                                        )),
                               );
                             },
                             child: Image.file(
@@ -142,7 +141,11 @@ class ProblemBody extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => CameraPage(type: 'pb', probleme: probleme, chantier: _chantier,),
+                    builder: (context) => CameraPage(
+                      type: 'pb',
+                      probleme: probleme,
+                      chantier: _chantier,
+                    ),
                   ));
                 },
                 child: const Text('Ajouter une photo'),
@@ -153,5 +156,4 @@ class ProblemBody extends StatelessWidget {
       ),
     );
   }
-
 }

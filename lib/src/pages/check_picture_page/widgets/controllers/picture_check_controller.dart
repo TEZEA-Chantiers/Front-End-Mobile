@@ -1,15 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tezea_chantiers/src/models/chantier/media.dart';
 import 'package:tezea_chantiers/src/models/chantier/probleme.dart';
-import 'package:tezea_chantiers/src/services/crud/chantier/media_service.dart';
 import 'package:tezea_chantiers/src/services/crud/chantier/photo_service.dart';
 
+import '../../../../models/chantier/chantier.dart';
 import '../../../../providers/provider_image_list.dart';
 import '../../../photo_doc_page/photo_doc_page.dart';
 import '../../../problem_page/problem_page.dart';
-import '../../../../models/chantier/chantier.dart';
-
 
 class PictureCheckController extends StatelessWidget {
   const PictureCheckController({Key key, this.imagePath, this.type})
@@ -19,10 +18,11 @@ class PictureCheckController extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final providerImgList = Provider.of<ProviderImageList>(context);
+    //final providerImgList = Provider.of<ProviderImageList>(context);
 
     final _chantier = context.read<Chantier>();
     final _probleme = context.read<Probleme>();
+    final _media = context.read<Media>();
     final _photoTotal = PhotoService();
 
     return Align(
@@ -58,27 +58,38 @@ class PictureCheckController extends StatelessWidget {
                                 FlatButton(
                                   onPressed: () {
                                     if (type == "pb") {
-                                      Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                        builder: (context) =>
-                                            ProblemPage(chantier: _chantier,),
-                                      ));
                                       /*Provider.of<ProviderImageList>(context,
                                               listen: false)
                                           .delImage(imagePath);*/
 
                                       //_photoTotal.deletePhoto(id)
-                                      _chantier.problemes.lookup(_probleme).imagesURL.remove(imagePath);
-                                    } else {
+                                      _chantier.problemes
+                                          .lookup(_probleme)
+                                          .imagesURL
+                                          .remove(imagePath);
+
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
-                                        builder: (context) =>
-                                            PhotoDocPage(chantier: _chantier,),
+                                        builder: (context) => ProblemPage(
+                                          chantier: _chantier, probleme: _probleme,
+                                        ),
                                       ));
+                                    } else {
                                       /*Provider.of<ProviderImageList>(context,
                                               listen: false)
                                           .delDoc(imagePath);*/
-                                      _chantier.medias.remove(imagePath);
+                                      //_chantier.medias.remove(imagePath);
+                                      _chantier.medias
+                                          .lookup(_media)
+                                          .imagesURL
+                                          .remove(imagePath);
+
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) => PhotoDocPage(
+                                          chantier: _chantier, media: _media,
+                                        ),
+                                      ));
                                     }
                                   },
                                   child: const Text('Oui'),
