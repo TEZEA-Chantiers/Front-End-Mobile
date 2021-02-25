@@ -26,7 +26,7 @@ class AuthWrapper extends StatelessWidget {
               return MultiProvider(
                 providers: [
                   Provider<Utilisateur>.value(value: utilisateur),
-                  Provider<Interceptor>(create: (_) => Interceptor(utilisateur))
+                  Provider<Interceptor>(create: (context) => Interceptor(utilisateur, context.read<FlutterSecureStorage>()))
                 ],
                 child: const HomePage(),
               );

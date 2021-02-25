@@ -1,11 +1,15 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http_interceptor/http_interceptor.dart';
+import 'package:no_context_navigation/no_context_navigation.dart';
 
 import '../../models/utilisateur/utilisateur.dart';
 
 class Interceptor implements InterceptorContract {
-  Interceptor(this.utilisateur);
+  Interceptor(this.utilisateur, this.flutterSecureStorage);
 
   final Utilisateur utilisateur;
+  final FlutterSecureStorage flutterSecureStorage;
+  final NavigationService navService = NavigationService();
 
   @override
   Future<RequestData> interceptRequest({RequestData data}) async {
@@ -19,5 +23,12 @@ class Interceptor implements InterceptorContract {
   }
 
   @override
-  Future<ResponseData> interceptResponse({ResponseData data}) async => data;
+  Future<ResponseData> interceptResponse({ResponseData data}) async {
+    if (data.statusCode == 403 || data.statusCode == 401)
+      {
+        await flutterSecureStorage.delete(key: 'utilisateur');
+        await navService.pushNamed('/auth_wrapper', args: 'Depuis interceptor');
+      }
+    return data;
+  }
 }
