@@ -30,6 +30,7 @@ class Interceptor implements InterceptorContract {
   Future<ResponseData> interceptResponse({ResponseData data}) async {
     if (data.statusCode == 403 || data.statusCode == 401) {
       await flutterSecureStorage.delete(key: 'utilisateur');
+      utilisateur.resetUtilisateur();
       await navService.pushNamed('/auth_wrapper', args: 'Depuis interceptor');
     }
     return data;

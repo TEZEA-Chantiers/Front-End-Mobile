@@ -19,6 +19,14 @@ class Utilisateur {
     jwt = utilisateur.jwt;
   }
 
+  void resetUtilisateur() {
+    id = 0;
+    username = '';
+    password = '';
+    role = '';
+    jwt = '';
+  }
+
   int id;
   String username;
   String password;
