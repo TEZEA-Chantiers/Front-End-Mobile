@@ -76,6 +76,7 @@ class ChantierBody extends StatelessWidget {
                   color : Color.fromRGBO(240, 240, 240, 1.0),
                   onPressed: () {
                     _chantier.statusChantier = StatusType.ENCOURS;
+                    _chantier.dateDebutEffectif = DateTime.now();
                     chantierService.updateChantier(_chantier.id, _chantier);
                     Navigator.pushReplacement(context, MaterialPageRoute(
                         builder: (context) => ChantierPage(
@@ -92,6 +93,7 @@ class ChantierBody extends StatelessWidget {
                   color : Color.fromRGBO(240, 240, 240, 1.0),
                   onPressed: () {
                     _chantier.statusChantier = StatusType.TERMINE;
+                    _chantier.dateFinEffectif = DateTime.now();
                     chantierService.updateChantier(_chantier.id, _chantier);
                     Navigator.pushReplacement(context, MaterialPageRoute(
                         builder: (context) => ChantierPage(

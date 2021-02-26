@@ -155,8 +155,8 @@ class Chantier{
   final DateTime dateDebutRegularite;
   final DateTime dateFinRegularite;
   final bool regularite;
-  final DateTime dateDebutEffectif;
-  final DateTime dateFinEffectif;
+  DateTime dateDebutEffectif;
+  DateTime dateFinEffectif;
   final bool conducteurPresent;
   final Set<RapportChantierRegulier> rapportsRegulier;
 
